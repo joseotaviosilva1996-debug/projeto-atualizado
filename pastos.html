@@ -10,138 +10,620 @@
         content="width=device-width, initial-scale=1.0"
     >
 
-    <title>Pastos</title>
+    <title>Pastos - AgroNexo</title>
 
     <link rel="stylesheet" href="style.css">
 
+    <style>
+
+        /* =====================================================
+           PASTOS - ESTILO DA PÁGINA
+        ===================================================== */
+
+        .pastos-pagina {
+            max-width: 1100px;
+            margin: 0 auto;
+            padding: 30px 20px 50px;
+        }
+
+        /* CABEÇALHO */
+
+        .topo-pastos {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 20px;
+        }
+
+        .topo-pastos-titulo {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+        }
+
+        .icone-pastos {
+            width: 55px;
+            height: 55px;
+            border-radius: 15px;
+            background: rgba(255,255,255,0.15);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 30px;
+        }
+
+        .topo-pastos h1 {
+            margin: 0;
+            font-size: 28px;
+        }
+
+        .topo-pastos p {
+            margin: 4px 0 0;
+            opacity: 0.9;
+        }
+
+        .botao-voltar-inicio {
+            border: none;
+            background: rgba(255,255,255,0.15);
+            color: white;
+            padding: 12px 18px;
+            border-radius: 12px;
+            font-size: 15px;
+            font-weight: bold;
+            cursor: pointer;
+            transition: 0.2s;
+        }
+
+        .botao-voltar-inicio:hover {
+            background: rgba(255,255,255,0.25);
+            transform: translateY(-1px);
+        }
+
+        /* PAINEL PRINCIPAL */
+
+        .painel-pasto {
+            background: white;
+            border-radius: 20px;
+            padding: 28px;
+            margin-bottom: 30px;
+            box-shadow: 0 5px 20px rgba(0,0,0,0.08);
+        }
+
+        .cabecalho-painel-pasto {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+            margin-bottom: 25px;
+        }
+
+        .icone-cadastro-pasto {
+            width: 52px;
+            height: 52px;
+            border-radius: 14px;
+            background: #e8f5eb;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 28px;
+        }
+
+        .cabecalho-painel-pasto h2 {
+            margin: 0;
+            color: #24733d;
+            font-size: 24px;
+        }
+
+        .cabecalho-painel-pasto p {
+            margin: 5px 0 0;
+            color: #777;
+        }
+
+        /* FORMULÁRIO */
+
+        .form-pasto-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 20px;
+        }
+
+        .campo-pasto {
+            display: flex;
+            flex-direction: column;
+            gap: 7px;
+        }
+
+        .campo-pasto label {
+            font-weight: bold;
+            color: #333;
+        }
+
+        .campo-pasto input,
+        .campo-pasto textarea {
+            width: 100%;
+            box-sizing: border-box;
+            padding: 13px 14px;
+            border: 1px solid #d4d9d5;
+            border-radius: 12px;
+            font-size: 15px;
+            font-family: Arial, Helvetica, sans-serif;
+            background: #fafcfb;
+            transition: 0.2s;
+        }
+
+        .campo-pasto input:focus,
+        .campo-pasto textarea:focus {
+            outline: none;
+            border-color: #24733d;
+            background: white;
+            box-shadow: 0 0 0 3px rgba(36,115,61,0.10);
+        }
+
+        .campo-pasto textarea {
+            resize: vertical;
+            min-height: 110px;
+        }
+
+        .campo-pasto-completo {
+            grid-column: 1 / -1;
+        }
+
+        .botao-salvar-pasto {
+            grid-column: 1 / -1;
+            border: none;
+            border-radius: 12px;
+            padding: 15px;
+            background: #24733d;
+            color: white;
+            font-size: 16px;
+            font-weight: bold;
+            cursor: pointer;
+            transition: 0.2s;
+        }
+
+        .botao-salvar-pasto:hover {
+            background: #1d6032;
+            transform: translateY(-1px);
+        }
+
+        .botao-salvar-pasto:active {
+            transform: scale(0.98);
+        }
+
+        /* LISTA */
+
+        .titulo-lista-pastos {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            margin: 0 0 18px;
+        }
+
+        .titulo-lista-pastos h2 {
+            margin: 0;
+            color: #24733d;
+        }
+
+        .contador-pastos {
+            background: #e8f5eb;
+            color: #24733d;
+            padding: 7px 12px;
+            border-radius: 20px;
+            font-size: 14px;
+            font-weight: bold;
+        }
+
+        #listaPastos {
+            display: flex;
+            flex-direction: column;
+            gap: 15px;
+        }
+
+        /* CASO A LISTA ESTEJA VAZIA */
+
+        .lista-vazia-pastos {
+            background: white;
+            border-radius: 18px;
+            padding: 35px 20px;
+            text-align: center;
+            color: #777;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.06);
+        }
+
+        .lista-vazia-pastos .icone {
+            font-size: 42px;
+            margin-bottom: 10px;
+        }
+
+        .lista-vazia-pastos h3 {
+            margin: 5px 0;
+            color: #444;
+        }
+
+        .lista-vazia-pastos p {
+            margin: 5px 0 0;
+        }
+
+        /* BOTÃO INÍCIO INFERIOR */
+
+        .area-voltar {
+            text-align: center;
+            margin-top: 30px;
+        }
+
+        .botao-voltar-inferior {
+            border: 1px solid #24733d;
+            background: white;
+            color: #24733d;
+            padding: 12px 22px;
+            border-radius: 12px;
+            font-size: 15px;
+            font-weight: bold;
+            cursor: pointer;
+            transition: 0.2s;
+        }
+
+        .botao-voltar-inferior:hover {
+            background: #eef7f0;
+        }
+
+        /* CELULAR */
+
+        @media (max-width: 700px) {
+
+            .topo-pastos {
+                align-items: flex-start;
+            }
+
+            .botao-voltar-inicio {
+                padding: 10px 12px;
+                font-size: 14px;
+            }
+
+            .topo-pastos h1 {
+                font-size: 24px;
+            }
+
+            .pastos-pagina {
+                padding: 20px 12px 40px;
+            }
+
+            .painel-pasto {
+                padding: 20px;
+            }
+
+            .form-pasto-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .campo-pasto-completo,
+            .botao-salvar-pasto {
+                grid-column: auto;
+            }
+
+            .titulo-lista-pastos {
+                gap: 10px;
+            }
+
+            .titulo-lista-pastos h2 {
+                font-size: 21px;
+            }
+
+        }
+
+    </style>
+
 </head>
+
 
 <body>
 
-<header class="topo">
 
-    <div>
+<!-- =====================================================
+     TOPO
+===================================================== -->
 
-        <h1>
-            🌱 Pastos
-        </h1>
+<header class="topo topo-pastos">
 
-        <p>
-            Controle das áreas
-        </p>
+    <div class="topo-pastos-titulo">
+
+        <div class="icone-pastos">
+            🌱
+        </div>
+
+        <div>
+
+            <h1>
+                Pastos
+            </h1>
+
+            <p>
+                Controle das áreas da fazenda
+            </p>
+
+        </div>
 
     </div>
 
+
     <button
-        class="botao-sair"
-        onclick="sair()"
+        type="button"
+        class="botao-voltar-inicio"
+        onclick="irPara('index.html')"
     >
-        🚪 Sair
+        ← Início
     </button>
 
 </header>
 
 
-<main class="dashboard">
+<!-- =====================================================
+     CONTEÚDO
+===================================================== -->
+
+<main class="pastos-pagina">
 
 
-    <section class="painel">
+    <!-- =================================================
+         CADASTRO
+    ================================================== -->
 
-        <h2>
-            ➕ Cadastrar pasto
-        </h2>
+    <section class="painel-pasto">
+
+
+        <div class="cabecalho-painel-pasto">
+
+            <div class="icone-cadastro-pasto">
+                🌱
+            </div>
+
+            <div>
+
+                <h2>
+                    Cadastrar novo pasto
+                </h2>
+
+                <p>
+                    Registre as informações da área para acompanhar sua propriedade.
+                </p>
+
+            </div>
+
+        </div>
 
 
         <form id="formPasto">
 
 
-            <div class="campo">
+            <div class="form-pasto-grid">
 
-                <label>
-                    Nome do pasto *
-                </label>
 
-                <input
-                    type="text"
-                    id="nomePasto"
-                    placeholder="Ex: Pasto 01"
-                    required
+                <!-- NOME -->
+
+                <div class="campo-pasto">
+
+                    <label for="nomePasto">
+                        Nome do pasto *
+                    </label>
+
+                    <input
+                        type="text"
+                        id="nomePasto"
+                        name="nome"
+                        placeholder="Ex: Pasto 01"
+                        required
+                    >
+
+                </div>
+
+
+                <!-- ÁREA -->
+
+                <div class="campo-pasto">
+
+                    <label for="areaPasto">
+                        Área em hectares
+                    </label>
+
+                    <input
+                        type="number"
+                        id="areaPasto"
+                        name="area"
+                        min="0"
+                        step="0.01"
+                        placeholder="Ex: 25,50"
+                    >
+
+                </div>
+
+
+                <!-- CAPACIDADE -->
+
+                <div class="campo-pasto">
+
+                    <label for="capacidadePasto">
+                        Capacidade de animais
+                    </label>
+
+                    <input
+                        type="number"
+                        id="capacidadePasto"
+                        name="capacidade"
+                        min="0"
+                        placeholder="Ex: 40"
+                    >
+
+                </div>
+
+
+                <!-- OBSERVAÇÕES -->
+
+                <div class="campo-pasto campo-pasto-completo">
+
+                    <label for="observacoesPasto">
+                        Observações
+                    </label>
+
+                    <textarea
+                        id="observacoesPasto"
+                        name="observacoes"
+                        placeholder="Digite informações sobre o pasto, condições da área, tipo de capim, localização, etc."
+                    ></textarea>
+
+                </div>
+
+
+                <!-- SALVAR -->
+
+                <button
+                    type="submit"
+                    class="botao-salvar-pasto"
                 >
+                    🌱 Salvar pasto
+                </button>
+
 
             </div>
-
-
-            <div class="campo">
-
-                <label>
-                    Área em hectares
-                </label>
-
-                <input
-                    type="number"
-                    id="areaPasto"
-                    min="0"
-                    step="0.01"
-                >
-
-            </div>
-
-
-            <div class="campo">
-
-                <label>
-                    Capacidade de animais
-                </label>
-
-                <input
-                    type="number"
-                    id="capacidadePasto"
-                    min="0"
-                >
-
-            </div>
-
-
-            <div class="campo">
-
-                <label>
-                    Observações
-                </label>
-
-                <textarea
-                    id="observacoesPasto"
-                    rows="4"
-                ></textarea>
-
-            </div>
-
-
-            <button type="submit">
-                🌱 Salvar pasto
-            </button>
 
         </form>
 
     </section>
 
 
-    <h2>
-        🌱 Pastos cadastrados
-    </h2>
+    <!-- =================================================
+         PASTOS CADASTRADOS
+    ================================================== -->
+
+    <div class="titulo-lista-pastos">
+
+        <h2>
+            🌱 Pastos cadastrados
+        </h2>
+
+        <span
+            class="contador-pastos"
+            id="contadorPastos"
+        >
+            0 pastos
+        </span>
+
+    </div>
 
 
-    <div id="listaPastos"></div>
+    <div id="listaPastos">
+
+        <!--
+            A lista pode ser preenchida pelo script.js.
+        -->
+
+    </div>
 
 
-    <button onclick="voltarInicio()">
-        🏠 Início
-    </button>
+    <!-- =================================================
+         VOLTAR
+    ================================================== -->
+
+    <div class="area-voltar">
+
+        <button
+            type="button"
+            class="botao-voltar-inferior"
+            onclick="irPara('index.html')"
+        >
+            ← Voltar para o início
+        </button>
+
+    </div>
 
 
 </main>
 
 
 <script src="script.js"></script>
+
+
+<script>
+
+    /*
+     * Atualiza o contador visual dos pastos.
+     */
+
+    document.addEventListener("DOMContentLoaded", function () {
+
+        try {
+
+            const dados =
+                JSON.parse(
+                    localStorage.getItem("pastos")
+                );
+
+            const pastos =
+                Array.isArray(dados)
+                    ? dados
+                    : [];
+
+            const contador =
+                document.getElementById(
+                    "contadorPastos"
+                );
+
+            if (contador) {
+
+                contador.textContent =
+                    pastos.length === 1
+                        ? "1 pasto"
+                        : pastos.length + " pastos";
+
+            }
+
+            /*
+             * Mostra uma mensagem quando ainda
+             * não existe nenhum pasto.
+             */
+
+            const lista =
+                document.getElementById(
+                    "listaPastos"
+                );
+
+            if (
+                lista &&
+                pastos.length === 0
+            ) {
+
+                lista.innerHTML = `
+
+                    <div class="lista-vazia-pastos">
+
+                        <div class="icone">
+                            🌱
+                        </div>
+
+                        <h3>
+                            Nenhum pasto cadastrado
+                        </h3>
+
+                        <p>
+                            Cadastre o primeiro pasto usando o formulário acima.
+                        </p>
+
+                    </div>
+
+                `;
+
+            }
+
+        } catch (erro) {
+
+            console.log(
+                "Não foi possível carregar os pastos."
+            );
+
+        }
+
+    });
+
+</script>
+
 
 </body>
 

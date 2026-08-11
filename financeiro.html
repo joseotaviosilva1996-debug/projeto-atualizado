@@ -2,555 +2,3923 @@
 <html lang="pt-BR">
 
 <head>
+
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-    <title>Financeiro - AgroNexo</title>
+    <meta
+        name="viewport"
+        content="width=device-width, initial-scale=1.0"
+    >
 
-    <link rel="stylesheet" href="style.css">
+    <title>Financeiro | AgroNexo</title>
+
+    <style>
+
+        * {
+            box-sizing: border-box;
+        }
+
+        body {
+            margin: 0;
+            font-family: Arial, Helvetica, sans-serif;
+            background: #f3f6f3;
+            color: #222;
+        }
+
+        button,
+        input,
+        select,
+        textarea {
+            font-family: inherit;
+        }
+
+
+        /* =====================================================
+           TOPO
+        ===================================================== */
+
+        .financeiro-topo {
+
+            background: linear-gradient(
+                135deg,
+                #24733d,
+                #14562c
+            );
+
+            color: white;
+
+            padding: 18px 25px;
+
+            display: flex;
+
+            align-items: center;
+
+            justify-content: space-between;
+
+            box-shadow:
+                0 4px 18px rgba(0,0,0,0.15);
+
+        }
+
+
+        .financeiro-topo-esquerda {
+
+            display: flex;
+
+            align-items: center;
+
+            gap: 14px;
+
+        }
+
+
+        .financeiro-logo {
+
+            width: 52px;
+
+            height: 52px;
+
+            border-radius: 15px;
+
+            background:
+                rgba(255,255,255,0.14);
+
+            display: flex;
+
+            align-items: center;
+
+            justify-content: center;
+
+            font-size: 28px;
+
+        }
+
+
+        .financeiro-topo h1 {
+
+            margin: 0;
+
+            font-size: 28px;
+
+        }
+
+
+        .financeiro-topo p {
+
+            margin: 4px 0 0;
+
+            opacity: 0.88;
+
+            font-size: 14px;
+
+        }
+
+
+        .botao-voltar-financeiro {
+
+            border: none;
+
+            background:
+                rgba(255,255,255,0.14);
+
+            color: white;
+
+            padding: 12px 18px;
+
+            border-radius: 12px;
+
+            font-size: 15px;
+
+            font-weight: bold;
+
+            cursor: pointer;
+
+            transition: 0.2s;
+
+        }
+
+
+        .botao-voltar-financeiro:hover {
+
+            background:
+                rgba(255,255,255,0.25);
+
+            transform: translateY(-1px);
+
+        }
+
+
+        /* =====================================================
+           CONTAINER
+        ===================================================== */
+
+        .financeiro-main {
+
+            width: 100%;
+
+            max-width: 1080px;
+
+            margin: auto;
+
+            padding: 28px 20px 50px;
+
+        }
+
+
+        /* =====================================================
+           CAPA
+        ===================================================== */
+
+        .financeiro-capa {
+
+            background:
+                linear-gradient(
+                    135deg,
+                    #287a43,
+                    #103b22
+                );
+
+            color: white;
+
+            border-radius: 22px;
+
+            padding: 30px;
+
+            margin-bottom: 22px;
+
+            box-shadow:
+                0 8px 25px rgba(0,0,0,0.10);
+
+        }
+
+
+        .financeiro-capa h2 {
+
+            margin: 0 0 8px;
+
+            font-size: 29px;
+
+        }
+
+
+        .financeiro-capa p {
+
+            margin: 0;
+
+            opacity: 0.9;
+
+            font-size: 15px;
+
+        }
+
+
+        /* =====================================================
+           ETAPAS
+        ===================================================== */
+
+        .financeiro-etapas {
+
+            background: white;
+
+            border-radius: 20px;
+
+            padding: 12px;
+
+            display: grid;
+
+            grid-template-columns:
+                repeat(4, 1fr);
+
+            gap: 10px;
+
+            box-shadow:
+                0 5px 20px rgba(0,0,0,0.07);
+
+            margin-bottom: 22px;
+
+        }
+
+
+        .etapa-financeira {
+
+            border: none;
+
+            background: #f1f4f2;
+
+            border-radius: 14px;
+
+            padding: 15px 10px;
+
+            cursor: pointer;
+
+            transition: 0.2s;
+
+            color: #444;
+
+        }
+
+
+        .etapa-financeira:hover {
+
+            background: #e5eee7;
+
+            transform: translateY(-1px);
+
+        }
+
+
+        .etapa-financeira.ativa {
+
+            background: #24733d;
+
+            color: white;
+
+            box-shadow:
+                0 5px 14px rgba(36,115,61,0.25);
+
+        }
+
+
+        .etapa-numero {
+
+            display: block;
+
+            font-size: 12px;
+
+            font-weight: bold;
+
+            opacity: 0.7;
+
+            margin-bottom: 5px;
+
+        }
+
+
+        .etapa-icone {
+
+            font-size: 22px;
+
+            margin-right: 5px;
+
+        }
+
+
+        .etapa-nome {
+
+            font-size: 15px;
+
+            font-weight: bold;
+
+        }
+
+
+        /* =====================================================
+           CONTEÚDO
+        ===================================================== */
+
+        .financeiro-conteudo {
+
+            background: white;
+
+            border-radius: 22px;
+
+            padding: 30px;
+
+            box-shadow:
+                0 5px 20px rgba(0,0,0,0.07);
+
+        }
+
+
+        .secao-financeira {
+
+            display: none;
+
+        }
+
+
+        .secao-financeira.ativa {
+
+            display: block;
+
+        }
+
+
+        /* =====================================================
+           TÍTULO
+        ===================================================== */
+
+        .titulo-financeiro {
+
+            display: flex;
+
+            align-items: center;
+
+            gap: 15px;
+
+            margin-bottom: 25px;
+
+        }
+
+
+        .titulo-financeiro-icone {
+
+            width: 55px;
+
+            height: 55px;
+
+            border-radius: 16px;
+
+            background: #e8f4eb;
+
+            display: flex;
+
+            align-items: center;
+
+            justify-content: center;
+
+            font-size: 27px;
+
+            flex-shrink: 0;
+
+        }
+
+
+        .titulo-financeiro h2 {
+
+            margin: 0;
+
+            color: #24733d;
+
+            font-size: 25px;
+
+        }
+
+
+        .titulo-financeiro p {
+
+            margin: 4px 0 0;
+
+            color: #777;
+
+            font-size: 14px;
+
+        }
+
+
+        /* =====================================================
+           FORMULÁRIO
+        ===================================================== */
+
+        .financeiro-form-grid {
+
+            display: grid;
+
+            grid-template-columns:
+                repeat(3, 1fr);
+
+            gap: 17px;
+
+        }
+
+
+        .financeiro-campo {
+
+            display: flex;
+
+            flex-direction: column;
+
+            gap: 7px;
+
+        }
+
+
+        .financeiro-campo label {
+
+            font-weight: bold;
+
+            font-size: 14px;
+
+            color: #333;
+
+        }
+
+
+        .financeiro-campo input,
+        .financeiro-campo select,
+        .financeiro-campo textarea {
+
+            width: 100%;
+
+            padding: 13px;
+
+            border: 1px solid #d7ddd8;
+
+            border-radius: 11px;
+
+            background: #fafcfb;
+
+            font-size: 15px;
+
+            transition: 0.2s;
+
+        }
+
+
+        .financeiro-campo textarea {
+
+            resize: vertical;
+
+        }
+
+
+        .financeiro-campo input:focus,
+        .financeiro-campo select:focus,
+        .financeiro-campo textarea:focus {
+
+            outline: none;
+
+            border-color: #24733d;
+
+            background: white;
+
+            box-shadow:
+                0 0 0 3px
+                rgba(36,115,61,0.08);
+
+        }
+
+
+        .financeiro-campo small {
+
+            color: #777;
+
+            font-size: 12px;
+
+        }
+
+
+        .campo-completo {
+
+            grid-column: 1 / -1;
+
+        }
+
+
+        .destaque-campo input {
+
+            border: 2px solid #24733d;
+
+            background: #f3faf5;
+
+            font-weight: bold;
+
+        }
+
+
+        .botao-financeiro {
+
+            width: 100%;
+
+            border: none;
+
+            padding: 15px;
+
+            margin-top: 20px;
+
+            border-radius: 12px;
+
+            background: #24733d;
+
+            color: white;
+
+            font-size: 16px;
+
+            font-weight: bold;
+
+            cursor: pointer;
+
+            transition: 0.2s;
+
+        }
+
+
+        .botao-financeiro:hover {
+
+            background: #1d6133;
+
+            transform: translateY(-1px);
+
+        }
+
+
+        /* =====================================================
+           RESUMO DA OPERAÇÃO
+        ===================================================== */
+
+        .resumo-operacao {
+
+            margin-top: 22px;
+
+            padding: 18px;
+
+            border-radius: 15px;
+
+            background: #f4f9f5;
+
+            border: 1px solid #d9e9dc;
+
+        }
+
+
+        .resumo-operacao-titulo {
+
+            display: flex;
+
+            align-items: center;
+
+            gap: 8px;
+
+            margin-bottom: 12px;
+
+            color: #24733d;
+
+            font-weight: bold;
+
+        }
+
+
+        .resumo-operacao-grid {
+
+            display: grid;
+
+            grid-template-columns:
+                repeat(3, 1fr);
+
+            gap: 12px;
+
+        }
+
+
+        .resumo-operacao-item {
+
+            background: white;
+
+            border-radius: 11px;
+
+            padding: 13px;
+
+            border: 1px solid #e1e8e2;
+
+        }
+
+
+        .resumo-operacao-item span {
+
+            display: block;
+
+            font-size: 12px;
+
+            color: #777;
+
+            margin-bottom: 5px;
+
+        }
+
+
+        .resumo-operacao-item strong {
+
+            color: #24733d;
+
+            font-size: 18px;
+
+        }
+
+
+        /* =====================================================
+           RESULTADO
+        ===================================================== */
+
+        .resultado-principal {
+
+            background:
+                linear-gradient(
+                    135deg,
+                    #f0f8f2,
+                    #e5f1e8
+                );
+
+            border-radius: 20px;
+
+            padding: 30px;
+
+            text-align: center;
+
+            border: 1px solid #d8e8dc;
+
+            margin-bottom: 20px;
+
+        }
+
+
+        .resultado-icone {
+
+            font-size: 48px;
+
+            margin-bottom: 8px;
+
+        }
+
+
+        .resultado-principal h3 {
+
+            margin: 0 0 7px;
+
+            font-size: 24px;
+
+            color: #24733d;
+
+        }
+
+
+        .resultado-valor {
+
+            font-size: 38px;
+
+            font-weight: bold;
+
+            color: #24733d;
+
+            margin: 10px 0;
+
+        }
+
+
+        .resultado-descricao {
+
+            color: #666;
+
+            margin: 0;
+
+        }
+
+
+        .resultado-cards {
+
+            display: grid;
+
+            grid-template-columns:
+                repeat(4, 1fr);
+
+            gap: 12px;
+
+            margin-bottom: 20px;
+
+        }
+
+
+        .resultado-card {
+
+            background: #f8faf8;
+
+            border: 1px solid #e1e8e2;
+
+            border-radius: 15px;
+
+            padding: 18px;
+
+            text-align: center;
+
+        }
+
+
+        .resultado-card span {
+
+            display: block;
+
+            color: #777;
+
+            font-size: 12px;
+
+            margin-bottom: 7px;
+
+        }
+
+
+        .resultado-card strong {
+
+            font-size: 19px;
+
+            color: #24733d;
+
+        }
+
+
+        /* =====================================================
+           AÇÕES DO RESULTADO
+        ===================================================== */
+
+        .resultado-acoes {
+
+            display: grid;
+
+            grid-template-columns:
+                repeat(2, 1fr);
+
+            gap: 12px;
+
+            margin-bottom: 20px;
+
+        }
+
+
+        .botao-exportar {
+
+            border: none;
+
+            border-radius: 12px;
+
+            padding: 14px;
+
+            background: #edf4ef;
+
+            color: #24733d;
+
+            font-weight: bold;
+
+            cursor: pointer;
+
+            transition: 0.2s;
+
+        }
+
+
+        .botao-exportar:hover {
+
+            background: #dcebe0;
+
+            transform: translateY(-1px);
+
+        }
+
+
+        /* =====================================================
+           MOVIMENTAÇÕES
+        ===================================================== */
+
+        .movimentacoes {
+
+            border-top: 1px solid #e4e9e5;
+
+            padding-top: 20px;
+
+        }
+
+
+        .movimentacoes h3 {
+
+            color: #24733d;
+
+            margin: 0 0 15px;
+
+        }
+
+
+        .movimento-item {
+
+            display: flex;
+
+            align-items: center;
+
+            justify-content: space-between;
+
+            gap: 12px;
+
+            padding: 14px;
+
+            border: 1px solid #e2e8e3;
+
+            border-radius: 12px;
+
+            margin-bottom: 9px;
+
+            background: #fafcfb;
+
+        }
+
+
+        .movimento-info strong {
+
+            display: block;
+
+            margin-bottom: 4px;
+
+        }
+
+
+        .movimento-info span {
+
+            font-size: 12px;
+
+            color: #777;
+
+        }
+
+
+        .movimento-valor {
+
+            font-weight: bold;
+
+            white-space: nowrap;
+
+        }
+
+
+        .movimento-compra {
+
+            color: #c0392b;
+
+        }
+
+
+        .movimento-venda {
+
+            color: #24733d;
+
+        }
+
+
+        .movimento-manutencao {
+
+            color: #d68910;
+
+        }
+
+
+        .botao-excluir {
+
+            border: none;
+
+            background: #fff0ef;
+
+            color: #c0392b;
+
+            border-radius: 8px;
+
+            padding: 7px 9px;
+
+            cursor: pointer;
+
+        }
+
+
+        /* =====================================================
+           VAZIO
+        ===================================================== */
+
+        .financeiro-vazio {
+
+            text-align: center;
+
+            padding: 35px 20px;
+
+            background: #f7faf8;
+
+            border-radius: 18px;
+
+            border: 1px dashed #cfdcd2;
+
+            color: #777;
+
+        }
+
+
+        .financeiro-vazio-icone {
+
+            font-size: 45px;
+
+            margin-bottom: 10px;
+
+        }
+
+
+        .financeiro-vazio h3 {
+
+            margin: 0 0 7px;
+
+            color: #333;
+
+        }
+
+
+        .financeiro-vazio p {
+
+            margin: 0;
+
+        }
+
+
+        /* =====================================================
+           RODAPÉ
+        ===================================================== */
+
+        .financeiro-footer {
+
+            text-align: center;
+
+            color: #777;
+
+            font-size: 13px;
+
+            margin-top: 25px;
+
+        }
+
+
+        /* =====================================================
+           IMPRESSÃO / PDF
+        ===================================================== */
+
+        @media print {
+
+            body {
+
+                background: white;
+
+            }
+
+            .financeiro-topo {
+
+                background: #24733d !important;
+
+                box-shadow: none;
+
+            }
+
+            .botao-voltar-financeiro,
+            .financeiro-etapas,
+            .resultado-acoes,
+            .botao-excluir {
+
+                display: none !important;
+
+            }
+
+            .financeiro-main {
+
+                max-width: none;
+
+                padding: 10px;
+
+            }
+
+            .financeiro-capa {
+
+                box-shadow: none;
+
+            }
+
+            .financeiro-conteudo {
+
+                box-shadow: none;
+
+            }
+
+        }
+
+
+        /* =====================================================
+           CELULAR
+        ===================================================== */
+
+        @media (max-width: 850px) {
+
+            .financeiro-form-grid {
+
+                grid-template-columns:
+                    repeat(2, 1fr);
+
+            }
+
+            .resultado-cards {
+
+                grid-template-columns:
+                    repeat(2, 1fr);
+
+            }
+
+        }
+
+
+        @media (max-width: 650px) {
+
+            .financeiro-topo {
+
+                padding: 14px;
+
+            }
+
+            .financeiro-topo h1 {
+
+                font-size: 22px;
+
+            }
+
+            .financeiro-logo {
+
+                width: 44px;
+
+                height: 44px;
+
+            }
+
+            .botao-voltar-financeiro {
+
+                padding: 9px 11px;
+
+                font-size: 13px;
+
+            }
+
+            .financeiro-main {
+
+                padding: 15px 10px 35px;
+
+            }
+
+            .financeiro-capa {
+
+                padding: 23px;
+
+                border-radius: 18px;
+
+            }
+
+            .financeiro-capa h2 {
+
+                font-size: 24px;
+
+            }
+
+            .financeiro-etapas {
+
+                grid-template-columns:
+                    repeat(2, 1fr);
+
+            }
+
+            .financeiro-conteudo {
+
+                padding: 20px;
+
+            }
+
+            .financeiro-form-grid {
+
+                grid-template-columns: 1fr;
+
+            }
+
+            .campo-completo {
+
+                grid-column: auto;
+
+            }
+
+            .resumo-operacao-grid {
+
+                grid-template-columns: 1fr;
+
+            }
+
+            .resultado-cards {
+
+                grid-template-columns: 1fr;
+
+            }
+
+            .resultado-acoes {
+
+                grid-template-columns: 1fr;
+
+            }
+
+            .movimento-item {
+
+                align-items: flex-start;
+
+                flex-direction: column;
+
+            }
+
+        }
+
+    </style>
+
 </head>
+
 
 <body>
 
-<header class="topo">
 
-    <div>
-        <h1>💰 Financeiro</h1>
-        <p>Controle financeiro da pecuária</p>
+<header class="financeiro-topo">
+
+    <div class="financeiro-topo-esquerda">
+
+        <div class="financeiro-logo">
+            💰
+        </div>
+
+        <div>
+
+            <h1>
+                Financeiro
+            </h1>
+
+            <p>
+                Controle financeiro do gado
+            </p>
+
+        </div>
+
     </div>
 
-    <button class="botao-voltar" onclick="voltarInicio()">
+
+    <button
+        type="button"
+        class="botao-voltar-financeiro"
+        onclick="voltarInicioFinanceiro()"
+    >
         ← Voltar
     </button>
 
 </header>
 
 
-<main class="financeiro-container">
+<main class="financeiro-main">
 
 
-    <!-- INDICADORES -->
+    <section class="financeiro-capa">
 
-    <section class="indicadores">
+        <h2>
+            Gestão Financeira
+        </h2>
 
-        <div class="indicador">
-            <span>🐂</span>
-            <strong id="indicadorCompras">0</strong>
-            <p>Animais comprados</p>
-        </div>
-
-        <div class="indicador">
-            <span>💵</span>
-            <strong id="indicadorInvestido">
-                R$ 0,00
-            </strong>
-            <p>Total investido</p>
-        </div>
-
-        <div class="indicador">
-            <span>🌱</span>
-            <strong id="indicadorCustos">
-                R$ 0,00
-            </strong>
-            <p>Custos do gado</p>
-        </div>
-
-        <div class="indicador">
-            <span>📈</span>
-            <strong id="indicadorVendas">
-                R$ 0,00
-            </strong>
-            <p>Total de vendas</p>
-        </div>
-
-        <div class="indicador destaque">
-            <span>💰</span>
-            <strong id="indicadorResultado">
-                R$ 0,00
-            </strong>
-            <p>Resultado</p>
-        </div>
+        <p>
+            Controle compras, manutenções, vendas e acompanhe o resultado da propriedade.
+        </p>
 
     </section>
 
 
-    <!-- ========================= -->
-    <!-- COMPRA -->
-    <!-- ========================= -->
+    <!-- =====================================================
+         ETAPAS
+    ====================================================== -->
 
-    <section class="financeiro-card">
-
-        <div class="titulo-secao">
-            <div class="titulo-icone">🐂</div>
-
-            <div>
-                <h2>Compra de gado</h2>
-                <p>Registre a entrada de novos animais</p>
-            </div>
-        </div>
+    <nav class="financeiro-etapas">
 
 
-        <form id="formCompra">
+        <button
+            type="button"
+            id="btnCompra"
+            class="etapa-financeira ativa"
+            onclick="mostrarEtapaFinanceira('compra')"
+        >
 
-            <div class="form-grid">
+            <span class="etapa-numero">
+                1
+            </span>
 
-                <div class="campo">
-                    <label>Quantidade de animais</label>
+            <span class="etapa-icone">
+                🐄
+            </span>
 
-                    <input
-                        type="number"
-                        id="compraQuantidade"
-                        min="1"
-                        placeholder="Ex: 20"
-                        required
-                    >
-                </div>
+            <span class="etapa-nome">
+                Compra
+            </span>
 
-
-                <div class="campo">
-
-                    <label>Tipo de compra</label>
-
-                    <select id="compraTipo">
-
-                        <option value="cabeca">
-                            Por cabeça
-                        </option>
-
-                        <option value="kg">
-                            Por kg
-                        </option>
-
-                        <option value="arroba">
-                            Por arroba (@)
-                        </option>
-
-                    </select>
-
-                </div>
+        </button>
 
 
-                <div class="campo">
+        <button
+            type="button"
+            id="btnManutencao"
+            class="etapa-financeira"
+            onclick="mostrarEtapaFinanceira('manutencao')"
+        >
 
-                    <label>Peso médio por animal (kg)</label>
+            <span class="etapa-numero">
+                2
+            </span>
 
-                    <input
-                        type="number"
-                        id="compraPeso"
-                        min="0"
-                        step="0.01"
-                        placeholder="Ex: 420"
-                    >
-
-                </div>
-
-
-                <div class="campo">
-
-                    <label>Preço por unidade</label>
-
-                    <input
-                        type="number"
-                        id="compraPreco"
-                        min="0"
-                        step="0.01"
-                        placeholder="Ex: 3500"
-                        required
-                    >
-
-                </div>
-
-
-                <div class="campo">
-
-                    <label>Data da compra</label>
-
-                    <input
-                        type="date"
-                        id="compraData"
-                        required
-                    >
-
-                </div>
-
-
-                <div class="campo">
-
-                    <label>Origem / fornecedor</label>
-
-                    <input
-                        type="text"
-                        id="compraOrigem"
-                        placeholder="Ex: Fazenda João"
-                    >
-
-                </div>
-
-            </div>
-
-
-            <div class="resultado-previo">
-
-                <span>Total da compra</span>
-
-                <strong id="totalCompraPreview">
-                    R$ 0,00
-                </strong>
-
-            </div>
-
-
-            <button class="botao-principal" type="submit">
-                💾 Registrar compra
-            </button>
-
-        </form>
-
-    </section>
-
-
-
-    <!-- ========================= -->
-    <!-- CUSTOS -->
-    <!-- ========================= -->
-
-    <section class="financeiro-card">
-
-        <div class="titulo-secao">
-
-            <div class="titulo-icone">
+            <span class="etapa-icone">
                 🌱
+            </span>
+
+            <span class="etapa-nome">
+                Manutenção
+            </span>
+
+        </button>
+
+
+        <button
+            type="button"
+            id="btnVenda"
+            class="etapa-financeira"
+            onclick="mostrarEtapaFinanceira('venda')"
+        >
+
+            <span class="etapa-numero">
+                3
+            </span>
+
+            <span class="etapa-icone">
+                💵
+            </span>
+
+            <span class="etapa-nome">
+                Venda
+            </span>
+
+        </button>
+
+
+        <button
+            type="button"
+            id="btnResultado"
+            class="etapa-financeira"
+            onclick="mostrarEtapaFinanceira('resultado')"
+        >
+
+            <span class="etapa-numero">
+                4
+            </span>
+
+            <span class="etapa-icone">
+                📊
+            </span>
+
+            <span class="etapa-nome">
+                Resultado
+            </span>
+
+        </button>
+
+    </nav>
+
+
+    <section class="financeiro-conteudo">
+
+
+        <!-- =====================================================
+             COMPRA
+        ====================================================== -->
+
+        <div
+            id="secaoCompra"
+            class="secao-financeira ativa"
+        >
+
+            <div class="titulo-financeiro">
+
+                <div class="titulo-financeiro-icone">
+                    🐄
+                </div>
+
+                <div>
+
+                    <h2>
+                        Comprar gado
+                    </h2>
+
+                    <p>
+                        Cadastre todos os detalhes da compra do animal.
+                    </p>
+
+                </div>
+
             </div>
 
-            <div>
 
-                <h2>Custos para manter o gado</h2>
+            <form id="formCompra">
 
-                <p>
-                    Registre alimentação, medicamentos,
-                    pastagem e outros gastos.
-                </p>
 
-            </div>
+                <div class="financeiro-form-grid">
+
+
+                    <div class="financeiro-campo">
+
+                        <label>
+                            Identificação / Brinco *
+                        </label>
+
+                        <input
+                            type="text"
+                            name="animal"
+                            placeholder="Ex: Brinco 025"
+                            required
+                        >
+
+                    </div>
+
+
+                    <div class="financeiro-campo">
+
+                        <label>
+                            Categoria
+                        </label>
+
+                        <select name="categoria">
+
+                            <option value="">
+                                Selecione
+                            </option>
+
+                            <option>Bezerro</option>
+                            <option>Novilho</option>
+                            <option>Novilha</option>
+                            <option>Boi</option>
+                            <option>Vaca</option>
+                            <option>Touro</option>
+
+                        </select>
+
+                    </div>
+
+
+                    <div class="financeiro-campo">
+
+                        <label>
+                            Sexo
+                        </label>
+
+                        <select name="sexo">
+
+                            <option value="">
+                                Selecione
+                            </option>
+
+                            <option>Macho</option>
+                            <option>Fêmea</option>
+
+                        </select>
+
+                    </div>
+
+
+                    <div class="financeiro-campo">
+
+                        <label>
+                            Raça
+                        </label>
+
+                        <input
+                            type="text"
+                            name="raca"
+                            placeholder="Ex: Nelore"
+                        >
+
+                    </div>
+
+
+                    <div class="financeiro-campo">
+
+                        <label>
+                            Idade
+                        </label>
+
+                        <input
+                            type="number"
+                            name="idade"
+                            min="0"
+                            step="1"
+                            placeholder="Anos"
+                        >
+
+                    </div>
+
+
+                    <div class="financeiro-campo">
+
+                        <label>
+                            Peso de entrada (kg)
+                        </label>
+
+                        <input
+                            type="number"
+                            id="pesoCompra"
+                            name="peso"
+                            min="0"
+                            step="0.01"
+                            placeholder="Ex: 420"
+                        >
+
+                    </div>
+
+
+                    <div class="financeiro-campo">
+
+                        <label>
+                            Preço por kg
+                        </label>
+
+                        <input
+                            type="number"
+                            id="precoKgCompra"
+                            name="precoKg"
+                            min="0"
+                            step="0.01"
+                            placeholder="R$ 0,00"
+                        >
+
+                        <small>
+                            Peso × preço/kg calcula o valor automaticamente.
+                        </small>
+
+                    </div>
+
+
+                    <div class="financeiro-campo destaque-campo">
+
+                        <label>
+                            Valor da compra *
+                        </label>
+
+                        <input
+                            type="number"
+                            id="valorCompra"
+                            name="valor"
+                            min="0"
+                            step="0.01"
+                            placeholder="R$ 0,00"
+                            required
+                        >
+
+                    </div>
+
+
+                    <div class="financeiro-campo">
+
+                        <label>
+                            Frete
+                        </label>
+
+                        <input
+                            type="number"
+                            id="freteCompra"
+                            name="frete"
+                            min="0"
+                            step="0.01"
+                            value="0"
+                            placeholder="R$ 0,00"
+                        >
+
+                    </div>
+
+
+                    <div class="financeiro-campo">
+
+                        <label>
+                            Outras despesas
+                        </label>
+
+                        <input
+                            type="number"
+                            id="outrasDespesasCompra"
+                            name="outrasDespesas"
+                            min="0"
+                            step="0.01"
+                            value="0"
+                            placeholder="R$ 0,00"
+                        >
+
+                    </div>
+
+
+                    <div class="financeiro-campo">
+
+                        <label>
+                            Fornecedor
+                        </label>
+
+                        <input
+                            type="text"
+                            name="fornecedor"
+                            placeholder="Nome do fornecedor"
+                        >
+
+                    </div>
+
+
+                    <div class="financeiro-campo">
+
+                        <label>
+                            Data da compra
+                        </label>
+
+                        <input
+                            type="date"
+                            name="data"
+                        >
+
+                    </div>
+
+
+                    <div class="financeiro-campo">
+
+                        <label>
+                            Forma de pagamento
+                        </label>
+
+                        <select name="pagamento">
+
+                            <option value="">
+                                Selecione
+                            </option>
+
+                            <option>À vista</option>
+                            <option>Pix</option>
+                            <option>Transferência</option>
+                            <option>Boleto</option>
+                            <option>Parcelado</option>
+                            <option>Outro</option>
+
+                        </select>
+
+                    </div>
+
+
+                    <div class="financeiro-campo">
+
+                        <label>
+                            Origem do gado
+                        </label>
+
+                        <input
+                            type="text"
+                            name="origem"
+                            placeholder="Ex: Fazenda São José"
+                        >
+
+                    </div>
+
+
+                    <div class="financeiro-campo campo-completo">
+
+                        <label>
+                            Observações
+                        </label>
+
+                        <textarea
+                            name="observacoes"
+                            rows="3"
+                            placeholder="Informações adicionais..."
+                        ></textarea>
+
+                    </div>
+
+                </div>
+
+
+                <div class="resumo-operacao">
+
+                    <div class="resumo-operacao-titulo">
+                        🧾 Resumo da compra
+                    </div>
+
+                    <div class="resumo-operacao-grid">
+
+                        <div class="resumo-operacao-item">
+
+                            <span>
+                                Valor do gado
+                            </span>
+
+                            <strong id="resumoCompraGado">
+                                R$ 0,00
+                            </strong>
+
+                        </div>
+
+
+                        <div class="resumo-operacao-item">
+
+                            <span>
+                                Frete + despesas
+                            </span>
+
+                            <strong id="resumoCompraFrete">
+                                R$ 0,00
+                            </strong>
+
+                        </div>
+
+
+                        <div class="resumo-operacao-item">
+
+                            <span>
+                                Custo total
+                            </span>
+
+                            <strong id="resumoCompraTotal">
+                                R$ 0,00
+                            </strong>
+
+                        </div>
+
+                    </div>
+
+                </div>
+
+
+                <button
+                    type="submit"
+                    class="botao-financeiro"
+                >
+                    🐄 Registrar compra
+                </button>
+
+
+            </form>
 
         </div>
 
 
-        <form id="formCusto">
+        <!-- =====================================================
+             MANUTENÇÃO
+        ====================================================== -->
 
-            <div class="form-grid">
+        <div
+            id="secaoManutencao"
+            class="secao-financeira"
+        >
 
-                <div class="campo">
+            <div class="titulo-financeiro">
 
-                    <label>Tipo de gasto</label>
-
-                    <select id="custoTipo">
-
-                        <option value="Alimentação">
-                            🌽 Alimentação
-                        </option>
-
-                        <option value="Medicamentos">
-                            💉 Medicamentos
-                        </option>
-
-                        <option value="Pasto">
-                            🌱 Pasto
-                        </option>
-
-                        <option value="Frete">
-                            🚚 Frete
-                        </option>
-
-                        <option value="Mão de obra">
-                            👨‍🌾 Mão de obra
-                        </option>
-
-                        <option value="Veterinário">
-                            🩺 Veterinário
-                        </option>
-
-                        <option value="Outros">
-                            📦 Outros
-                        </option>
-
-                    </select>
-
+                <div class="titulo-financeiro-icone">
+                    🌱
                 </div>
 
+                <div>
 
-                <div class="campo">
+                    <h2>
+                        Manutenção
+                    </h2>
 
-                    <label>Descrição</label>
-
-                    <input
-                        type="text"
-                        id="custoDescricao"
-                        placeholder="Ex: Ração"
-                        required
-                    >
-
-                </div>
-
-
-                <div class="campo">
-
-                    <label>Valor</label>
-
-                    <input
-                        type="number"
-                        id="custoValor"
-                        min="0"
-                        step="0.01"
-                        placeholder="R$ 0,00"
-                        required
-                    >
-
-                </div>
-
-
-                <div class="campo">
-
-                    <label>Data</label>
-
-                    <input
-                        type="date"
-                        id="custoData"
-                        required
-                    >
+                    <p>
+                        Registre gastos da propriedade.
+                    </p>
 
                 </div>
 
             </div>
 
 
-            <button class="botao-principal" type="submit">
-                💾 Registrar gasto
-            </button>
+            <form id="formManutencao">
 
-        </form>
-
-    </section>
+                <div class="financeiro-form-grid">
 
 
+                    <div class="financeiro-campo">
 
-    <!-- ========================= -->
-    <!-- VENDA -->
-    <!-- ========================= -->
+                        <label>
+                            Descrição *
+                        </label>
 
-    <section class="financeiro-card venda-card">
+                        <input
+                            type="text"
+                            name="descricao"
+                            placeholder="Ex: Medicamentos"
+                            required
+                        >
 
-        <div class="titulo-secao">
+                    </div>
 
-            <div class="titulo-icone">
-                📈
-            </div>
 
-            <div>
+                    <div class="financeiro-campo">
 
-                <h2>Venda de gado</h2>
+                        <label>
+                            Valor *
+                        </label>
 
-                <p>
-                    Informe o preço de venda e veja
-                    automaticamente se houve lucro ou prejuízo.
-                </p>
+                        <input
+                            type="number"
+                            name="valor"
+                            min="0"
+                            step="0.01"
+                            placeholder="R$ 0,00"
+                            required
+                        >
 
-            </div>
+                    </div>
+
+
+                    <div class="financeiro-campo">
+
+                        <label>
+                            Data
+                        </label>
+
+                        <input
+                            type="date"
+                            name="data"
+                        >
+
+                    </div>
+
+
+                    <div class="financeiro-campo">
+
+                        <label>
+                            Categoria
+                        </label>
+
+                        <select name="categoria">
+
+                            <option value="">
+                                Selecione
+                            </option>
+
+                            <option>Medicamentos</option>
+                            <option>Alimentação</option>
+                            <option>Pasto</option>
+                            <option>Máquinas</option>
+                            <option>Combustível</option>
+                            <option>Veterinário</option>
+                            <option>Funcionários</option>
+                            <option>Outros</option>
+
+                        </select>
+
+                    </div>
+
+
+                    <div class="financeiro-campo campo-completo">
+
+                        <label>
+                            Observações
+                        </label>
+
+                        <textarea
+                            name="observacoes"
+                            rows="3"
+                            placeholder="Detalhes do gasto..."
+                        ></textarea>
+
+                    </div>
+
+                </div>
+
+
+                <button
+                    type="submit"
+                    class="botao-financeiro"
+                >
+                    🌱 Registrar manutenção
+                </button>
+
+            </form>
 
         </div>
 
 
-        <form id="formVenda">
+        <!-- =====================================================
+             VENDA
+        ====================================================== -->
 
-            <div class="form-grid">
+        <div
+            id="secaoVenda"
+            class="secao-financeira"
+        >
 
-                <div class="campo">
+            <div class="titulo-financeiro">
 
-                    <label>Quantidade vendida</label>
-
-                    <input
-                        type="number"
-                        id="vendaQuantidade"
-                        min="1"
-                        placeholder="Ex: 10"
-                        required
-                    >
-
+                <div class="titulo-financeiro-icone">
+                    💵
                 </div>
 
+                <div>
 
-                <div class="campo">
+                    <h2>
+                        Vender gado
+                    </h2>
 
-                    <label>Forma de venda</label>
-
-                    <select id="vendaTipo">
-
-                        <option value="cabeca">
-                            Por cabeça
-                        </option>
-
-                        <option value="kg">
-                            Por kg
-                        </option>
-
-                        <option value="arroba">
-                            Por arroba (@)
-                        </option>
-
-                    </select>
-
-                </div>
-
-
-                <div class="campo">
-
-                    <label>Peso médio (kg)</label>
-
-                    <input
-                        type="number"
-                        id="vendaPeso"
-                        min="0"
-                        step="0.01"
-                        placeholder="Ex: 500"
-                    >
-
-                </div>
-
-
-                <div class="campo">
-
-                    <label>Preço de venda</label>
-
-                    <input
-                        type="number"
-                        id="vendaPreco"
-                        min="0"
-                        step="0.01"
-                        placeholder="Ex: 4500"
-                        required
-                    >
-
-                </div>
-
-
-                <div class="campo">
-
-                    <label>Data da venda</label>
-
-                    <input
-                        type="date"
-                        id="vendaData"
-                        required
-                    >
+                    <p>
+                        Registre os detalhes e valores da venda.
+                    </p>
 
                 </div>
 
             </div>
 
 
-            <!-- SIMULAÇÃO -->
-
-            <div class="simulacao">
-
-                <h3>📊 Resultado da venda</h3>
+            <form id="formVenda">
 
 
-                <div class="resultado-grid">
+                <div class="financeiro-form-grid">
 
-                    <div>
-                        <span>Receita</span>
-                        <strong id="vendaReceita">
-                            R$ 0,00
-                        </strong>
+
+                    <div class="financeiro-campo">
+
+                        <label>
+                            Identificação / Brinco *
+                        </label>
+
+                        <input
+                            type="text"
+                            name="animal"
+                            placeholder="Ex: Brinco 025"
+                            required
+                        >
+
                     </div>
 
 
-                    <div>
-                        <span>Custo estimado</span>
-                        <strong id="vendaCusto">
-                            R$ 0,00
-                        </strong>
+                    <div class="financeiro-campo">
+
+                        <label>
+                            Categoria
+                        </label>
+
+                        <select name="categoria">
+
+                            <option value="">
+                                Selecione
+                            </option>
+
+                            <option>Bezerro</option>
+                            <option>Novilho</option>
+                            <option>Novilha</option>
+                            <option>Boi</option>
+                            <option>Vaca</option>
+                            <option>Touro</option>
+
+                        </select>
+
                     </div>
 
 
-                    <div>
-                        <span>Lucro / Prejuízo</span>
-                        <strong id="vendaLucro">
-                            R$ 0,00
-                        </strong>
+                    <div class="financeiro-campo">
+
+                        <label>
+                            Sexo
+                        </label>
+
+                        <select name="sexo">
+
+                            <option value="">
+                                Selecione
+                            </option>
+
+                            <option>Macho</option>
+                            <option>Fêmea</option>
+
+                        </select>
+
                     </div>
 
 
-                    <div>
-                        <span>Margem</span>
-                        <strong id="vendaMargem">
-                            0%
-                        </strong>
+                    <div class="financeiro-campo">
+
+                        <label>
+                            Raça
+                        </label>
+
+                        <input
+                            type="text"
+                            name="raca"
+                            placeholder="Ex: Nelore"
+                        >
+
+                    </div>
+
+
+                    <div class="financeiro-campo">
+
+                        <label>
+                            Peso de saída (kg)
+                        </label>
+
+                        <input
+                            type="number"
+                            id="pesoVenda"
+                            name="peso"
+                            min="0"
+                            step="0.01"
+                            placeholder="Ex: 520"
+                        >
+
+                    </div>
+
+
+                    <div class="financeiro-campo">
+
+                        <label>
+                            Preço por kg
+                        </label>
+
+                        <input
+                            type="number"
+                            id="precoKgVenda"
+                            name="precoKg"
+                            min="0"
+                            step="0.01"
+                            placeholder="R$ 0,00"
+                        >
+
+                        <small>
+                            Peso × preço/kg calcula o valor automaticamente.
+                        </small>
+
+                    </div>
+
+
+                    <div class="financeiro-campo destaque-campo">
+
+                        <label>
+                            Valor da venda *
+                        </label>
+
+                        <input
+                            type="number"
+                            id="valorVenda"
+                            name="valor"
+                            min="0"
+                            step="0.01"
+                            placeholder="R$ 0,00"
+                            required
+                        >
+
+                    </div>
+
+
+                    <div class="financeiro-campo">
+
+                        <label>
+                            Frete
+                        </label>
+
+                        <input
+                            type="number"
+                            id="freteVenda"
+                            name="frete"
+                            min="0"
+                            step="0.01"
+                            value="0"
+                            placeholder="R$ 0,00"
+                        >
+
+                    </div>
+
+
+                    <div class="financeiro-campo">
+
+                        <label>
+                            Outras despesas
+                        </label>
+
+                        <input
+                            type="number"
+                            id="outrasDespesasVenda"
+                            name="outrasDespesas"
+                            min="0"
+                            step="0.01"
+                            value="0"
+                            placeholder="R$ 0,00"
+                        >
+
+                    </div>
+
+
+                    <div class="financeiro-campo">
+
+                        <label>
+                            Comprador
+                        </label>
+
+                        <input
+                            type="text"
+                            name="comprador"
+                            placeholder="Nome do comprador"
+                        >
+
+                    </div>
+
+
+                    <div class="financeiro-campo">
+
+                        <label>
+                            Data da venda
+                        </label>
+
+                        <input
+                            type="date"
+                            name="data"
+                        >
+
+                    </div>
+
+
+                    <div class="financeiro-campo">
+
+                        <label>
+                            Forma de pagamento
+                        </label>
+
+                        <select name="pagamento">
+
+                            <option value="">
+                                Selecione
+                            </option>
+
+                            <option>À vista</option>
+                            <option>Pix</option>
+                            <option>Transferência</option>
+                            <option>Boleto</option>
+                            <option>Parcelado</option>
+                            <option>Outro</option>
+
+                        </select>
+
+                    </div>
+
+
+                    <div class="financeiro-campo">
+
+                        <label>
+                            Destino do gado
+                        </label>
+
+                        <input
+                            type="text"
+                            name="destino"
+                            placeholder="Ex: Frigorífico"
+                        >
+
+                    </div>
+
+
+                    <div class="financeiro-campo campo-completo">
+
+                        <label>
+                            Observações
+                        </label>
+
+                        <textarea
+                            name="observacoes"
+                            rows="3"
+                            placeholder="Informações adicionais..."
+                        ></textarea>
+
                     </div>
 
                 </div>
 
+
+                <div class="resumo-operacao">
+
+                    <div class="resumo-operacao-titulo">
+                        🧾 Resumo da venda
+                    </div>
+
+                    <div class="resumo-operacao-grid">
+
+                        <div class="resumo-operacao-item">
+
+                            <span>
+                                Valor do gado
+                            </span>
+
+                            <strong id="resumoVendaGado">
+                                R$ 0,00
+                            </strong>
+
+                        </div>
+
+
+                        <div class="resumo-operacao-item">
+
+                            <span>
+                                Despesas
+                            </span>
+
+                            <strong id="resumoVendaDespesas">
+                                R$ 0,00
+                            </strong>
+
+                        </div>
+
+
+                        <div class="resumo-operacao-item">
+
+                            <span>
+                                Valor líquido
+                            </span>
+
+                            <strong id="resumoVendaTotal">
+                                R$ 0,00
+                            </strong>
+
+                        </div>
+
+                    </div>
+
+                </div>
+
+
+                <button
+                    type="submit"
+                    class="botao-financeiro"
+                >
+                    💵 Registrar venda
+                </button>
+
+
+            </form>
+
+        </div>
+
+
+        <!-- =====================================================
+             RESULTADO
+        ====================================================== -->
+
+        <div
+            id="secaoResultado"
+            class="secao-financeira"
+        >
+
+            <div class="titulo-financeiro">
+
+                <div class="titulo-financeiro-icone">
+                    📊
+                </div>
+
+                <div>
+
+                    <h2>
+                        Resultado financeiro
+                    </h2>
+
+                    <p>
+                        Veja quanto entrou, quanto saiu e o resultado final.
+                    </p>
+
+                </div>
+
+            </div>
+
+
+            <div class="resultado-principal">
+
+                <div class="resultado-icone">
+                    📊
+                </div>
+
+                <h3>
+                    Resultado da propriedade
+                </h3>
 
                 <div
-                    id="mensagemResultado"
-                    class="mensagem-resultado"
+                    id="resultadoValor"
+                    class="resultado-valor"
                 >
-                    Informe os dados da venda.
+                    R$ 0,00
                 </div>
 
-            </div>
-
-
-            <button class="botao-principal" type="submit">
-                💾 Registrar venda
-            </button>
-
-        </form>
-
-    </section>
-
-
-
-    <!-- ========================= -->
-    <!-- HISTÓRICO -->
-    <!-- ========================= -->
-
-    <section class="financeiro-card">
-
-        <div class="titulo-secao">
-
-            <div class="titulo-icone">
-                📋
-            </div>
-
-            <div>
-
-                <h2>Histórico financeiro</h2>
-
-                <p>
-                    Últimas movimentações da fazenda.
+                <p
+                    id="resultadoDescricao"
+                    class="resultado-descricao"
+                >
+                    Registre movimentações para acompanhar seu resultado.
                 </p>
 
             </div>
 
-        </div>
+
+            <div class="resultado-cards">
 
 
-        <div id="historicoFinanceiro">
+                <div class="resultado-card">
 
-            <div class="historico-vazio">
-                Nenhuma movimentação registrada.
+                    <span>
+                        Compras
+                    </span>
+
+                    <strong id="totalCompras">
+                        R$ 0,00
+                    </strong>
+
+                </div>
+
+
+                <div class="resultado-card">
+
+                    <span>
+                        Manutenção
+                    </span>
+
+                    <strong id="totalManutencao">
+                        R$ 0,00
+                    </strong>
+
+                </div>
+
+
+                <div class="resultado-card">
+
+                    <span>
+                        Vendas
+                    </span>
+
+                    <strong id="totalVendas">
+                        R$ 0,00
+                    </strong>
+
+                </div>
+
+
+                <div class="resultado-card">
+
+                    <span>
+                        Despesas extras
+                    </span>
+
+                    <strong id="totalDespesasExtras">
+                        R$ 0,00
+                    </strong>
+
+                </div>
+
+
+            </div>
+
+
+            <div class="resultado-acoes">
+
+                <button
+                    type="button"
+                    class="botao-exportar"
+                    onclick="imprimirFinanceiro()"
+                >
+                    📄 Imprimir / PDF
+                </button>
+
+
+                <button
+                    type="button"
+                    class="botao-exportar"
+                    onclick="exportarExcelFinanceiro()"
+                >
+                    📊 Exportar Excel
+                </button>
+
+            </div>
+
+
+            <div class="movimentacoes">
+
+                <h3>
+                    Últimas movimentações
+                </h3>
+
+                <div id="listaMovimentacoes">
+
+                    <div class="financeiro-vazio">
+
+                        <div class="financeiro-vazio-icone">
+                            📊
+                        </div>
+
+                        <h3>
+                            Nenhuma movimentação
+                        </h3>
+
+                        <p>
+                            Cadastre compras, manutenções ou vendas.
+                        </p>
+
+                    </div>
+
+                </div>
+
             </div>
 
         </div>
 
     </section>
 
+
+    <footer class="financeiro-footer">
+
+        AgroNexo • Gestão inteligente da propriedade
+
+    </footer>
 
 </main>
 
 
-<script src="financeiro.js"></script>
+<script>
+
+/* =====================================================
+   VOLTAR PARA INÍCIO
+===================================================== */
+
+function voltarInicioFinanceiro() {
+
+    window.location.href = "index.html";
+
+}
+
+
+/* =====================================================
+   MOEDA
+===================================================== */
+
+function formatarMoedaFinanceiro(valor) {
+
+    return Number(valor || 0).toLocaleString(
+        "pt-BR",
+        {
+            style: "currency",
+            currency: "BRL"
+        }
+    );
+
+}
+
+
+/* =====================================================
+   TROCAR ETAPA
+===================================================== */
+
+function mostrarEtapaFinanceira(etapa) {
+
+    const secoes = {
+
+        compra: "secaoCompra",
+
+        manutencao: "secaoManutencao",
+
+        venda: "secaoVenda",
+
+        resultado: "secaoResultado"
+
+    };
+
+
+    const botoes = {
+
+        compra: "btnCompra",
+
+        manutencao: "btnManutencao",
+
+        venda: "btnVenda",
+
+        resultado: "btnResultado"
+
+    };
+
+
+    Object.values(secoes).forEach(
+        function(id) {
+
+            const elemento =
+                document.getElementById(id);
+
+            if (elemento) {
+
+                elemento.classList.remove("ativa");
+
+            }
+
+        }
+    );
+
+
+    Object.values(botoes).forEach(
+        function(id) {
+
+            const botao =
+                document.getElementById(id);
+
+            if (botao) {
+
+                botao.classList.remove("ativa");
+
+            }
+
+        }
+    );
+
+
+    const secao =
+        document.getElementById(
+            secoes[etapa]
+        );
+
+
+    const botao =
+        document.getElementById(
+            botoes[etapa]
+        );
+
+
+    if (secao) {
+
+        secao.classList.add("ativa");
+
+    }
+
+
+    if (botao) {
+
+        botao.classList.add("ativa");
+
+    }
+
+
+    if (etapa === "resultado") {
+
+        atualizarResultadoFinanceiro();
+
+    }
+
+}
+
+
+/* =====================================================
+   LER LOCALSTORAGE COM SEGURANÇA
+===================================================== */
+
+function lerListaFinanceira(chave) {
+
+    try {
+
+        return JSON.parse(
+            localStorage.getItem(chave)
+        ) || [];
+
+    } catch (erro) {
+
+        return [];
+
+    }
+
+}
+
+
+/* =====================================================
+   SALVAR LISTA
+===================================================== */
+
+function salvarListaFinanceira(chave, lista) {
+
+    localStorage.setItem(
+        chave,
+        JSON.stringify(lista)
+    );
+
+}
+
+
+/* =====================================================
+   CÁLCULO DA COMPRA
+===================================================== */
+
+function calcularCompraFinanceiro() {
+
+    const peso =
+        Number(
+            document.getElementById(
+                "pesoCompra"
+            )?.value || 0
+        );
+
+
+    const precoKg =
+        Number(
+            document.getElementById(
+                "precoKgCompra"
+            )?.value || 0
+        );
+
+
+    const campoValor =
+        document.getElementById(
+            "valorCompra"
+        );
+
+
+    let valorGado =
+        Number(
+            campoValor?.value || 0
+        );
+
+
+    if (
+        peso > 0 &&
+        precoKg > 0
+    ) {
+
+        valorGado =
+            peso * precoKg;
+
+        if (campoValor) {
+
+            campoValor.value =
+                valorGado.toFixed(2);
+
+        }
+
+    }
+
+
+    const frete =
+        Number(
+            document.getElementById(
+                "freteCompra"
+            )?.value || 0
+        );
+
+
+    const outras =
+        Number(
+            document.getElementById(
+                "outrasDespesasCompra"
+            )?.value || 0
+        );
+
+
+    const despesas =
+        frete + outras;
+
+
+    const total =
+        valorGado + despesas;
+
+
+    document.getElementById(
+        "resumoCompraGado"
+    ).textContent =
+        formatarMoedaFinanceiro(
+            valorGado
+        );
+
+
+    document.getElementById(
+        "resumoCompraFrete"
+    ).textContent =
+        formatarMoedaFinanceiro(
+            despesas
+        );
+
+
+    document.getElementById(
+        "resumoCompraTotal"
+    ).textContent =
+        formatarMoedaFinanceiro(
+            total
+        );
+
+}
+
+
+/* =====================================================
+   CÁLCULO DA VENDA
+===================================================== */
+
+function calcularVendaFinanceiro() {
+
+    const peso =
+        Number(
+            document.getElementById(
+                "pesoVenda"
+            )?.value || 0
+        );
+
+
+    const precoKg =
+        Number(
+            document.getElementById(
+                "precoKgVenda"
+            )?.value || 0
+        );
+
+
+    const campoValor =
+        document.getElementById(
+            "valorVenda"
+        );
+
+
+    let valorGado =
+        Number(
+            campoValor?.value || 0
+        );
+
+
+    if (
+        peso > 0 &&
+        precoKg > 0
+    ) {
+
+        valorGado =
+            peso * precoKg;
+
+        if (campoValor) {
+
+            campoValor.value =
+                valorGado.toFixed(2);
+
+        }
+
+    }
+
+
+    const frete =
+        Number(
+            document.getElementById(
+                "freteVenda"
+            )?.value || 0
+        );
+
+
+    const outras =
+        Number(
+            document.getElementById(
+                "outrasDespesasVenda"
+            )?.value || 0
+        );
+
+
+    const despesas =
+        frete + outras;
+
+
+    const liquido =
+        valorGado - despesas;
+
+
+    document.getElementById(
+        "resumoVendaGado"
+    ).textContent =
+        formatarMoedaFinanceiro(
+            valorGado
+        );
+
+
+    document.getElementById(
+        "resumoVendaDespesas"
+    ).textContent =
+        formatarMoedaFinanceiro(
+            despesas
+        );
+
+
+    document.getElementById(
+        "resumoVendaTotal"
+    ).textContent =
+        formatarMoedaFinanceiro(
+            liquido
+        );
+
+}
+
+
+/* =====================================================
+   REGISTRAR COMPRA
+===================================================== */
+
+document
+    .getElementById("formCompra")
+    .addEventListener(
+        "submit",
+        function(event) {
+
+            event.preventDefault();
+
+
+            const dados =
+                new FormData(this);
+
+
+            const valor =
+                Number(
+                    dados.get("valor") || 0
+                );
+
+
+            const frete =
+                Number(
+                    dados.get("frete") || 0
+                );
+
+
+            const outras =
+                Number(
+                    dados.get(
+                        "outrasDespesas"
+                    ) || 0
+                );
+
+
+            const compra = {
+
+                id: Date.now(),
+
+                tipo: "compra",
+
+                animal:
+                    dados.get("animal"),
+
+                categoria:
+                    dados.get("categoria"),
+
+                sexo:
+                    dados.get("sexo"),
+
+                raca:
+                    dados.get("raca"),
+
+                idade:
+                    Number(
+                        dados.get("idade") || 0
+                    ),
+
+                peso:
+                    Number(
+                        dados.get("peso") || 0
+                    ),
+
+                precoKg:
+                    Number(
+                        dados.get("precoKg") || 0
+                    ),
+
+                valor: valor,
+
+                frete: frete,
+
+                outrasDespesas: outras,
+
+                custoTotal:
+                    valor +
+                    frete +
+                    outras,
+
+                fornecedor:
+                    dados.get("fornecedor"),
+
+                data:
+                    dados.get("data"),
+
+                pagamento:
+                    dados.get("pagamento"),
+
+                origem:
+                    dados.get("origem"),
+
+                observacoes:
+                    dados.get("observacoes")
+
+            };
+
+
+            const compras =
+                lerListaFinanceira(
+                    "compras"
+                );
+
+
+            compras.push(compra);
+
+
+            salvarListaFinanceira(
+                "compras",
+                compras
+            );
+
+
+            alert(
+                "✅ Compra registrada com sucesso!"
+            );
+
+
+            this.reset();
+
+
+            definirDatas();
+
+
+            atualizarResultadoFinanceiro();
+
+
+            mostrarEtapaFinanceira(
+                "resultado"
+            );
+
+        }
+    );
+
+
+/* =====================================================
+   REGISTRAR VENDA
+===================================================== */
+
+document
+    .getElementById("formVenda")
+    .addEventListener(
+        "submit",
+        function(event) {
+
+            event.preventDefault();
+
+
+            const dados =
+                new FormData(this);
+
+
+            const valor =
+                Number(
+                    dados.get("valor") || 0
+                );
+
+
+            const frete =
+                Number(
+                    dados.get("frete") || 0
+                );
+
+
+            const outras =
+                Number(
+                    dados.get(
+                        "outrasDespesas"
+                    ) || 0
+                );
+
+
+            const venda = {
+
+                id: Date.now(),
+
+                tipo: "venda",
+
+                animal:
+                    dados.get("animal"),
+
+                categoria:
+                    dados.get("categoria"),
+
+                sexo:
+                    dados.get("sexo"),
+
+                raca:
+                    dados.get("raca"),
+
+                peso:
+                    Number(
+                        dados.get("peso") || 0
+                    ),
+
+                precoKg:
+                    Number(
+                        dados.get("precoKg") || 0
+                    ),
+
+                valor: valor,
+
+                frete: frete,
+
+                outrasDespesas: outras,
+
+                valorLiquido:
+                    valor -
+                    frete -
+                    outras,
+
+                comprador:
+                    dados.get("comprador"),
+
+                data:
+                    dados.get("data"),
+
+                pagamento:
+                    dados.get("pagamento"),
+
+                destino:
+                    dados.get("destino"),
+
+                observacoes:
+                    dados.get("observacoes")
+
+            };
+
+
+            const vendas =
+                lerListaFinanceira(
+                    "vendas"
+                );
+
+
+            vendas.push(venda);
+
+
+            salvarListaFinanceira(
+                "vendas",
+                vendas
+            );
+
+
+            alert(
+                "✅ Venda registrada com sucesso!"
+            );
+
+
+            this.reset();
+
+
+            definirDatas();
+
+
+            atualizarResultadoFinanceiro();
+
+
+            mostrarEtapaFinanceira(
+                "resultado"
+            );
+
+        }
+    );
+
+
+/* =====================================================
+   REGISTRAR MANUTENÇÃO
+===================================================== */
+
+document
+    .getElementById("formManutencao")
+    .addEventListener(
+        "submit",
+        function(event) {
+
+            event.preventDefault();
+
+
+            const dados =
+                new FormData(this);
+
+
+            const manutencao = {
+
+                id: Date.now(),
+
+                tipo: "manutencao",
+
+                descricao:
+                    dados.get("descricao"),
+
+                valor:
+                    Number(
+                        dados.get("valor") || 0
+                    ),
+
+                data:
+                    dados.get("data"),
+
+                categoria:
+                    dados.get("categoria"),
+
+                observacoes:
+                    dados.get("observacoes")
+
+            };
+
+
+            const manutencoes =
+                lerListaFinanceira(
+                    "manutencoes"
+                );
+
+
+            manutencoes.push(
+                manutencao
+            );
+
+
+            salvarListaFinanceira(
+                "manutencoes",
+                manutencoes
+            );
+
+
+            alert(
+                "✅ Manutenção registrada com sucesso!"
+            );
+
+
+            this.reset();
+
+
+            definirDatas();
+
+
+            atualizarResultadoFinanceiro();
+
+
+            mostrarEtapaFinanceira(
+                "resultado"
+            );
+
+        }
+    );
+
+
+/* =====================================================
+   RESULTADO FINANCEIRO
+===================================================== */
+
+function atualizarResultadoFinanceiro() {
+
+    const compras =
+        lerListaFinanceira(
+            "compras"
+        );
+
+
+    const vendas =
+        lerListaFinanceira(
+            "vendas"
+        );
+
+
+    const manutencoes =
+        lerListaFinanceira(
+            "manutencoes"
+        );
+
+
+    const totalCompras =
+        compras.reduce(
+            function(total, item) {
+
+                return total +
+                    Number(
+                        item.custoTotal ??
+                        (
+                            Number(
+                                item.valor || 0
+                            ) +
+                            Number(
+                                item.frete || 0
+                            ) +
+                            Number(
+                                item.outrasDespesas || 0
+                            )
+                        )
+                    );
+
+            },
+            0
+        );
+
+
+    const totalManutencao =
+        manutencoes.reduce(
+            function(total, item) {
+
+                return total +
+                    Number(
+                        item.valor || 0
+                    );
+
+            },
+            0
+        );
+
+
+    const totalVendasBrutas =
+        vendas.reduce(
+            function(total, item) {
+
+                return total +
+                    Number(
+                        item.valor || 0
+                    );
+
+            },
+            0
+        );
+
+
+    const despesasVenda =
+        vendas.reduce(
+            function(total, item) {
+
+                return total +
+                    Number(
+                        item.frete || 0
+                    ) +
+                    Number(
+                        item.outrasDespesas || 0
+                    );
+
+            },
+            0
+        );
+
+
+    const resultado =
+        totalVendasBrutas -
+        totalCompras -
+        totalManutencao -
+        despesasVenda;
+
+
+    const despesasExtras =
+        despesasVenda;
+
+
+    document.getElementById(
+        "totalCompras"
+    ).textContent =
+        formatarMoedaFinanceiro(
+            totalCompras
+        );
+
+
+    document.getElementById(
+        "totalManutencao"
+    ).textContent =
+        formatarMoedaFinanceiro(
+            totalManutencao
+        );
+
+
+    document.getElementById(
+        "totalVendas"
+    ).textContent =
+        formatarMoedaFinanceiro(
+            totalVendasBrutas
+        );
+
+
+    document.getElementById(
+        "totalDespesasExtras"
+    ).textContent =
+        formatarMoedaFinanceiro(
+            despesasExtras
+        );
+
+
+    const resultadoElemento =
+        document.getElementById(
+            "resultadoValor"
+        );
+
+
+    resultadoElemento.textContent =
+        formatarMoedaFinanceiro(
+            resultado
+        );
+
+
+    const descricao =
+        document.getElementById(
+            "resultadoDescricao"
+        );
+
+
+    if (resultado > 0) {
+
+        descricao.textContent =
+            "🟢 A propriedade está apresentando lucro.";
+
+        resultadoElemento.style.color =
+            "#24733d";
+
+    } else if (resultado < 0) {
+
+        descricao.textContent =
+            "🔴 As despesas estão maiores que as receitas.";
+
+        resultadoElemento.style.color =
+            "#c0392b";
+
+    } else {
+
+        descricao.textContent =
+            "⚪ O resultado está zerado.";
+
+        resultadoElemento.style.color =
+            "#555";
+
+    }
+
+
+    mostrarMovimentacoes();
+
+}
+
+
+/* =====================================================
+   LISTA DE MOVIMENTAÇÕES
+===================================================== */
+
+function mostrarMovimentacoes() {
+
+    const compras =
+        lerListaFinanceira(
+            "compras"
+        );
+
+
+    const vendas =
+        lerListaFinanceira(
+            "vendas"
+        );
+
+
+    const manutencoes =
+        lerListaFinanceira(
+            "manutencoes"
+        );
+
+
+    let lista = [];
+
+
+    compras.forEach(
+        function(item) {
+
+            lista.push({
+
+                id: item.id,
+
+                tipo: "compra",
+
+                nome:
+                    "Compra de gado " +
+                    (
+                        item.animal ||
+                        ""
+                    ),
+
+                data:
+                    item.data || "",
+
+                valor:
+                    Number(
+                        item.custoTotal ??
+                        item.valor ??
+                        0
+                    )
+
+            });
+
+        }
+    );
+
+
+    vendas.forEach(
+        function(item) {
+
+            lista.push({
+
+                id: item.id,
+
+                tipo: "venda",
+
+                nome:
+                    "Venda de gado " +
+                    (
+                        item.animal ||
+                        ""
+                    ),
+
+                data:
+                    item.data || "",
+
+                valor:
+                    Number(
+                        item.valor ||
+                        0
+                    )
+
+            });
+
+        }
+    );
+
+
+    manutencoes.forEach(
+        function(item) {
+
+            lista.push({
+
+                id: item.id,
+
+                tipo: "manutencao",
+
+                nome:
+                    item.descricao ||
+                    "Manutenção",
+
+                data:
+                    item.data || "",
+
+                valor:
+                    Number(
+                        item.valor ||
+                        0
+                    )
+
+            });
+
+        }
+    );
+
+
+    lista.sort(
+        function(a, b) {
+
+            return b.id - a.id;
+
+        }
+    );
+
+
+    const container =
+        document.getElementById(
+            "listaMovimentacoes"
+        );
+
+
+    if (!lista.length) {
+
+        container.innerHTML = `
+
+            <div class="financeiro-vazio">
+
+                <div class="financeiro-vazio-icone">
+                    📊
+                </div>
+
+                <h3>
+                    Nenhuma movimentação
+                </h3>
+
+                <p>
+                    Cadastre compras, manutenções ou vendas.
+                </p>
+
+            </div>
+
+        `;
+
+        return;
+
+    }
+
+
+    container.innerHTML =
+        lista
+            .slice(0, 20)
+            .map(
+                function(item) {
+
+                    let icone = "📊";
+
+                    let classe =
+                        "movimento-manutencao";
+
+
+                    if (
+                        item.tipo ===
+                        "compra"
+                    ) {
+
+                        icone = "🐄";
+
+                        classe =
+                            "movimento-compra";
+
+                    }
+
+
+                    if (
+                        item.tipo ===
+                        "venda"
+                    ) {
+
+                        icone = "💵";
+
+                        classe =
+                            "movimento-venda";
+
+                    }
+
+
+                    const valorTexto =
+                        formatarMoedaFinanceiro(
+                            item.valor
+                        );
+
+
+                    return `
+
+                        <div class="movimento-item">
+
+                            <div class="movimento-info">
+
+                                <strong>
+                                    ${icone}
+                                    ${escaparHTML(item.nome)}
+                                </strong>
+
+                                <span>
+                                    ${item.data || "Sem data"}
+                                </span>
+
+                            </div>
+
+                            <div>
+
+                                <span
+                                    class="movimento-valor ${classe}"
+                                >
+                                    ${valorTexto}
+                                </span>
+
+                            </div>
+
+                        </div>
+
+                    `;
+
+                }
+            )
+            .join("");
+
+}
+
+
+/* =====================================================
+   EVITAR HTML INJETADO
+===================================================== */
+
+function escaparHTML(texto) {
+
+    return String(
+        texto || ""
+    )
+    .replaceAll("&", "&amp;")
+    .replaceAll("<", "&lt;")
+    .replaceAll(">", "&gt;")
+    .replaceAll('"', "&quot;")
+    .replaceAll("'", "&#039;");
+
+}
+
+
+/* =====================================================
+   DATAS
+===================================================== */
+
+function definirDatas() {
+
+    const hoje =
+        new Date()
+            .toISOString()
+            .split("T")[0];
+
+
+    document
+        .querySelectorAll(
+            'input[type="date"]'
+        )
+        .forEach(
+            function(input) {
+
+                if (!input.value) {
+
+                    input.value =
+                        hoje;
+
+                }
+
+            }
+        );
+
+}
+
+
+/* =====================================================
+   PDF / IMPRESSÃO
+===================================================== */
+
+function imprimirFinanceiro() {
+
+    mostrarEtapaFinanceira(
+        "resultado"
+    );
+
+
+    setTimeout(
+        function() {
+
+            window.print();
+
+        },
+        200
+    );
+
+}
+
+
+/* =====================================================
+   EXPORTAR EXCEL
+===================================================== */
+
+function exportarExcelFinanceiro() {
+
+    const compras =
+        lerListaFinanceira(
+            "compras"
+        );
+
+
+    const vendas =
+        lerListaFinanceira(
+            "vendas"
+        );
+
+
+    const manutencoes =
+        lerListaFinanceira(
+            "manutencoes"
+        );
+
+
+    let linhas = [];
+
+
+    linhas.push([
+        "Tipo",
+        "Identificação",
+        "Categoria",
+        "Data",
+        "Valor",
+        "Frete",
+        "Outras despesas",
+        "Total"
+    ]);
+
+
+    compras.forEach(
+        function(item) {
+
+            const frete =
+                Number(
+                    item.frete || 0
+                );
+
+
+            const outras =
+                Number(
+                    item.outrasDespesas || 0
+                );
+
+
+            const valor =
+                Number(
+                    item.valor || 0
+                );
+
+
+            linhas.push([
+
+                "Compra",
+
+                item.animal || "",
+
+                item.categoria || "",
+
+                item.data || "",
+
+                valor.toFixed(2),
+
+                frete.toFixed(2),
+
+                outras.toFixed(2),
+
+                (
+                    valor +
+                    frete +
+                    outras
+                ).toFixed(2)
+
+            ]);
+
+        }
+    );
+
+
+    vendas.forEach(
+        function(item) {
+
+            const frete =
+                Number(
+                    item.frete || 0
+                );
+
+
+            const outras =
+                Number(
+                    item.outrasDespesas || 0
+                );
+
+
+            const valor =
+                Number(
+                    item.valor || 0
+                );
+
+
+            linhas.push([
+
+                "Venda",
+
+                item.animal || "",
+
+                item.categoria || "",
+
+                item.data || "",
+
+                valor.toFixed(2),
+
+                frete.toFixed(2),
+
+                outras.toFixed(2),
+
+                (
+                    valor -
+                    frete -
+                    outras
+                ).toFixed(2)
+
+            ]);
+
+        }
+    );
+
+
+    manutencoes.forEach(
+        function(item) {
+
+            const valor =
+                Number(
+                    item.valor || 0
+                );
+
+
+            linhas.push([
+
+                "Manutenção",
+
+                item.descricao || "",
+
+                item.categoria || "",
+
+                item.data || "",
+
+                valor.toFixed(2),
+
+                "0.00",
+
+                "0.00",
+
+                valor.toFixed(2)
+
+            ]);
+
+        }
+    );
+
+
+    const tabela =
+        linhas
+            .map(
+                function(linha) {
+
+                    return linha
+                        .map(
+                            function(celula) {
+
+                                return '"' +
+                                    String(
+                                        celula
+                                    ).replaceAll(
+                                        '"',
+                                        '""'
+                                    ) +
+                                    '"';
+
+                            }
+                        )
+                        .join(";");
+
+                }
+            )
+            .join("\n");
+
+
+    const blob =
+        new Blob(
+            [
+                "\ufeff" +
+                tabela
+            ],
+            {
+                type:
+                    "application/vnd.ms-excel;charset=utf-8;"
+            }
+        );
+
+
+    const url =
+        URL.createObjectURL(
+            blob
+        );
+
+
+    const link =
+        document.createElement(
+            "a"
+        );
+
+
+    link.href = url;
+
+    link.download =
+        "relatorio-financeiro-AgroNexo.xls";
+
+
+    document.body.appendChild(
+        link
+    );
+
+
+    link.click();
+
+
+    document.body.removeChild(
+        link
+    );
+
+
+    URL.revokeObjectURL(
+        url
+    );
+
+}
+
+
+/* =====================================================
+   EVENTOS DE CÁLCULO
+===================================================== */
+
+document.addEventListener(
+    "DOMContentLoaded",
+    function() {
+
+
+        definirDatas();
+
+
+        const camposCompra = [
+
+            "pesoCompra",
+
+            "precoKgCompra",
+
+            "valorCompra",
+
+            "freteCompra",
+
+            "outrasDespesasCompra"
+
+        ];
+
+
+        camposCompra.forEach(
+            function(id) {
+
+                const campo =
+                    document.getElementById(id);
+
+
+                if (campo) {
+
+                    campo.addEventListener(
+                        "input",
+                        calcularCompraFinanceiro
+                    );
+
+                }
+
+            }
+        );
+
+
+        const camposVenda = [
+
+            "pesoVenda",
+
+            "precoKgVenda",
+
+            "valorVenda",
+
+            "freteVenda",
+
+            "outrasDespesasVenda"
+
+        ];
+
+
+        camposVenda.forEach(
+            function(id) {
+
+                const campo =
+                    document.getElementById(id);
+
+
+                if (campo) {
+
+                    campo.addEventListener(
+                        "input",
+                        calcularVendaFinanceiro
+                    );
+
+                }
+
+            }
+        );
+
+
+        calcularCompraFinanceiro();
+
+        calcularVendaFinanceiro();
+
+        atualizarResultadoFinanceiro();
+
+    }
+);
+
+</script>
+
 
 </body>
 
