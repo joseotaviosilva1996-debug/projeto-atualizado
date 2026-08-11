@@ -1,0 +1,1465 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta
+        name="viewport"
+        content="width=device-width, initial-scale=1.0"
+    >
+
+    <title>AgroNexo - Cadastrar animal</title>
+
+
+    <style>
+
+        /* =========================================
+           RESET
+        ========================================= */
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+
+        /* =========================================
+           BODY
+        ========================================= */
+
+        body {
+
+            font-family:
+                Arial,
+                Helvetica,
+                sans-serif;
+
+            background: #f3f6f3;
+
+            color: #222;
+
+            min-height: 100vh;
+
+        }
+
+
+        /* =========================================
+           TOPO
+        ========================================= */
+
+        .topo {
+
+            background:
+                linear-gradient(
+                    135deg,
+                    #176b35,
+                    #258247
+                );
+
+            color: white;
+
+            padding: 20px 35px;
+
+            display: flex;
+
+            align-items: center;
+
+            justify-content: space-between;
+
+            box-shadow:
+                0 3px 12px
+                rgba(0,0,0,0.15);
+
+        }
+
+
+        .topo-esquerda {
+
+            display: flex;
+
+            align-items: center;
+
+            gap: 14px;
+
+        }
+
+
+        .topo-icone {
+
+            font-size: 40px;
+
+        }
+
+
+        .topo h1 {
+
+            font-size: 28px;
+
+        }
+
+
+        .topo p {
+
+            margin-top: 4px;
+
+            opacity: 0.85;
+
+            font-size: 14px;
+
+        }
+
+
+        /* =========================================
+           BOTÃO VOLTAR DO TOPO
+        ========================================= */
+
+        .botao-voltar-topo {
+
+            border: 1px solid
+                rgba(255,255,255,0.4);
+
+            background:
+                rgba(255,255,255,0.12);
+
+            color: white;
+
+            padding: 11px 18px;
+
+            border-radius: 10px;
+
+            cursor: pointer;
+
+            font-size: 14px;
+
+            transition: 0.2s;
+
+        }
+
+
+        .botao-voltar-topo:hover {
+
+            background:
+                rgba(255,255,255,0.22);
+
+        }
+
+
+        /* =========================================
+           CONTEÚDO
+        ========================================= */
+
+        .conteudo {
+
+            width: 100%;
+
+            max-width: 1000px;
+
+            margin: 35px auto;
+
+            padding: 0 20px;
+
+        }
+
+
+        /* =========================================
+           CABEÇALHO DA PÁGINA
+        ========================================= */
+
+        .cabecalho-pagina {
+
+            margin-bottom: 25px;
+
+        }
+
+
+        .cabecalho-pagina h2 {
+
+            font-size: 27px;
+
+            color: #176b35;
+
+            margin-bottom: 7px;
+
+        }
+
+
+        .cabecalho-pagina p {
+
+            color: #666;
+
+        }
+
+
+        /* =========================================
+           CARD DO FORMULÁRIO
+        ========================================= */
+
+        .card-formulario {
+
+            background: white;
+
+            border-radius: 18px;
+
+            padding: 30px;
+
+            box-shadow:
+                0 5px 20px
+                rgba(0,0,0,0.08);
+
+        }
+
+
+        /* =========================================
+           SEÇÕES
+        ========================================= */
+
+        .secao {
+
+            margin-bottom: 30px;
+
+        }
+
+
+        .titulo-secao {
+
+            display: flex;
+
+            align-items: center;
+
+            gap: 10px;
+
+            padding-bottom: 12px;
+
+            margin-bottom: 20px;
+
+            border-bottom:
+                1px solid #e3e8e3;
+
+        }
+
+
+        .titulo-secao .icone {
+
+            width: 38px;
+
+            height: 38px;
+
+            border-radius: 10px;
+
+            background: #e8f4eb;
+
+            display: flex;
+
+            align-items: center;
+
+            justify-content: center;
+
+            font-size: 20px;
+
+        }
+
+
+        .titulo-secao h3 {
+
+            color: #176b35;
+
+            font-size: 18px;
+
+        }
+
+
+        /* =========================================
+           GRID
+        ========================================= */
+
+        .grid {
+
+            display: grid;
+
+            grid-template-columns:
+                repeat(2, 1fr);
+
+            gap: 18px;
+
+        }
+
+
+        .campo {
+
+            display: flex;
+
+            flex-direction: column;
+
+        }
+
+
+        .campo-completo {
+
+            grid-column:
+                1 / -1;
+
+        }
+
+
+        /* =========================================
+           LABEL
+        ========================================= */
+
+        .campo label {
+
+            font-size: 14px;
+
+            font-weight: bold;
+
+            color: #333;
+
+            margin-bottom: 7px;
+
+        }
+
+
+        .obrigatorio {
+
+            color: #d33;
+
+        }
+
+
+        /* =========================================
+           INPUTS
+        ========================================= */
+
+        .campo input,
+        .campo select,
+        .campo textarea {
+
+            width: 100%;
+
+            padding: 13px 14px;
+
+            border:
+                1px solid #d6ddd7;
+
+            border-radius: 10px;
+
+            background: #fff;
+
+            font-size: 15px;
+
+            font-family: inherit;
+
+            outline: none;
+
+            transition: 0.2s;
+
+        }
+
+
+        .campo input:focus,
+        .campo select:focus,
+        .campo textarea:focus {
+
+            border-color: #258247;
+
+            box-shadow:
+                0 0 0 3px
+                rgba(37,130,71,0.12);
+
+        }
+
+
+        .campo textarea {
+
+            min-height: 110px;
+
+            resize: vertical;
+
+        }
+
+
+        .ajuda {
+
+            color: #888;
+
+            font-size: 12px;
+
+            margin-top: 5px;
+
+        }
+
+
+        /* =========================================
+           BOTÕES
+        ========================================= */
+
+        .acoes {
+
+            display: flex;
+
+            justify-content: flex-end;
+
+            gap: 12px;
+
+            border-top:
+                1px solid #e5e9e5;
+
+            padding-top: 25px;
+
+            margin-top: 10px;
+
+        }
+
+
+        .botao {
+
+            border: none;
+
+            border-radius: 11px;
+
+            padding: 14px 23px;
+
+            font-size: 15px;
+
+            font-weight: bold;
+
+            cursor: pointer;
+
+            transition: 0.2s;
+
+        }
+
+
+        .botao-voltar {
+
+            background: #eef1ee;
+
+            color: #444;
+
+        }
+
+
+        .botao-voltar:hover {
+
+            background: #e0e5e0;
+
+        }
+
+
+        .botao-salvar {
+
+            background: #258247;
+
+            color: white;
+
+            min-width: 180px;
+
+        }
+
+
+        .botao-salvar:hover {
+
+            background: #1b6b38;
+
+        }
+
+
+        .botao-salvar:active,
+        .botao-voltar:active {
+
+            transform: scale(0.98);
+
+        }
+
+
+        /* =========================================
+           MENSAGEM
+        ========================================= */
+
+        #mensagem {
+
+            display: none;
+
+            padding: 14px;
+
+            border-radius: 10px;
+
+            margin-bottom: 20px;
+
+            text-align: center;
+
+            font-weight: bold;
+
+        }
+
+
+        .mensagem-sucesso {
+
+            display: block !important;
+
+            background: #e5f6e9;
+
+            color: #176b35;
+
+            border:
+                1px solid #bde4c7;
+
+        }
+
+
+        .mensagem-erro {
+
+            display: block !important;
+
+            background: #ffe8e8;
+
+            color: #a12626;
+
+            border:
+                1px solid #f0bcbc;
+
+        }
+
+
+        /* =========================================
+           RODAPÉ
+        ========================================= */
+
+        footer {
+
+            text-align: center;
+
+            color: #888;
+
+            font-size: 13px;
+
+            padding: 25px;
+
+        }
+
+
+        /* =========================================
+           CELULAR
+        ========================================= */
+
+        @media (max-width: 700px) {
+
+            .topo {
+
+                padding: 16px 20px;
+
+            }
+
+
+            .topo h1 {
+
+                font-size: 22px;
+
+            }
+
+
+            .topo-icone {
+
+                font-size: 30px;
+
+            }
+
+
+            .botao-voltar-topo {
+
+                padding: 9px 12px;
+
+            }
+
+
+            .conteudo {
+
+                margin-top: 25px;
+
+            }
+
+
+            .card-formulario {
+
+                padding: 20px;
+
+            }
+
+
+            .grid {
+
+                grid-template-columns: 1fr;
+
+            }
+
+
+            .campo-completo {
+
+                grid-column: auto;
+
+            }
+
+
+            .acoes {
+
+                flex-direction: column;
+
+            }
+
+
+            .botao {
+
+                width: 100%;
+
+            }
+
+        }
+
+    </style>
+
+</head>
+
+
+<body>
+
+
+<!-- =========================================
+     TOPO
+========================================= -->
+
+<header class="topo">
+
+
+    <div class="topo-esquerda">
+
+        <div class="topo-icone">
+            🐂
+        </div>
+
+        <div>
+
+            <h1>
+                AgroNexo
+            </h1>
+
+            <p>
+                Cadastro de animal
+            </p>
+
+        </div>
+
+    </div>
+
+
+    <button
+        type="button"
+        class="botao-voltar-topo"
+        onclick="voltarInicio()"
+    >
+        ← Voltar
+    </button>
+
+
+</header>
+
+
+
+<!-- =========================================
+     CONTEÚDO
+========================================= -->
+
+<main class="conteudo">
+
+
+    <div class="cabecalho-pagina">
+
+        <h2>
+            🐂 Cadastrar novo animal
+        </h2>
+
+        <p>
+            Preencha as informações do animal para adicioná-lo ao seu rebanho.
+        </p>
+
+    </div>
+
+
+
+    <div
+        id="mensagem"
+    ></div>
+
+
+
+    <!-- =====================================
+         FORMULÁRIO
+    ====================================== -->
+
+    <form
+        id="formAnimal"
+        class="card-formulario"
+    >
+
+
+        <!-- ================================
+             IDENTIFICAÇÃO
+        ================================= -->
+
+        <section class="secao">
+
+
+            <div class="titulo-secao">
+
+                <div class="icone">
+                    🏷️
+                </div>
+
+                <h3>
+                    Identificação
+                </h3>
+
+            </div>
+
+
+            <div class="grid">
+
+
+                <div class="campo">
+
+                    <label>
+                        Número do brinco
+                        <span class="obrigatorio">*</span>
+                    </label>
+
+                    <input
+                        type="text"
+                        id="brinco"
+                        placeholder="Ex: 001"
+                        required
+                    >
+
+                </div>
+
+
+                <div class="campo">
+
+                    <label>
+                        Nome do animal
+                    </label>
+
+                    <input
+                        type="text"
+                        id="nome"
+                        placeholder="Ex: Mimosa"
+                    >
+
+                </div>
+
+
+                <div class="campo">
+
+                    <label>
+                        Categoria
+                        <span class="obrigatorio">*</span>
+                    </label>
+
+                    <select
+                        id="categoria"
+                        required
+                    >
+
+                        <option value="">
+                            Selecione a categoria
+                        </option>
+
+                        <option value="Bezerro">
+                            Bezerro
+                        </option>
+
+                        <option value="Bezerra">
+                            Bezerra
+                        </option>
+
+                        <option value="Novilha">
+                            Novilha
+                        </option>
+
+                        <option value="Vaca">
+                            Vaca
+                        </option>
+
+                        <option value="Garrote">
+                            Garrote
+                        </option>
+
+                        <option value="Boi">
+                            Boi
+                        </option>
+
+                        <option value="Touro">
+                            Touro
+                        </option>
+
+                    </select>
+
+                </div>
+
+
+                <div class="campo">
+
+                    <label>
+                        Sexo
+                        <span class="obrigatorio">*</span>
+                    </label>
+
+                    <select
+                        id="sexo"
+                        required
+                    >
+
+                        <option value="">
+                            Selecione o sexo
+                        </option>
+
+                        <option value="Macho">
+                            Macho
+                        </option>
+
+                        <option value="Fêmea">
+                            Fêmea
+                        </option>
+
+                    </select>
+
+                </div>
+
+
+            </div>
+
+        </section>
+
+
+
+        <!-- =================================
+             CARACTERÍSTICAS
+        ================================== -->
+
+        <section class="secao">
+
+
+            <div class="titulo-secao">
+
+                <div class="icone">
+                    🧬
+                </div>
+
+                <h3>
+                    Características
+                </h3>
+
+            </div>
+
+
+            <div class="grid">
+
+
+                <div class="campo">
+
+                    <label>
+                        Raça
+                        <span class="obrigatorio">*</span>
+                    </label>
+
+                    <select
+                        id="raca"
+                        required
+                    >
+
+                        <option value="">
+                            Selecione a raça
+                        </option>
+
+                        <option value="Nelore">
+                            Nelore
+                        </option>
+
+                        <option value="Angus">
+                            Angus
+                        </option>
+
+                        <option value="Hereford">
+                            Hereford
+                        </option>
+
+                        <option value="Brangus">
+                            Brangus
+                        </option>
+
+                        <option value="Brahman">
+                            Brahman
+                        </option>
+
+                        <option value="Guzerá">
+                            Guzerá
+                        </option>
+
+                        <option value="Gir">
+                            Gir
+                        </option>
+
+                        <option value="Girolando">
+                            Girolando
+                        </option>
+
+                        <option value="Holandês">
+                            Holandês
+                        </option>
+
+                        <option value="Jersey">
+                            Jersey
+                        </option>
+
+                        <option value="Senepol">
+                            Senepol
+                        </option>
+
+                        <option value="Tabapuã">
+                            Tabapuã
+                        </option>
+
+                        <option value="Simental">
+                            Simental
+                        </option>
+
+                        <option value="Caracu">
+                            Caracu
+                        </option>
+
+                        <option value="Mestiço">
+                            Mestiço
+                        </option>
+
+                        <option value="Outra">
+                            Outra
+                        </option>
+
+                    </select>
+
+                </div>
+
+
+                <div class="campo">
+
+                    <label>
+                        Peso atual (kg)
+                    </label>
+
+                    <input
+                        type="number"
+                        id="peso"
+                        placeholder="Ex: 450"
+                        min="0"
+                        step="0.1"
+                    >
+
+                </div>
+
+
+                <div class="campo">
+
+                    <label>
+                        Data de nascimento
+                    </label>
+
+                    <input
+                        type="date"
+                        id="dataNascimento"
+                    >
+
+                </div>
+
+
+                <div class="campo">
+
+                    <label>
+                        Origem
+                    </label>
+
+                    <select
+                        id="origem"
+                    >
+
+                        <option value="">
+                            Selecione a origem
+                        </option>
+
+                        <option value="Nascido na fazenda">
+                            Nascido na fazenda
+                        </option>
+
+                        <option value="Comprado">
+                            Comprado
+                        </option>
+
+                        <option value="Transferido">
+                            Transferido
+                        </option>
+
+                        <option value="Outro">
+                            Outro
+                        </option>
+
+                    </select>
+
+                </div>
+
+
+            </div>
+
+        </section>
+
+
+
+        <!-- =================================
+             FILIAÇÃO
+        ================================== -->
+
+        <section class="secao">
+
+
+            <div class="titulo-secao">
+
+                <div class="icone">
+                    🐄
+                </div>
+
+                <h3>
+                    Filiação
+                </h3>
+
+            </div>
+
+
+            <div class="grid">
+
+
+                <div class="campo">
+
+                    <label>
+                        Mãe
+                    </label>
+
+                    <input
+                        type="text"
+                        id="mae"
+                        placeholder="Número do brinco ou nome da mãe"
+                    >
+
+                </div>
+
+
+                <div class="campo">
+
+                    <label>
+                        Pai
+                    </label>
+
+                    <input
+                        type="text"
+                        id="pai"
+                        placeholder="Número do brinco ou nome do pai"
+                    >
+
+                </div>
+
+
+            </div>
+
+        </section>
+
+
+
+        <!-- =================================
+             LOCALIZAÇÃO
+        ================================== -->
+
+        <section class="secao">
+
+
+            <div class="titulo-secao">
+
+                <div class="icone">
+                    🌱
+                </div>
+
+                <h3>
+                    Localização
+                </h3>
+
+            </div>
+
+
+            <div class="grid">
+
+
+                <div class="campo campo-completo">
+
+                    <label>
+                        Pasto atual
+                    </label>
+
+                    <input
+                        type="text"
+                        id="pasto"
+                        placeholder="Ex: Pasto 01"
+                    >
+
+                    <span class="ajuda">
+                        Informe onde o animal está atualmente.
+                    </span>
+
+                </div>
+
+
+            </div>
+
+        </section>
+
+
+
+        <!-- =================================
+             OBSERVAÇÕES
+        ================================== -->
+
+        <section class="secao">
+
+
+            <div class="titulo-secao">
+
+                <div class="icone">
+                    📝
+                </div>
+
+                <h3>
+                    Observações
+                </h3>
+
+            </div>
+
+
+            <div class="grid">
+
+
+                <div class="campo campo-completo">
+
+                    <label>
+                        Observações
+                    </label>
+
+                    <textarea
+                        id="observacoes"
+                        placeholder="Digite alguma informação importante sobre o animal..."
+                    ></textarea>
+
+                </div>
+
+
+            </div>
+
+        </section>
+
+
+
+        <!-- =================================
+             AÇÕES
+        ================================== -->
+
+        <div class="acoes">
+
+
+            <button
+                type="button"
+                class="botao botao-voltar"
+                onclick="voltarInicio()"
+            >
+                ← Voltar
+            </button>
+
+
+            <button
+                type="submit"
+                class="botao botao-salvar"
+            >
+                💾 Salvar animal
+            </button>
+
+
+        </div>
+
+
+    </form>
+
+
+</main>
+
+
+
+<footer>
+
+    AgroNexo © 2026 • Controle inteligente da fazenda
+
+</footer>
+
+
+
+<script>
+
+
+// =====================================================
+// BOTÃO VOLTAR
+// =====================================================
+
+function voltarInicio() {
+
+    window.location.href = "index.html";
+
+}
+
+
+
+// =====================================================
+// SALVAR ANIMAL
+// =====================================================
+
+document
+    .getElementById("formAnimal")
+    .addEventListener(
+        "submit",
+        function(event) {
+
+            event.preventDefault();
+
+
+            // -----------------------------------------
+            // PEGA OS DADOS
+            // -----------------------------------------
+
+            const animal = {
+
+                id:
+                    Date.now().toString(),
+
+                brinco:
+                    document
+                        .getElementById("brinco")
+                        .value
+                        .trim(),
+
+                nome:
+                    document
+                        .getElementById("nome")
+                        .value
+                        .trim(),
+
+                categoria:
+                    document
+                        .getElementById("categoria")
+                        .value,
+
+                raca:
+                    document
+                        .getElementById("raca")
+                        .value,
+
+                sexo:
+                    document
+                        .getElementById("sexo")
+                        .value,
+
+                peso:
+                    document
+                        .getElementById("peso")
+                        .value,
+
+                dataNascimento:
+                    document
+                        .getElementById("dataNascimento")
+                        .value,
+
+                mae:
+                    document
+                        .getElementById("mae")
+                        .value
+                        .trim(),
+
+                pai:
+                    document
+                        .getElementById("pai")
+                        .value
+                        .trim(),
+
+                origem:
+                    document
+                        .getElementById("origem")
+                        .value,
+
+                pasto:
+                    document
+                        .getElementById("pasto")
+                        .value
+                        .trim(),
+
+                observacoes:
+                    document
+                        .getElementById("observacoes")
+                        .value
+                        .trim(),
+
+                dataCadastro:
+                    new Date()
+                        .toISOString()
+
+            };
+
+
+            // -----------------------------------------
+            // RECUPERA ANIMAIS
+            // -----------------------------------------
+
+            let animais =
+                JSON.parse(
+                    localStorage.getItem(
+                        "animaisAgroNexo"
+                    )
+                ) || [];
+
+
+            // -----------------------------------------
+            // VERIFICA BRINCO REPETIDO
+            // -----------------------------------------
+
+            const brincoExiste =
+                animais.some(
+                    function(item) {
+
+                        return item.brinco
+                            .toLowerCase()
+                            === animal.brinco
+                                .toLowerCase();
+
+                    }
+                );
+
+
+            if (brincoExiste) {
+
+                mostrarMensagem(
+                    "Já existe um animal cadastrado com esse número de brinco.",
+                    "erro"
+                );
+
+                return;
+
+            }
+
+
+            // -----------------------------------------
+            // ADICIONA ANIMAL
+            // -----------------------------------------
+
+            animais.push(animal);
+
+
+            // -----------------------------------------
+            // SALVA NO NAVEGADOR
+            // -----------------------------------------
+
+            localStorage.setItem(
+                "animaisAgroNexo",
+                JSON.stringify(animais)
+            );
+
+
+            // -----------------------------------------
+            // MOSTRA SUCESSO
+            // -----------------------------------------
+
+            mostrarMensagem(
+                "Animal cadastrado com sucesso! 🐂",
+                "sucesso"
+            );
+
+
+            // -----------------------------------------
+            // LIMPA O FORMULÁRIO
+            // -----------------------------------------
+
+            document
+                .getElementById("formAnimal")
+                .reset();
+
+
+            // -----------------------------------------
+            // PERMANECE NO CADASTRO
+            // -----------------------------------------
+
+            setTimeout(
+                function() {
+
+                    window.location.href =
+                        "cadastro.html";
+
+                },
+                1200
+            );
+
+        }
+    );
+
+
+
+// =====================================================
+// MENSAGEM
+// =====================================================
+
+function mostrarMensagem(
+    texto,
+    tipo
+) {
+
+    const mensagem =
+        document.getElementById(
+            "mensagem"
+        );
+
+
+    mensagem.textContent =
+        texto;
+
+
+    mensagem.className =
+        tipo === "sucesso"
+            ? "mensagem-sucesso"
+            : "mensagem-erro";
+
+
+    mensagem.style.display =
+        "block";
+
+
+    window.scrollTo({
+        top: 0,
+        behavior: "smooth"
+    });
+
+}
+
+
+</script>
+
+
+</body>
+
+</html>

@@ -1,0 +1,1023 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta
+        name="viewport"
+        content="width=device-width, initial-scale=1.0"
+    >
+
+    <title>AgroNexo - Login</title>
+
+    <style>
+
+        * {
+            box-sizing: border-box;
+        }
+
+
+        body {
+
+            margin: 0;
+
+            min-height: 100vh;
+
+            font-family:
+                Arial,
+                Helvetica,
+                sans-serif;
+
+            background:
+                linear-gradient(
+                    135deg,
+                    #174f2b,
+                    #24733d,
+                    #4c965c
+                );
+
+            display: flex;
+
+            align-items: center;
+
+            justify-content: center;
+
+            padding: 20px;
+
+        }
+
+
+        /* =========================
+           CARTÃO
+        ========================= */
+
+        .login-container {
+
+            width: 100%;
+
+            max-width: 430px;
+
+            background: white;
+
+            border-radius: 25px;
+
+            padding: 35px;
+
+            box-shadow:
+                0 20px 50px
+                rgba(0,0,0,0.25);
+
+            animation:
+                aparecer 0.5s ease;
+
+        }
+
+
+        @keyframes aparecer {
+
+            from {
+
+                opacity: 0;
+
+                transform:
+                    translateY(20px);
+
+            }
+
+            to {
+
+                opacity: 1;
+
+                transform:
+                    translateY(0);
+
+            }
+
+        }
+
+
+        /* =========================
+           LOGO
+        ========================= */
+
+        .logo {
+
+            text-align: center;
+
+            margin-bottom: 30px;
+
+        }
+
+
+        .logo-icone {
+
+            font-size: 60px;
+
+            margin-bottom: 5px;
+
+        }
+
+
+        .logo h1 {
+
+            margin: 0;
+
+            color: #24733d;
+
+            font-size: 34px;
+
+        }
+
+
+        .logo p {
+
+            margin-top: 8px;
+
+            color: #777;
+
+            font-size: 15px;
+
+        }
+
+
+        /* =========================
+           TÍTULO
+        ========================= */
+
+        .titulo {
+
+            margin-bottom: 20px;
+
+        }
+
+
+        .titulo h2 {
+
+            margin: 0;
+
+            color: #222;
+
+            font-size: 24px;
+
+        }
+
+
+        .titulo p {
+
+            color: #777;
+
+            margin-top: 7px;
+
+        }
+
+
+        /* =========================
+           CAMPOS
+        ========================= */
+
+        .campo {
+
+            margin-bottom: 18px;
+
+        }
+
+
+        .campo label {
+
+            display: block;
+
+            margin-bottom: 7px;
+
+            font-weight: bold;
+
+            color: #333;
+
+        }
+
+
+        .campo input {
+
+            width: 100%;
+
+            padding: 14px;
+
+            border: 1px solid #d5d5d5;
+
+            border-radius: 12px;
+
+            font-size: 16px;
+
+            outline: none;
+
+            transition: 0.2s;
+
+        }
+
+
+        .campo input:focus {
+
+            border-color: #24733d;
+
+            box-shadow:
+                0 0 0 3px
+                rgba(36,115,61,0.12);
+
+        }
+
+
+        /* =========================
+           BOTÃO ENTRAR
+        ========================= */
+
+        .botao-entrar {
+
+            width: 100%;
+
+            padding: 15px;
+
+            border: none;
+
+            border-radius: 12px;
+
+            background: #24733d;
+
+            color: white;
+
+            font-size: 17px;
+
+            font-weight: bold;
+
+            cursor: pointer;
+
+            transition: 0.2s;
+
+        }
+
+
+        .botao-entrar:hover {
+
+            background: #1d6032;
+
+        }
+
+
+        .botao-entrar:active {
+
+            transform: scale(0.98);
+
+        }
+
+
+        /* =========================
+           CRIAR CONTA
+        ========================= */
+
+        .criar-conta {
+
+            margin-top: 20px;
+
+            text-align: center;
+
+            color: #666;
+
+        }
+
+
+        .criar-conta button {
+
+            border: none;
+
+            background: none;
+
+            color: #24733d;
+
+            font-size: 15px;
+
+            font-weight: bold;
+
+            cursor: pointer;
+
+            margin-top: 7px;
+
+        }
+
+
+        .criar-conta button:hover {
+
+            text-decoration: underline;
+
+        }
+
+
+        /* =========================
+           FORMULÁRIO DE CADASTRO
+        ========================= */
+
+        #formCadastro {
+
+            display: none;
+
+        }
+
+
+        .botao-voltar {
+
+            border: none;
+
+            background: none;
+
+            color: #666;
+
+            cursor: pointer;
+
+            margin-bottom: 15px;
+
+            font-size: 14px;
+
+        }
+
+
+        .botao-voltar:hover {
+
+            color: #24733d;
+
+        }
+
+
+        /* =========================
+           MENSAGEM
+        ========================= */
+
+        #mensagem {
+
+            display: none;
+
+            padding: 12px;
+
+            margin-bottom: 15px;
+
+            border-radius: 10px;
+
+            text-align: center;
+
+            font-size: 14px;
+
+        }
+
+
+        .erro {
+
+            background: #ffe5e5;
+
+            color: #a00000;
+
+        }
+
+
+        .sucesso {
+
+            background: #e2f5e7;
+
+            color: #17632d;
+
+        }
+
+
+        /* =========================
+           RODAPÉ
+        ========================= */
+
+        .rodape {
+
+            text-align: center;
+
+            margin-top: 25px;
+
+            color: #999;
+
+            font-size: 12px;
+
+        }
+
+
+        /* =========================
+           CELULAR
+        ========================= */
+
+        @media (max-width: 500px) {
+
+            .login-container {
+
+                padding: 25px 20px;
+
+            }
+
+            .logo h1 {
+
+                font-size: 30px;
+
+            }
+
+        }
+
+    </style>
+
+</head>
+
+
+<body>
+
+
+<div class="login-container">
+
+
+    <!-- =========================
+         LOGIN
+    ========================= -->
+
+    <div id="formLogin">
+
+
+        <div class="logo">
+
+            <div class="logo-icone">
+                🐂
+            </div>
+
+            <h1>
+                AgroNexo
+            </h1>
+
+            <p>
+                Controle inteligente da sua fazenda
+            </p>
+
+        </div>
+
+
+        <div class="titulo">
+
+            <h2>
+                Bem-vindo!
+            </h2>
+
+            <p>
+                Entre na sua conta para continuar.
+            </p>
+
+        </div>
+
+
+        <div id="mensagemLogin"
+             class="mensagem">
+
+        </div>
+
+
+        <form onsubmit="entrar(event)">
+
+
+            <div class="campo">
+
+                <label>
+                    👤 Usuário
+                </label>
+
+                <input
+                    type="text"
+                    id="loginUsuario"
+                    placeholder="Digite seu usuário"
+                    autocomplete="username"
+                    required
+                >
+
+            </div>
+
+
+            <div class="campo">
+
+                <label>
+                    🔒 Senha
+                </label>
+
+                <input
+                    type="password"
+                    id="loginSenha"
+                    placeholder="Digite sua senha"
+                    autocomplete="current-password"
+                    required
+                >
+
+            </div>
+
+
+            <button
+                type="submit"
+                class="botao-entrar"
+            >
+                🔓 Entrar
+            </button>
+
+
+        </form>
+
+
+        <div class="criar-conta">
+
+            <div>
+                Ainda não possui uma conta?
+            </div>
+
+            <button onclick="mostrarCadastro()">
+                ➕ Criar minha conta
+            </button>
+
+        </div>
+
+
+    </div>
+
+
+    <!-- =========================
+         CADASTRO
+    ========================= -->
+
+    <div id="formCadastro">
+
+
+        <button
+            class="botao-voltar"
+            onclick="mostrarLogin()"
+        >
+            ← Voltar para o login
+        </button>
+
+
+        <div class="logo">
+
+            <div class="logo-icone">
+                🌱
+            </div>
+
+            <h1>
+                Criar conta
+            </h1>
+
+            <p>
+                Crie seu acesso ao AgroNexo
+            </p>
+
+        </div>
+
+
+        <div id="mensagemCadastro"
+             class="mensagem">
+
+        </div>
+
+
+        <form onsubmit="criarConta(event)">
+
+
+            <div class="campo">
+
+                <label>
+                    👤 Nome
+                </label>
+
+                <input
+                    type="text"
+                    id="novoNome"
+                    placeholder="Seu nome"
+                    required
+                >
+
+            </div>
+
+
+            <div class="campo">
+
+                <label>
+                    🏷️ Usuário
+                </label>
+
+                <input
+                    type="text"
+                    id="novoUsuario"
+                    placeholder="Escolha seu usuário"
+                    required
+                >
+
+            </div>
+
+
+            <div class="campo">
+
+                <label>
+                    🔒 Senha
+                </label>
+
+                <input
+                    type="password"
+                    id="novaSenha"
+                    placeholder="Crie uma senha"
+                    minlength="4"
+                    required
+                >
+
+            </div>
+
+
+            <div class="campo">
+
+                <label>
+                    🔒 Confirmar senha
+                </label>
+
+                <input
+                    type="password"
+                    id="confirmarSenha"
+                    placeholder="Digite a senha novamente"
+                    minlength="4"
+                    required
+                >
+
+            </div>
+
+
+            <button
+                type="submit"
+                class="botao-entrar"
+            >
+                ✅ Criar minha conta
+            </button>
+
+
+        </form>
+
+
+    </div>
+
+
+    <div class="rodape">
+
+        AgroNexo © 2026
+
+    </div>
+
+
+</div>
+
+
+<script>
+
+
+// ==================================================
+// MOSTRAR CADASTRO
+// ==================================================
+
+function mostrarCadastro() {
+
+    document.getElementById(
+        "formLogin"
+    ).style.display = "none";
+
+
+    document.getElementById(
+        "formCadastro"
+    ).style.display = "block";
+
+
+    limparMensagens();
+
+}
+
+
+// ==================================================
+// MOSTRAR LOGIN
+// ==================================================
+
+function mostrarLogin() {
+
+    document.getElementById(
+        "formCadastro"
+    ).style.display = "none";
+
+
+    document.getElementById(
+        "formLogin"
+    ).style.display = "block";
+
+
+    limparMensagens();
+
+}
+
+
+// ==================================================
+// MENSAGEM
+// ==================================================
+
+function mostrarMensagem(
+    id,
+    texto,
+    tipo
+) {
+
+    const elemento =
+        document.getElementById(id);
+
+
+    elemento.textContent = texto;
+
+
+    elemento.style.display =
+        "block";
+
+
+    elemento.className =
+        "mensagem " + tipo;
+
+}
+
+
+function limparMensagens() {
+
+    const mensagens =
+        document.querySelectorAll(
+            ".mensagem"
+        );
+
+
+    mensagens.forEach(
+        function(mensagem) {
+
+            mensagem.style.display =
+                "none";
+
+            mensagem.textContent =
+                "";
+
+        }
+    );
+
+}
+
+
+// ==================================================
+// CRIAR CONTA
+// ==================================================
+
+function criarConta(event) {
+
+    event.preventDefault();
+
+
+    const nome =
+        document.getElementById(
+            "novoNome"
+        ).value.trim();
+
+
+    const usuario =
+        document.getElementById(
+            "novoUsuario"
+        ).value.trim();
+
+
+    const senha =
+        document.getElementById(
+            "novaSenha"
+        ).value;
+
+
+    const confirmar =
+        document.getElementById(
+            "confirmarSenha"
+        ).value;
+
+
+    // ----------------------------------------------
+    // VERIFICA SENHAS
+    // ----------------------------------------------
+
+    if (senha !== confirmar) {
+
+        mostrarMensagem(
+            "mensagemCadastro",
+            "As senhas não são iguais.",
+            "erro"
+        );
+
+        return;
+
+    }
+
+
+    // ----------------------------------------------
+    // RECUPERA CONTAS
+    // ----------------------------------------------
+
+    let usuarios =
+        JSON.parse(
+            localStorage.getItem(
+                "usuariosAgroNexo"
+            )
+        ) || [];
+
+
+    // ----------------------------------------------
+    // VERIFICA USUÁRIO EXISTENTE
+    // ----------------------------------------------
+
+    const existe =
+        usuarios.some(
+            function(item) {
+
+                return item.usuario.toLowerCase()
+                    === usuario.toLowerCase();
+
+            }
+        );
+
+
+    if (existe) {
+
+        mostrarMensagem(
+            "mensagemCadastro",
+            "Esse usuário já existe. Escolha outro.",
+            "erro"
+        );
+
+        return;
+
+    }
+
+
+    // ----------------------------------------------
+    // CRIA USUÁRIO
+    // ----------------------------------------------
+
+    const novoUsuario = {
+
+        id:
+            Date.now().toString(),
+
+        nome:
+            nome,
+
+        usuario:
+            usuario,
+
+        senha:
+            senha
+
+    };
+
+
+    usuarios.push(
+        novoUsuario
+    );
+
+
+    // ----------------------------------------------
+    // SALVA
+    // ----------------------------------------------
+
+    localStorage.setItem(
+        "usuariosAgroNexo",
+        JSON.stringify(usuarios)
+    );
+
+
+    mostrarMensagem(
+        "mensagemCadastro",
+        "Conta criada com sucesso! Agora faça login.",
+        "sucesso"
+    );
+
+
+    // ----------------------------------------------
+    // LIMPA FORMULÁRIO
+    // ----------------------------------------------
+
+    document.querySelector(
+        "#formCadastro form"
+    ).reset();
+
+
+    // ----------------------------------------------
+    // VOLTA PARA LOGIN
+    // ----------------------------------------------
+
+    setTimeout(
+        function() {
+
+            mostrarLogin();
+
+        },
+        1500
+    );
+
+}
+
+
+// ==================================================
+// ENTRAR
+// ==================================================
+
+function entrar(event) {
+
+    event.preventDefault();
+
+
+    const usuario =
+        document.getElementById(
+            "loginUsuario"
+        ).value.trim();
+
+
+    const senha =
+        document.getElementById(
+            "loginSenha"
+        ).value;
+
+
+    // ----------------------------------------------
+    // RECUPERA USUÁRIOS
+    // ----------------------------------------------
+
+    const usuarios =
+        JSON.parse(
+            localStorage.getItem(
+                "usuariosAgroNexo"
+            )
+        ) || [];
+
+
+    // ----------------------------------------------
+    // PROCURA USUÁRIO
+    // ----------------------------------------------
+
+    const usuarioEncontrado =
+        usuarios.find(
+            function(item) {
+
+                return (
+                    item.usuario.toLowerCase()
+                    === usuario.toLowerCase()
+                    &&
+                    item.senha === senha
+                );
+
+            }
+        );
+
+
+    // ----------------------------------------------
+    // LOGIN INCORRETO
+    // ----------------------------------------------
+
+    if (!usuarioEncontrado) {
+
+        mostrarMensagem(
+            "mensagemLogin",
+            "Usuário ou senha incorretos.",
+            "erro"
+        );
+
+        return;
+
+    }
+
+
+    // ----------------------------------------------
+    // SALVA SESSÃO
+    // ----------------------------------------------
+
+    localStorage.setItem(
+        "usuarioLogado",
+        JSON.stringify(
+            usuarioEncontrado
+        )
+    );
+
+
+    // ----------------------------------------------
+    // ENTRA NO SISTEMA
+    // ----------------------------------------------
+
+    window.location.href =
+        "index.html";
+
+}
+
+
+</script>
+
+
+</body>
+
+</html>

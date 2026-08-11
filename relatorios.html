@@ -1,0 +1,1928 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+<head>
+    <meta charset="UTF-8">
+
+    <meta name="viewport"
+          content="width=device-width, initial-scale=1.0">
+
+    <title>Relatórios - AgroNexo</title>
+
+    <style>
+
+        * {
+            box-sizing: border-box;
+        }
+
+
+        body {
+            margin: 0;
+
+            font-family:
+                Arial,
+                Helvetica,
+                sans-serif;
+
+            background: #f3f6f4;
+
+            color: #222;
+        }
+
+
+        /* =====================================================
+           TOPO
+           ===================================================== */
+
+        .topo-relatorio {
+            background: #24733d;
+
+            color: white;
+
+            min-height: 92px;
+
+            padding: 18px 24px;
+
+            display: flex;
+
+            align-items: center;
+
+            justify-content: space-between;
+        }
+
+
+        .titulo-topo {
+            display: flex;
+
+            align-items: center;
+
+            gap: 12px;
+        }
+
+
+        .icone-topo {
+            font-size: 36px;
+        }
+
+
+        .titulo-topo h1 {
+            margin: 0;
+
+            font-size: 30px;
+        }
+
+
+        .titulo-topo p {
+            margin: 3px 0 0;
+
+            font-size: 15px;
+
+            opacity: 0.9;
+        }
+
+
+        .botao-voltar {
+            border: none;
+
+            background: rgba(255,255,255,0.16);
+
+            color: white;
+
+            padding: 12px 20px;
+
+            border-radius: 12px;
+
+            font-size: 16px;
+
+            cursor: pointer;
+
+            transition: 0.2s;
+        }
+
+
+        .botao-voltar:hover {
+            background: rgba(255,255,255,0.28);
+
+            transform: translateY(-2px);
+        }
+
+
+        /* =====================================================
+           CONTAINER
+           ===================================================== */
+
+        .container-relatorios {
+            width: 100%;
+
+            max-width: 1120px;
+
+            margin: 30px auto;
+
+            padding: 0 20px;
+        }
+
+
+        /* =====================================================
+           CARD PRINCIPAL
+           ===================================================== */
+
+        .card-principal {
+            background: white;
+
+            border-radius: 20px;
+
+            padding: 28px;
+
+            box-shadow:
+                0 5px 20px rgba(0,0,0,0.08);
+        }
+
+
+        .card-principal h2 {
+            margin: 0;
+
+            color: #24733d;
+
+            font-size: 27px;
+        }
+
+
+        .subtitulo {
+            margin: 8px 0 15px;
+
+            color: #444;
+
+            font-size: 16px;
+        }
+
+
+        .data-relatorio {
+            color: #777;
+
+            font-size: 14px;
+
+            margin-bottom: 24px;
+        }
+
+
+        /* =====================================================
+           BOTÕES DOS RELATÓRIOS
+           ===================================================== */
+
+        .botoes-relatorios {
+            display: grid;
+
+            grid-template-columns:
+                repeat(5, 1fr);
+
+            gap: 15px;
+        }
+
+
+        .card-relatorio {
+            position: relative;
+
+            min-height: 120px;
+
+            border: 1px solid #dbe8de;
+
+            border-radius: 17px;
+
+            padding: 17px 14px;
+
+            display: flex;
+
+            align-items: center;
+
+            gap: 12px;
+
+            text-align: left;
+
+            cursor: pointer;
+
+            transition:
+                transform 0.2s ease,
+                box-shadow 0.2s ease,
+                border-color 0.2s ease;
+
+            overflow: hidden;
+        }
+
+
+        .card-relatorio:hover {
+            transform: translateY(-5px);
+
+            box-shadow:
+                0 10px 25px rgba(0,0,0,0.13);
+        }
+
+
+        .card-relatorio:active {
+            transform: scale(0.97);
+        }
+
+
+        /* =====================================================
+           ÍCONE
+           ===================================================== */
+
+        .icone-relatorio {
+            width: 55px;
+
+            height: 55px;
+
+            min-width: 55px;
+
+            border-radius: 50%;
+
+            background: white;
+
+            display: flex;
+
+            align-items: center;
+
+            justify-content: center;
+
+            font-size: 29px;
+
+            box-shadow:
+                0 2px 8px rgba(0,0,0,0.09);
+        }
+
+
+        /* =====================================================
+           TEXTO
+           ===================================================== */
+
+        .texto-relatorio {
+            display: flex;
+
+            flex-direction: column;
+
+            gap: 5px;
+
+            flex: 1;
+        }
+
+
+        .texto-relatorio strong {
+            font-size: 17px;
+
+            color: #173522;
+        }
+
+
+        .texto-relatorio small {
+            font-size: 12px;
+
+            color: #365844;
+
+            line-height: 1.3;
+        }
+
+
+        /* =====================================================
+           SETA
+           ===================================================== */
+
+        .seta-relatorio {
+            font-size: 34px;
+
+            line-height: 1;
+
+            color: #24733d;
+
+            transition:
+                transform 0.2s ease;
+        }
+
+
+        .card-relatorio:hover .seta-relatorio {
+            transform: translateX(5px);
+        }
+
+
+        /* =====================================================
+           CORES DOS CARDS
+           ===================================================== */
+
+        .card-relatorio.rebanho {
+            background:
+                linear-gradient(
+                    135deg,
+                    #16854a,
+                    #24733d
+                );
+
+            border-color: #16854a;
+        }
+
+
+        .card-relatorio.rebanho
+        .texto-relatorio strong,
+
+        .card-relatorio.rebanho
+        .texto-relatorio small,
+
+        .card-relatorio.rebanho
+        .seta-relatorio {
+            color: white;
+        }
+
+
+        .card-relatorio.pastos {
+            background:
+                linear-gradient(
+                    135deg,
+                    #e8f5e2,
+                    #d8edcf
+                );
+        }
+
+
+        .card-relatorio.manejos {
+            background:
+                linear-gradient(
+                    135deg,
+                    #e7f4e1,
+                    #d7edcf
+                );
+        }
+
+
+        .card-relatorio.financeiro {
+            background:
+                linear-gradient(
+                    135deg,
+                    #fff1bf,
+                    #ffe29b
+                );
+
+            border-color: #efd17c;
+        }
+
+
+        .card-relatorio.pdf {
+            background:
+                linear-gradient(
+                    135deg,
+                    #dcebf9,
+                    #c8def3
+                );
+
+            border-color: #a9c9e8;
+        }
+
+
+        /* =====================================================
+           RELATÓRIO FINANCEIRO
+           ===================================================== */
+
+        .secao-relatorio {
+            background: white;
+
+            border-radius: 20px;
+
+            padding: 28px;
+
+            margin-top: 25px;
+
+            box-shadow:
+                0 5px 20px rgba(0,0,0,0.08);
+        }
+
+
+        .titulo-secao {
+            display: flex;
+
+            align-items: center;
+
+            gap: 10px;
+
+            margin-bottom: 22px;
+        }
+
+
+        .titulo-secao h2 {
+            margin: 0;
+
+            color: #24733d;
+
+            font-size: 27px;
+        }
+
+
+        .titulo-secao span {
+            font-size: 30px;
+        }
+
+
+        /* =====================================================
+           INDICADORES
+           ===================================================== */
+
+        .indicadores-financeiros {
+            display: grid;
+
+            grid-template-columns:
+                repeat(4, 1fr);
+
+            gap: 15px;
+        }
+
+
+        .indicador-financeiro {
+            background:
+                linear-gradient(
+                    145deg,
+                    #f2f8f4,
+                    #eaf3ed
+                );
+
+            border: 1px solid #d9e8de;
+
+            border-radius: 14px;
+
+            padding: 23px 15px;
+
+            text-align: center;
+        }
+
+
+        .indicador-financeiro .icone {
+            font-size: 31px;
+
+            margin-bottom: 7px;
+        }
+
+
+        .indicador-financeiro strong {
+            display: block;
+
+            font-size: 27px;
+
+            color: #18763c;
+        }
+
+
+        .indicador-financeiro span {
+            color: #666;
+
+            font-size: 14px;
+        }
+
+
+        /* =====================================================
+           ANÁLISE
+           ===================================================== */
+
+        .analise-financeira {
+            margin-top: 23px;
+
+            padding: 20px;
+
+            border-left:
+                5px solid #24733d;
+
+            border-radius: 8px;
+
+            background: #f8faf9;
+
+            box-shadow:
+                0 3px 12px rgba(0,0,0,0.04);
+        }
+
+
+        .analise-financeira strong {
+            display: block;
+
+            margin-bottom: 8px;
+
+            font-size: 16px;
+        }
+
+
+        .analise-financeira p {
+            margin: 0;
+
+            color: #555;
+
+            line-height: 1.5;
+        }
+
+
+        /* =====================================================
+           RELATÓRIO SELECIONADO
+           ===================================================== */
+
+        #areaRelatorio {
+            display: none;
+
+            margin-top: 25px;
+        }
+
+
+        .resultado-relatorio {
+            background: white;
+
+            border-radius: 20px;
+
+            padding: 28px;
+
+            box-shadow:
+                0 5px 20px rgba(0,0,0,0.08);
+        }
+
+
+        .resultado-relatorio h2 {
+            color: #24733d;
+
+            margin-top: 0;
+        }
+
+
+        .tabela-relatorio {
+            width: 100%;
+
+            border-collapse: collapse;
+
+            margin-top: 20px;
+        }
+
+
+        .tabela-relatorio th,
+        .tabela-relatorio td {
+            padding: 13px;
+
+            border-bottom: 1px solid #e5e5e5;
+
+            text-align: left;
+        }
+
+
+        .tabela-relatorio th {
+            background: #eef6f0;
+
+            color: #24733d;
+        }
+
+
+        .sem-registros {
+            padding: 25px;
+
+            text-align: center;
+
+            color: #777;
+
+            background: #f7f8f7;
+
+            border-radius: 12px;
+        }
+
+
+        /* =====================================================
+           RODAPÉ
+           ===================================================== */
+
+        footer {
+            text-align: center;
+
+            padding: 30px 15px;
+
+            color: #777;
+
+            font-size: 14px;
+        }
+
+
+        /* =====================================================
+           RESPONSIVO
+           ===================================================== */
+
+        @media (max-width: 1000px) {
+
+            .botoes-relatorios {
+                grid-template-columns:
+                    repeat(2, 1fr);
+            }
+
+
+            .indicadores-financeiros {
+                grid-template-columns:
+                    repeat(2, 1fr);
+            }
+
+        }
+
+
+        @media (max-width: 600px) {
+
+            .topo-relatorio {
+                padding: 15px;
+
+                min-height: 80px;
+            }
+
+
+            .titulo-topo h1 {
+                font-size: 24px;
+            }
+
+
+            .icone-topo {
+                font-size: 28px;
+            }
+
+
+            .botao-voltar {
+                padding: 10px 13px;
+
+                font-size: 14px;
+            }
+
+
+            .container-relatorios {
+                margin-top: 15px;
+
+                padding: 0 12px;
+            }
+
+
+            .card-principal,
+            .secao-relatorio,
+            .resultado-relatorio {
+                padding: 20px;
+            }
+
+
+            .botoes-relatorios {
+                grid-template-columns: 1fr;
+            }
+
+
+            .indicadores-financeiros {
+                grid-template-columns: 1fr;
+            }
+
+
+            .card-relatorio {
+                min-height: 95px;
+            }
+
+        }
+
+    </style>
+</head>
+
+
+<body>
+
+
+<!-- =====================================================
+     TOPO
+     ===================================================== -->
+
+<header class="topo-relatorio">
+
+    <div class="titulo-topo">
+
+        <div class="icone-topo">
+            📊
+        </div>
+
+        <div>
+
+            <h1>
+                Relatórios
+            </h1>
+
+            <p>
+                AgroNexo • Controle da propriedade
+            </p>
+
+        </div>
+
+    </div>
+
+
+    <button
+        class="botao-voltar"
+        onclick="voltar()">
+
+        ← Voltar
+
+    </button>
+
+</header>
+
+
+
+<main class="container-relatorios">
+
+
+    <!-- =================================================
+         ESCOLHA DO RELATÓRIO
+         ================================================= -->
+
+    <section class="card-principal">
+
+        <h2>
+            Relatórios da Fazenda
+        </h2>
+
+        <p class="subtitulo">
+            Consulte separadamente as informações de cada
+            módulo do AgroNexo.
+        </p>
+
+
+        <div class="data-relatorio">
+
+            📅 Relatório gerado em
+            <span id="dataRelatorio"></span>
+
+        </div>
+
+
+
+        <!-- =================================================
+             BOTÕES
+             ================================================= -->
+
+        <div class="botoes-relatorios">
+
+
+            <!-- REBANHO -->
+
+            <button
+                class="card-relatorio rebanho"
+                onclick="mostrarRelatorio('rebanho')">
+
+                <span class="icone-relatorio">
+                    🐄
+                </span>
+
+                <span class="texto-relatorio">
+
+                    <strong>
+                        Rebanho
+                    </strong>
+
+                    <small>
+                        Animais da propriedade
+                    </small>
+
+                </span>
+
+                <span class="seta-relatorio">
+                    ›
+                </span>
+
+            </button>
+
+
+
+            <!-- PASTOS -->
+
+            <button
+                class="card-relatorio pastos"
+                onclick="mostrarRelatorio('pastos')">
+
+                <span class="icone-relatorio">
+                    🌱
+                </span>
+
+                <span class="texto-relatorio">
+
+                    <strong>
+                        Pastos
+                    </strong>
+
+                    <small>
+                        Áreas de pastagem
+                    </small>
+
+                </span>
+
+                <span class="seta-relatorio">
+                    ›
+                </span>
+
+            </button>
+
+
+
+            <!-- MANEJOS -->
+
+            <button
+                class="card-relatorio manejos"
+                onclick="mostrarRelatorio('manejos')">
+
+                <span class="icone-relatorio">
+                    🚜
+                </span>
+
+                <span class="texto-relatorio">
+
+                    <strong>
+                        Manejos
+                    </strong>
+
+                    <small>
+                        Atividades realizadas
+                    </small>
+
+                </span>
+
+                <span class="seta-relatorio">
+                    ›
+                </span>
+
+            </button>
+
+
+
+            <!-- FINANCEIRO -->
+
+            <button
+                class="card-relatorio financeiro"
+                onclick="mostrarRelatorio('financeiro')">
+
+                <span class="icone-relatorio">
+                    💰
+                </span>
+
+                <span class="texto-relatorio">
+
+                    <strong>
+                        Financeiro
+                    </strong>
+
+                    <small>
+                        Entradas e saídas
+                    </small>
+
+                </span>
+
+                <span class="seta-relatorio">
+                    ›
+                </span>
+
+            </button>
+
+
+
+            <!-- PDF -->
+
+            <button
+                class="card-relatorio pdf"
+                onclick="imprimirRelatorio()">
+
+                <span class="icone-relatorio">
+                    📄
+                </span>
+
+                <span class="texto-relatorio">
+
+                    <strong>
+                        Imprimir / PDF
+                    </strong>
+
+                    <small>
+                        Gerar relatório
+                    </small>
+
+                </span>
+
+                <span class="seta-relatorio">
+                    ›
+                </span>
+
+            </button>
+
+
+        </div>
+
+    </section>
+
+
+
+    <!-- =================================================
+         RELATÓRIO FINANCEIRO
+         ================================================= -->
+
+    <section class="secao-relatorio">
+
+        <div class="titulo-secao">
+
+            <span>
+                💰
+            </span>
+
+            <h2>
+                Relatório Financeiro
+            </h2>
+
+        </div>
+
+
+        <div class="indicadores-financeiros">
+
+
+            <div class="indicador-financeiro">
+
+                <div class="icone">
+                    🛒
+                </div>
+
+                <strong id="totalCompras">
+                    R$ 0,00
+                </strong>
+
+                <span>
+                    Compras
+                </span>
+
+            </div>
+
+
+
+            <div class="indicador-financeiro">
+
+                <div class="icone">
+                    💸
+                </div>
+
+                <strong id="totalGastos">
+                    R$ 0,00
+                </strong>
+
+                <span>
+                    Gastos
+                </span>
+
+            </div>
+
+
+
+            <div class="indicador-financeiro">
+
+                <div class="icone">
+                    💰
+                </div>
+
+                <strong id="totalVendas">
+                    R$ 0,00
+                </strong>
+
+                <span>
+                    Vendas
+                </span>
+
+            </div>
+
+
+
+            <div class="indicador-financeiro">
+
+                <div class="icone">
+                    📈
+                </div>
+
+                <strong id="resultadoFinanceiro">
+                    R$ 0,00
+                </strong>
+
+                <span>
+                    Resultado
+                </span>
+
+            </div>
+
+
+        </div>
+
+
+
+        <div class="analise-financeira">
+
+            <strong>
+                Análise financeira:
+            </strong>
+
+            <p id="mensagemFinanceira">
+                Ainda não existem movimentações financeiras
+                registradas.
+            </p>
+
+        </div>
+
+    </section>
+
+
+
+    <!-- =================================================
+         ÁREA DO RELATÓRIO ESCOLHIDO
+         ================================================= -->
+
+    <section id="areaRelatorio">
+
+        <div
+            id="resultadoRelatorio"
+            class="resultado-relatorio">
+
+        </div>
+
+    </section>
+
+
+</main>
+
+
+
+<footer>
+
+    AgroNexo • Relatório da propriedade
+
+</footer>
+
+
+
+<script>
+
+/* =====================================================
+   FUNÇÕES AUXILIARES
+   ===================================================== */
+
+function pegarLista(nome) {
+
+    try {
+
+        const dados =
+            JSON.parse(
+                localStorage.getItem(nome)
+            );
+
+        return Array.isArray(dados)
+            ? dados
+            : [];
+
+    } catch (erro) {
+
+        return [];
+
+    }
+
+}
+
+
+/* =====================================================
+   MOEDA
+   ===================================================== */
+
+function moeda(valor) {
+
+    const numero =
+        Number(valor) || 0;
+
+    return numero.toLocaleString(
+        "pt-BR",
+        {
+            style: "currency",
+            currency: "BRL"
+        }
+    );
+
+}
+
+
+/* =====================================================
+   DATA
+   ===================================================== */
+
+function mostrarData() {
+
+    const agora =
+        new Date();
+
+    const data =
+        agora.toLocaleDateString(
+            "pt-BR"
+        );
+
+    const hora =
+        agora.toLocaleTimeString(
+            "pt-BR",
+            {
+                hour: "2-digit",
+                minute: "2-digit"
+            }
+        );
+
+    const elemento =
+        document.getElementById(
+            "dataRelatorio"
+        );
+
+    if (elemento) {
+
+        elemento.textContent =
+            data + " às " + hora;
+
+    }
+
+}
+
+
+/* =====================================================
+   VOLTAR
+   ===================================================== */
+
+function voltar() {
+
+    window.location.href =
+        "index.html";
+
+}
+
+
+/* =====================================================
+   MOSTRAR RELATÓRIO
+   ===================================================== */
+
+function mostrarRelatorio(tipo) {
+
+    const area =
+        document.getElementById(
+            "areaRelatorio"
+        );
+
+    const resultado =
+        document.getElementById(
+            "resultadoRelatorio"
+        );
+
+
+    if (!area || !resultado) {
+
+        return;
+
+    }
+
+
+    area.style.display =
+        "block";
+
+
+    if (tipo === "rebanho") {
+
+        gerarRelatorioRebanho(resultado);
+
+    }
+
+
+    if (tipo === "pastos") {
+
+        gerarRelatorioPastos(resultado);
+
+    }
+
+
+    if (tipo === "manejos") {
+
+        gerarRelatorioManejos(resultado);
+
+    }
+
+
+    if (tipo === "financeiro") {
+
+        gerarRelatorioFinanceiro(resultado);
+
+    }
+
+
+    area.scrollIntoView({
+        behavior: "smooth",
+        block: "start"
+    });
+
+}
+
+
+/* =====================================================
+   RELATÓRIO DO REBANHO
+   ===================================================== */
+
+function gerarRelatorioRebanho(elemento) {
+
+    const animais =
+        pegarLista("animais");
+
+
+    let html = `
+
+        <h2>
+            🐄 Relatório do Rebanho
+        </h2>
+
+        <p>
+            Resumo dos animais cadastrados
+            na propriedade.
+        </p>
+
+    `;
+
+
+    if (animais.length === 0) {
+
+        html += `
+
+            <div class="sem-registros">
+
+                Nenhum animal cadastrado
+                no momento.
+
+            </div>
+
+        `;
+
+        elemento.innerHTML =
+            html;
+
+        return;
+
+    }
+
+
+    html += `
+
+        <p>
+            <strong>
+                Total de animais:
+            </strong>
+
+            ${animais.length}
+
+        </p>
+
+        <table class="tabela-relatorio">
+
+            <thead>
+
+                <tr>
+                    <th>Animal</th>
+                    <th>Identificação</th>
+                    <th>Sexo</th>
+                    <th>Data</th>
+                </tr>
+
+            </thead>
+
+            <tbody>
+
+    `;
+
+
+    animais.forEach(function(animal) {
+
+        const nome =
+            animal.nome ||
+            animal.brinco ||
+            animal.identificacao ||
+            "Animal";
+
+
+        const identificacao =
+            animal.brinco ||
+            animal.identificacao ||
+            animal.numero ||
+            "-";
+
+
+        const sexo =
+            animal.sexo ||
+            "-";
+
+
+        const data =
+            animal.dataCadastro ||
+            "-";
+
+
+        html += `
+
+            <tr>
+
+                <td>
+                    ${nome}
+                </td>
+
+                <td>
+                    ${identificacao}
+                </td>
+
+                <td>
+                    ${sexo}
+                </td>
+
+                <td>
+                    ${data}
+                </td>
+
+            </tr>
+
+        `;
+
+    });
+
+
+    html += `
+
+            </tbody>
+
+        </table>
+
+    `;
+
+
+    elemento.innerHTML =
+        html;
+
+}
+
+
+/* =====================================================
+   RELATÓRIO DOS PASTOS
+   ===================================================== */
+
+function gerarRelatorioPastos(elemento) {
+
+    const pastos =
+        pegarLista("pastos");
+
+
+    let html = `
+
+        <h2>
+            🌱 Relatório dos Pastos
+        </h2>
+
+        <p>
+            Resumo das áreas de pastagem
+            cadastradas.
+        </p>
+
+    `;
+
+
+    if (pastos.length === 0) {
+
+        html += `
+
+            <div class="sem-registros">
+
+                Nenhum pasto cadastrado
+                no momento.
+
+            </div>
+
+        `;
+
+        elemento.innerHTML =
+            html;
+
+        return;
+
+    }
+
+
+    html += `
+
+        <p>
+            <strong>
+                Total de pastos:
+            </strong>
+
+            ${pastos.length}
+
+        </p>
+
+        <table class="tabela-relatorio">
+
+            <thead>
+
+                <tr>
+                    <th>Nome</th>
+                    <th>Área</th>
+                    <th>Tipo</th>
+                </tr>
+
+            </thead>
+
+            <tbody>
+
+    `;
+
+
+    pastos.forEach(function(pasto) {
+
+        const nome =
+            pasto.nome ||
+            pasto.nomePasto ||
+            "Pasto";
+
+
+        const area =
+            pasto.area ||
+            pasto.tamanho ||
+            "-";
+
+
+        const tipo =
+            pasto.tipo ||
+            "-";
+
+
+        html += `
+
+            <tr>
+
+                <td>
+                    ${nome}
+                </td>
+
+                <td>
+                    ${area}
+                </td>
+
+                <td>
+                    ${tipo}
+                </td>
+
+            </tr>
+
+        `;
+
+    });
+
+
+    html += `
+
+            </tbody>
+
+        </table>
+
+    `;
+
+
+    elemento.innerHTML =
+        html;
+
+}
+
+
+/* =====================================================
+   RELATÓRIO DOS MANEJOS
+   ===================================================== */
+
+function gerarRelatorioManejos(elemento) {
+
+    const manejos =
+        pegarLista("manejos");
+
+
+    let html = `
+
+        <h2>
+            🚜 Relatório dos Manejos
+        </h2>
+
+        <p>
+            Histórico das atividades
+            realizadas na propriedade.
+        </p>
+
+    `;
+
+
+    if (manejos.length === 0) {
+
+        html += `
+
+            <div class="sem-registros">
+
+                Nenhum manejo registrado
+                no momento.
+
+            </div>
+
+        `;
+
+        elemento.innerHTML =
+            html;
+
+        return;
+
+    }
+
+
+    html += `
+
+        <p>
+            <strong>
+                Total de manejos:
+            </strong>
+
+            ${manejos.length}
+
+        </p>
+
+        <table class="tabela-relatorio">
+
+            <thead>
+
+                <tr>
+                    <th>Tipo</th>
+                    <th>Animal</th>
+                    <th>Data</th>
+                    <th>Descrição</th>
+                </tr>
+
+            </thead>
+
+            <tbody>
+
+    `;
+
+
+    manejos.forEach(function(manejo) {
+
+        const tipo =
+            manejo.tipo ||
+            manejo.tipoManejo ||
+            "-";
+
+
+        const animal =
+            manejo.animal ||
+            manejo.animalId ||
+            "-";
+
+
+        const data =
+            manejo.data ||
+            "-";
+
+
+        const descricao =
+            manejo.descricao ||
+            "-";
+
+
+        html += `
+
+            <tr>
+
+                <td>
+                    ${tipo}
+                </td>
+
+                <td>
+                    ${animal}
+                </td>
+
+                <td>
+                    ${data}
+                </td>
+
+                <td>
+                    ${descricao}
+                </td>
+
+            </tr>
+
+        `;
+
+    });
+
+
+    html += `
+
+            </tbody>
+
+        </table>
+
+    `;
+
+
+    elemento.innerHTML =
+        html;
+
+}
+
+
+/* =====================================================
+   RELATÓRIO FINANCEIRO
+   ===================================================== */
+
+function gerarRelatorioFinanceiro(elemento) {
+
+    const compras =
+        Number(
+            localStorage.getItem(
+                "totalCompras"
+            )
+        ) || 0;
+
+
+    const gastos =
+        Number(
+            localStorage.getItem(
+                "totalGastos"
+            )
+        ) || 0;
+
+
+    const vendas =
+        Number(
+            localStorage.getItem(
+                "totalVendas"
+            )
+        ) || 0;
+
+
+    const resultado =
+        vendas -
+        compras -
+        gastos;
+
+
+    elemento.innerHTML = `
+
+        <h2>
+            💰 Relatório Financeiro
+        </h2>
+
+        <p>
+            Resumo financeiro da propriedade.
+        </p>
+
+
+        <table class="tabela-relatorio">
+
+            <thead>
+
+                <tr>
+                    <th>Categoria</th>
+                    <th>Valor</th>
+                </tr>
+
+            </thead>
+
+            <tbody>
+
+                <tr>
+                    <td>
+                        Compras de gado
+                    </td>
+
+                    <td>
+                        ${moeda(compras)}
+                    </td>
+                </tr>
+
+
+                <tr>
+                    <td>
+                        Gastos de manutenção
+                    </td>
+
+                    <td>
+                        ${moeda(gastos)}
+                    </td>
+                </tr>
+
+
+                <tr>
+                    <td>
+                        Vendas de gado
+                    </td>
+
+                    <td>
+                        ${moeda(vendas)}
+                    </td>
+                </tr>
+
+
+                <tr>
+                    <td>
+                        <strong>
+                            Resultado
+                        </strong>
+                    </td>
+
+                    <td>
+                        <strong>
+                            ${moeda(resultado)}
+                        </strong>
+                    </td>
+                </tr>
+
+            </tbody>
+
+        </table>
+
+    `;
+
+}
+
+
+/* =====================================================
+   ATUALIZAR FINANCEIRO
+   ===================================================== */
+
+function atualizarFinanceiro() {
+
+    const compras =
+        Number(
+            localStorage.getItem(
+                "totalCompras"
+            )
+        ) || 0;
+
+
+    const gastos =
+        Number(
+            localStorage.getItem(
+                "totalGastos"
+            )
+        ) || 0;
+
+
+    const vendas =
+        Number(
+            localStorage.getItem(
+                "totalVendas"
+            )
+        ) || 0;
+
+
+    const resultado =
+        vendas -
+        compras -
+        gastos;
+
+
+    document.getElementById(
+        "totalCompras"
+    ).textContent =
+        moeda(compras);
+
+
+    document.getElementById(
+        "totalGastos"
+    ).textContent =
+        moeda(gastos);
+
+
+    document.getElementById(
+        "totalVendas"
+    ).textContent =
+        moeda(vendas);
+
+
+    document.getElementById(
+        "resultadoFinanceiro"
+    ).textContent =
+        moeda(resultado);
+
+
+    const mensagem =
+        document.getElementById(
+            "mensagemFinanceira"
+        );
+
+
+    if (
+        compras === 0 &&
+        gastos === 0 &&
+        vendas === 0
+    ) {
+
+        mensagem.textContent =
+            "Ainda não existem movimentações financeiras registradas.";
+
+    }
+
+    else if (resultado > 0) {
+
+        mensagem.textContent =
+            "A propriedade apresenta resultado positivo de "
+            + moeda(resultado)
+            + ".";
+
+    }
+
+    else if (resultado < 0) {
+
+        mensagem.textContent =
+            "A propriedade apresenta resultado negativo de "
+            + moeda(Math.abs(resultado))
+            + ".";
+
+    }
+
+    else {
+
+        mensagem.textContent =
+            "As entradas e saídas estão equilibradas.";
+
+    }
+
+}
+
+
+/* =====================================================
+   IMPRIMIR / PDF
+   ===================================================== */
+
+function imprimirRelatorio() {
+
+    window.print();
+
+}
+
+
+/* =====================================================
+   INICIALIZAÇÃO
+   ===================================================== */
+
+document.addEventListener(
+    "DOMContentLoaded",
+    function() {
+
+        mostrarData();
+
+        atualizarFinanceiro();
+
+    }
+);
+
+</script>
+
+
+<!-- =====================================================
+     ESTILO DE IMPRESSÃO
+     ===================================================== -->
+
+<style>
+
+@media print {
+
+    .botao-voltar,
+    .botoes-relatorios {
+        display: none !important;
+    }
+
+
+    body {
+        background: white;
+    }
+
+
+    .topo-relatorio {
+        background: #24733d !important;
+
+        -webkit-print-color-adjust: exact;
+        print-color-adjust: exact;
+    }
+
+
+    .container-relatorios {
+        max-width: none;
+
+        margin: 15px;
+    }
+
+
+    .card-principal,
+    .secao-relatorio,
+    .resultado-relatorio {
+        box-shadow: none;
+
+        border: 1px solid #ddd;
+    }
+
+
+    #areaRelatorio {
+        display: block !important;
+    }
+
+}
+
+</style>
+
+
+</body>
+</html>

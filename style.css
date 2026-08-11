@@ -1,0 +1,1481 @@
+/* ========================================
+   CONFIGURAÇÕES GERAIS
+======================================== */
+
+* {
+    box-sizing: border-box;
+}
+
+
+body {
+
+    margin: 0;
+
+    font-family:
+        Arial,
+        Helvetica,
+        sans-serif;
+
+    background: #f3f6f3;
+
+    color: #222;
+
+}
+
+
+/* ========================================
+   TOPO
+======================================== */
+
+.topo {
+
+    position: relative;
+
+    background: #24733d;
+
+    color: white;
+
+    padding: 22px 80px 22px 25px;
+
+    min-height: 100px;
+
+}
+
+
+.topo h1 {
+
+    margin: 0;
+
+    font-size: 30px;
+
+}
+
+
+.topo p {
+
+    margin: 5px 0 0;
+
+    font-size: 16px;
+
+    opacity: 0.9;
+
+}
+
+
+/* ========================================
+   BOTÃO DO MENU
+======================================== */
+
+.botao-menu {
+
+    position: absolute;
+
+    right: 20px;
+
+    top: 22px;
+
+    width: 55px;
+
+    height: 55px;
+
+    border: none;
+
+    border-radius: 15px;
+
+    background: rgba(255,255,255,0.18);
+
+    color: white;
+
+    font-size: 30px;
+
+    cursor: pointer;
+
+    display: flex;
+
+    align-items: center;
+
+    justify-content: center;
+
+    z-index: 1000;
+
+}
+
+
+.botao-menu:hover {
+
+    background: rgba(255,255,255,0.28);
+
+}
+
+
+.botao-menu:active {
+
+    transform: scale(0.94);
+
+}
+
+
+/* ========================================
+   MENU - FUNDO
+======================================== */
+
+.fundo-menu {
+
+    position: fixed;
+
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+
+    background: rgba(0,0,0,0.45);
+
+    z-index: 998;
+
+    opacity: 0;
+
+    visibility: hidden;
+
+    transition:
+        opacity 0.3s ease,
+        visibility 0.3s ease;
+
+}
+
+
+.fundo-menu.aberto {
+
+    opacity: 1;
+
+    visibility: visible;
+
+}
+
+
+/* ========================================
+   MENU LATERAL
+======================================== */
+
+.menu-lateral {
+
+    position: fixed;
+
+    top: 0;
+
+    right: 0;
+
+    width: 310px;
+
+    max-width: 85vw;
+
+    height: 100vh;
+
+    background: white;
+
+    z-index: 999;
+
+    transform: translateX(100%);
+
+    transition:
+        transform 0.3s ease;
+
+    box-shadow:
+        -8px 0 30px rgba(0,0,0,0.20);
+
+    display: flex;
+
+    flex-direction: column;
+
+}
+
+
+.menu-lateral.aberto {
+
+    transform: translateX(0);
+
+}
+
+
+/* ========================================
+   CABEÇALHO DO MENU
+======================================== */
+
+.menu-cabecalho {
+
+    background: #24733d;
+
+    color: white;
+
+    padding: 25px 20px;
+
+    display: flex;
+
+    align-items: center;
+
+    justify-content: space-between;
+
+}
+
+
+.menu-cabecalho h2 {
+
+    margin: 0;
+
+    font-size: 25px;
+
+}
+
+
+.menu-cabecalho p {
+
+    margin: 5px 0 0;
+
+    font-size: 15px;
+
+}
+
+
+.fechar-menu {
+
+    width: 45px;
+
+    height: 45px;
+
+    border: none;
+
+    background: transparent;
+
+    color: white;
+
+    font-size: 38px;
+
+    cursor: pointer;
+
+    line-height: 1;
+
+}
+
+
+/* ========================================
+   OPÇÕES DO MENU
+======================================== */
+
+.opcoes-menu {
+
+    padding: 15px;
+
+    display: flex;
+
+    flex-direction: column;
+
+    gap: 5px;
+
+    overflow-y: auto;
+
+}
+
+
+.opcoes-menu button {
+
+    width: 100%;
+
+    border: none;
+
+    background: transparent;
+
+    padding: 15px;
+
+    border-radius: 12px;
+
+    font-size: 17px;
+
+    text-align: left;
+
+    cursor: pointer;
+
+    display: flex;
+
+    align-items: center;
+
+    gap: 15px;
+
+    color: #222;
+
+}
+
+
+.opcoes-menu button:hover {
+
+    background: #eef7f0;
+
+}
+
+
+.opcoes-menu button:active {
+
+    background: #dceee0;
+
+    transform: scale(0.98);
+
+}
+
+
+.opcoes-menu button span {
+
+    flex: 1;
+
+}
+
+
+/* ========================================
+   RODAPÉ DO MENU
+======================================== */
+
+.menu-rodape {
+
+    margin-top: auto;
+
+    padding: 15px;
+
+    border-top: 1px solid #ddd;
+
+}
+
+
+.menu-rodape button {
+
+    width: 100%;
+
+    border: none;
+
+    background: transparent;
+
+    padding: 15px;
+
+    border-radius: 12px;
+
+    font-size: 17px;
+
+    text-align: left;
+
+    cursor: pointer;
+
+    display: flex;
+
+    align-items: center;
+
+    gap: 15px;
+
+}
+
+
+.menu-rodape button:hover {
+
+    background: #f5eeee;
+
+}
+
+
+/* ========================================
+   CONTEÚDO
+======================================== */
+
+.dashboard {
+
+    width: 100%;
+
+    max-width: 1100px;
+
+    margin: auto;
+
+    padding: 25px 20px 40px;
+
+}
+
+
+/* ========================================
+   FOTO
+======================================== */
+
+.foto-capa {
+
+    position: relative;
+
+    width: 100%;
+
+    height: 280px;
+
+    border-radius: 20px;
+
+    overflow: hidden;
+
+    background: #2f7544;
+
+    box-shadow:
+        0 5px 20px rgba(0,0,0,0.10);
+
+}
+
+
+.foto-capa img {
+
+    width: 100%;
+
+    height: 100%;
+
+    object-fit: cover;
+
+}
+
+
+.foto-capa::after {
+
+    content: "";
+
+    position: absolute;
+
+    inset: 0;
+
+    background:
+        linear-gradient(
+            transparent,
+            rgba(0,0,0,0.65)
+        );
+
+}
+
+
+.foto-texto {
+
+    position: absolute;
+
+    left: 25px;
+
+    bottom: 25px;
+
+    color: white;
+
+    z-index: 2;
+
+}
+
+
+.foto-texto h2 {
+
+    margin: 0 0 5px;
+
+    font-size: 32px;
+
+}
+
+
+.foto-texto p {
+
+    margin: 0;
+
+    font-size: 16px;
+
+}
+
+
+/* ========================================
+   RESUMO
+======================================== */
+
+.resumo {
+
+    display: grid;
+
+    grid-template-columns:
+        repeat(3, 1fr);
+
+    gap: 18px;
+
+    margin-top: 25px;
+
+}
+
+
+.card-resumo {
+
+    background: white;
+
+    border-radius: 18px;
+
+    padding: 25px 15px;
+
+    text-align: center;
+
+    box-shadow:
+        0 4px 15px rgba(0,0,0,0.08);
+
+}
+
+
+.card-resumo .icone {
+
+    font-size: 35px;
+
+    margin-bottom: 8px;
+
+}
+
+
+.card-resumo h2 {
+
+    margin: 0;
+
+    font-size: 32px;
+
+    color: #24733d;
+
+}
+
+
+.card-resumo p {
+
+    margin: 5px 0 0;
+
+    color: #666;
+
+    font-size: 16px;
+
+}
+
+
+/* ========================================
+   EXPLICAÇÃO
+======================================== */
+
+.explicacao {
+
+    background: white;
+
+    margin-top: 25px;
+
+    padding: 25px;
+
+    border-radius: 18px;
+
+    box-shadow:
+        0 4px 15px rgba(0,0,0,0.06);
+
+}
+
+
+.explicacao h2 {
+
+    margin-top: 0;
+
+    color: #24733d;
+
+}
+
+
+.explicacao p {
+
+    color: #555;
+
+    line-height: 1.6;
+
+}
+
+
+/* ========================================
+   RODAPÉ
+======================================== */
+
+footer {
+
+    text-align: center;
+
+    padding: 25px 15px;
+
+    color: #777;
+
+    font-size: 14px;
+
+}
+
+
+/* ========================================
+   CELULAR
+======================================== */
+
+@media (max-width: 700px) {
+
+    .topo {
+
+        padding-left: 20px;
+
+    }
+
+
+    .topo h1 {
+
+        font-size: 25px;
+
+    }
+
+
+    .dashboard {
+
+        padding:
+            15px
+            12px
+            30px;
+
+    }
+
+
+    .foto-capa {
+
+        height: 220px;
+
+    }
+
+
+    .foto-texto h2 {
+
+        font-size: 26px;
+
+    }
+
+
+    .resumo {
+
+        grid-template-columns: 1fr;
+
+        gap: 12px;
+
+    }
+
+
+    .card-resumo {
+
+        padding: 20px;
+
+    }
+
+
+    .menu-lateral {
+
+        width: 290px;
+
+    }
+
+}/* ========================================
+   CARDS DOS ANIMAIS
+======================================== */
+
+#listaAnimais {
+
+    display: flex;
+
+    flex-direction: column;
+
+    gap: 15px;
+
+    margin-top: 20px;
+
+}
+
+
+.card-animal {
+
+    background: white;
+
+    padding: 20px;
+
+    border-radius: 18px;
+
+    box-shadow:
+        0 4px 15px rgba(0,0,0,0.08);
+
+}
+
+
+.card-animal h2 {
+
+    margin-top: 0;
+
+    color: #24733d;
+
+}
+
+
+.card-animal p {
+
+    margin: 8px 0;
+
+    color: #555;
+
+}
+
+
+.acoes-animal {
+
+    display: flex;
+
+    gap: 10px;
+
+    margin-top: 20px;
+
+}
+
+
+.acoes-animal button {
+
+    border: none;
+
+    padding: 10px 15px;
+
+    border-radius: 10px;
+
+    cursor: pointer;
+
+    font-size: 15px;
+
+}
+
+
+.botao-principal {
+
+    width: 100%;
+
+    margin-top: 20px;
+
+    padding: 16px;
+
+    border: none;
+
+    border-radius: 12px;
+
+    background: #24733d;
+
+    color: white;
+
+    font-size: 17px;
+
+    cursor: pointer;
+
+}/* =================================
+   FINANCEIRO AGRO NEXO
+================================= */
+
+.financeiro-container {
+
+    max-width: 1100px;
+
+    margin: 30px auto;
+
+    padding: 0 20px;
+
+}
+
+
+/* INDICADORES */
+
+.indicadores {
+
+    display: grid;
+
+    grid-template-columns:
+        repeat(5, 1fr);
+
+    gap: 15px;
+
+    margin-bottom: 25px;
+
+}
+
+
+.indicador {
+
+    background: white;
+
+    padding: 20px;
+
+    border-radius: 16px;
+
+    box-shadow:
+        0 3px 12px rgba(0,0,0,0.08);
+
+}
+
+
+.indicador span {
+
+    font-size: 28px;
+
+}
+
+
+.indicador strong {
+
+    display: block;
+
+    font-size: 22px;
+
+    margin-top: 8px;
+
+}
+
+
+.indicador p {
+
+    margin: 5px 0 0;
+
+    color: #666;
+
+}
+
+
+.indicador.destaque {
+
+    background: #e9f7ed;
+
+}
+
+
+/* CARDS */
+
+.financeiro-card {
+
+    background: white;
+
+    border-radius: 18px;
+
+    padding: 25px;
+
+    margin-bottom: 25px;
+
+    box-shadow:
+        0 4px 15px rgba(0,0,0,0.08);
+
+}
+
+
+.titulo-secao {
+
+    display: flex;
+
+    align-items: center;
+
+    gap: 15px;
+
+    margin-bottom: 25px;
+
+}
+
+
+.titulo-icone {
+
+    width: 55px;
+
+    height: 55px;
+
+    border-radius: 14px;
+
+    display: flex;
+
+    align-items: center;
+
+    justify-content: center;
+
+    font-size: 28px;
+
+    background: #e9f7ed;
+
+}
+
+
+.titulo-secao h2 {
+
+    margin: 0;
+
+}
+
+
+.titulo-secao p {
+
+    margin: 5px 0;
+
+    color: #666;
+
+}
+
+
+/* FORMULÁRIO */
+
+.form-grid {
+
+    display: grid;
+
+    grid-template-columns:
+        repeat(2, 1fr);
+
+    gap: 18px;
+
+}
+
+
+.campo {
+
+    display: flex;
+
+    flex-direction: column;
+
+    gap: 7px;
+
+}
+
+
+.campo label {
+
+    font-weight: bold;
+
+}
+
+
+.campo input,
+.campo select {
+
+    padding: 12px;
+
+    border: 1px solid #ccc;
+
+    border-radius: 10px;
+
+    font-size: 15px;
+
+    background: white;
+
+}
+
+
+.campo input:focus,
+.campo select:focus {
+
+    outline: none;
+
+    border-color: #26743d;
+
+}
+
+
+/* TOTAL */
+
+.resultado-previo {
+
+    display: flex;
+
+    justify-content: space-between;
+
+    align-items: center;
+
+    margin: 20px 0;
+
+    padding: 18px;
+
+    background: #f4f8f5;
+
+    border-radius: 12px;
+
+}
+
+
+.resultado-previo strong {
+
+    font-size: 22px;
+
+}
+
+
+/* BOTÃO */
+
+.botao-principal {
+
+    width: 100%;
+
+    border: none;
+
+    padding: 14px;
+
+    border-radius: 10px;
+
+    background: #287840;
+
+    color: white;
+
+    font-size: 16px;
+
+    font-weight: bold;
+
+    cursor: pointer;
+
+}
+
+
+.botao-principal:hover {
+
+    background: #1e6032;
+
+}
+
+
+/* SIMULAÇÃO */
+
+.simulacao {
+
+    margin-top: 25px;
+
+    padding: 20px;
+
+    border-radius: 15px;
+
+    background: #f5f8f6;
+
+}
+
+
+.simulacao h3 {
+
+    margin-top: 0;
+
+}
+
+
+.resultado-grid {
+
+    display: grid;
+
+    grid-template-columns:
+        repeat(4, 1fr);
+
+    gap: 12px;
+
+}
+
+
+.resultado-grid div {
+
+    background: white;
+
+    padding: 15px;
+
+    border-radius: 10px;
+
+}
+
+
+.resultado-grid span {
+
+    display: block;
+
+    color: #666;
+
+    font-size: 13px;
+
+}
+
+
+.resultado-grid strong {
+
+    display: block;
+
+    font-size: 18px;
+
+    margin-top: 5px;
+
+}
+
+
+.mensagem-resultado {
+
+    margin-top: 15px;
+
+    padding: 14px;
+
+    border-radius: 10px;
+
+    background: white;
+
+    font-weight: bold;
+
+}
+
+
+/* HISTÓRICO */
+
+.movimento {
+
+    display: flex;
+
+    align-items: center;
+
+    gap: 15px;
+
+    padding: 15px;
+
+    border-bottom: 1px solid #eee;
+
+}
+
+
+.movimento:last-child {
+
+    border-bottom: none;
+
+}
+
+
+.movimento-icone {
+
+    font-size: 25px;
+
+}
+
+
+.movimento-info {
+
+    flex: 1;
+
+}
+
+
+.movimento-info strong {
+
+    display: block;
+
+}
+
+
+.movimento-info small {
+
+    color: #777;
+
+}
+
+
+.historico-vazio {
+
+    text-align: center;
+
+    padding: 30px;
+
+    color: #777;
+
+}
+
+
+/* VOLTAR */
+
+.botao-voltar {
+
+    border: none;
+
+    background: transparent;
+
+    color: white;
+
+    font-size: 16px;
+
+    cursor: pointer;
+
+}
+
+
+/* CELULAR */
+
+@media (max-width: 800px) {
+
+    .indicadores {
+
+        grid-template-columns:
+            repeat(2, 1fr);
+
+    }
+
+
+    .form-grid {
+
+        grid-template-columns: 1fr;
+
+    }
+
+
+    .resultado-grid {
+
+        grid-template-columns:
+            repeat(2, 1fr);
+
+    }
+
+}
+
+
+@media (max-width: 500px) {
+
+    .indicadores {
+
+        grid-template-columns: 1fr;
+
+    }
+
+
+    .resultado-grid {
+
+        grid-template-columns: 1fr;
+
+    }
+
+}/* =====================================================
+   BOTÕES DOS RELATÓRIOS
+   ===================================================== */
+
+.botoes-relatorios {
+    display: grid;
+
+    grid-template-columns:
+        repeat(5, 1fr);
+
+    gap: 15px;
+
+    margin-top: 25px;
+}
+
+
+/* CARD */
+
+.card-relatorio {
+    position: relative;
+
+    min-height: 105px;
+
+    border: 1px solid #dbe8de;
+
+    border-radius: 16px;
+
+    padding: 16px 14px;
+
+    display: flex;
+
+    align-items: center;
+
+    gap: 12px;
+
+    text-align: left;
+
+    cursor: pointer;
+
+    transition:
+        transform 0.2s ease,
+        box-shadow 0.2s ease,
+        border-color 0.2s ease;
+
+    overflow: hidden;
+}
+
+
+/* HOVER */
+
+.card-relatorio:hover {
+    transform: translateY(-4px);
+
+    box-shadow:
+        0 8px 22px rgba(0,0,0,0.12);
+
+    border-color: #24733d;
+}
+
+
+/* CLIQUE */
+
+.card-relatorio:active {
+    transform: scale(0.97);
+}
+
+
+/* ÍCONE */
+
+.icone-relatorio {
+    width: 52px;
+
+    height: 52px;
+
+    min-width: 52px;
+
+    border-radius: 50%;
+
+    background: white;
+
+    display: flex;
+
+    align-items: center;
+
+    justify-content: center;
+
+    font-size: 27px;
+
+    box-shadow:
+        0 2px 8px rgba(0,0,0,0.08);
+}
+
+
+/* TEXTO */
+
+.texto-relatorio {
+    display: flex;
+
+    flex-direction: column;
+
+    gap: 5px;
+
+    flex: 1;
+}
+
+
+.texto-relatorio strong {
+    font-size: 17px;
+
+    color: #173522;
+}
+
+
+.texto-relatorio small {
+    font-size: 13px;
+
+    color: #365844;
+
+    line-height: 1.3;
+}
+
+
+/* SETA */
+
+.seta-relatorio {
+    font-size: 32px;
+
+    line-height: 1;
+
+    color: #24733d;
+
+    margin-left: auto;
+
+    transition:
+        transform 0.2s ease;
+}
+
+
+.card-relatorio:hover .seta-relatorio {
+    transform: translateX(4px);
+}
+
+
+/* =====================================================
+   CORES DOS CARDS
+   ===================================================== */
+
+.card-relatorio.rebanho {
+    background:
+        linear-gradient(
+            135deg,
+            #16854a,
+            #24733d
+        );
+
+    border-color: #16854a;
+}
+
+.card-relatorio.rebanho
+.texto-relatorio strong,
+
+.card-relatorio.rebanho
+.texto-relatorio small,
+
+.card-relatorio.rebanho
+.seta-relatorio {
+    color: white;
+}
+
+
+.card-relatorio.pastos {
+    background:
+        linear-gradient(
+            135deg,
+            #e5f4df,
+            #d7edcf
+        );
+}
+
+
+.card-relatorio.manejos {
+    background:
+        linear-gradient(
+            135deg,
+            #e5f4df,
+            #d7edcf
+        );
+}
+
+
+.card-relatorio.financeiro {
+    background:
+        linear-gradient(
+            135deg,
+            #fff0bd,
+            #ffe3a0
+        );
+
+    border-color: #efd17c;
+}
+
+
+.card-relatorio.pdf {
+    background:
+        linear-gradient(
+            135deg,
+            #dbeaf9,
+            #c8def3
+        );
+
+    border-color: #a9c9e8;
+}
+
+
+/* =====================================================
+   RESPONSIVO
+   ===================================================== */
+
+@media (max-width: 1000px) {
+
+    .botoes-relatorios {
+        grid-template-columns:
+            repeat(2, 1fr);
+    }
+
+}
+
+
+@media (max-width: 600px) {
+
+    .botoes-relatorios {
+        grid-template-columns: 1fr;
+    }
+
+
+    .card-relatorio {
+        min-height: 90px;
+    }
+
+
+    .icone-relatorio {
+        width: 48px;
+
+        height: 48px;
+
+        min-width: 48px;
+    }
+
+}

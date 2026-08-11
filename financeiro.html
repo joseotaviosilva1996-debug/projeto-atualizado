@@ -1,0 +1,557 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Financeiro - AgroNexo</title>
+
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+
+<header class="topo">
+
+    <div>
+        <h1>💰 Financeiro</h1>
+        <p>Controle financeiro da pecuária</p>
+    </div>
+
+    <button class="botao-voltar" onclick="voltarInicio()">
+        ← Voltar
+    </button>
+
+</header>
+
+
+<main class="financeiro-container">
+
+
+    <!-- INDICADORES -->
+
+    <section class="indicadores">
+
+        <div class="indicador">
+            <span>🐂</span>
+            <strong id="indicadorCompras">0</strong>
+            <p>Animais comprados</p>
+        </div>
+
+        <div class="indicador">
+            <span>💵</span>
+            <strong id="indicadorInvestido">
+                R$ 0,00
+            </strong>
+            <p>Total investido</p>
+        </div>
+
+        <div class="indicador">
+            <span>🌱</span>
+            <strong id="indicadorCustos">
+                R$ 0,00
+            </strong>
+            <p>Custos do gado</p>
+        </div>
+
+        <div class="indicador">
+            <span>📈</span>
+            <strong id="indicadorVendas">
+                R$ 0,00
+            </strong>
+            <p>Total de vendas</p>
+        </div>
+
+        <div class="indicador destaque">
+            <span>💰</span>
+            <strong id="indicadorResultado">
+                R$ 0,00
+            </strong>
+            <p>Resultado</p>
+        </div>
+
+    </section>
+
+
+    <!-- ========================= -->
+    <!-- COMPRA -->
+    <!-- ========================= -->
+
+    <section class="financeiro-card">
+
+        <div class="titulo-secao">
+            <div class="titulo-icone">🐂</div>
+
+            <div>
+                <h2>Compra de gado</h2>
+                <p>Registre a entrada de novos animais</p>
+            </div>
+        </div>
+
+
+        <form id="formCompra">
+
+            <div class="form-grid">
+
+                <div class="campo">
+                    <label>Quantidade de animais</label>
+
+                    <input
+                        type="number"
+                        id="compraQuantidade"
+                        min="1"
+                        placeholder="Ex: 20"
+                        required
+                    >
+                </div>
+
+
+                <div class="campo">
+
+                    <label>Tipo de compra</label>
+
+                    <select id="compraTipo">
+
+                        <option value="cabeca">
+                            Por cabeça
+                        </option>
+
+                        <option value="kg">
+                            Por kg
+                        </option>
+
+                        <option value="arroba">
+                            Por arroba (@)
+                        </option>
+
+                    </select>
+
+                </div>
+
+
+                <div class="campo">
+
+                    <label>Peso médio por animal (kg)</label>
+
+                    <input
+                        type="number"
+                        id="compraPeso"
+                        min="0"
+                        step="0.01"
+                        placeholder="Ex: 420"
+                    >
+
+                </div>
+
+
+                <div class="campo">
+
+                    <label>Preço por unidade</label>
+
+                    <input
+                        type="number"
+                        id="compraPreco"
+                        min="0"
+                        step="0.01"
+                        placeholder="Ex: 3500"
+                        required
+                    >
+
+                </div>
+
+
+                <div class="campo">
+
+                    <label>Data da compra</label>
+
+                    <input
+                        type="date"
+                        id="compraData"
+                        required
+                    >
+
+                </div>
+
+
+                <div class="campo">
+
+                    <label>Origem / fornecedor</label>
+
+                    <input
+                        type="text"
+                        id="compraOrigem"
+                        placeholder="Ex: Fazenda João"
+                    >
+
+                </div>
+
+            </div>
+
+
+            <div class="resultado-previo">
+
+                <span>Total da compra</span>
+
+                <strong id="totalCompraPreview">
+                    R$ 0,00
+                </strong>
+
+            </div>
+
+
+            <button class="botao-principal" type="submit">
+                💾 Registrar compra
+            </button>
+
+        </form>
+
+    </section>
+
+
+
+    <!-- ========================= -->
+    <!-- CUSTOS -->
+    <!-- ========================= -->
+
+    <section class="financeiro-card">
+
+        <div class="titulo-secao">
+
+            <div class="titulo-icone">
+                🌱
+            </div>
+
+            <div>
+
+                <h2>Custos para manter o gado</h2>
+
+                <p>
+                    Registre alimentação, medicamentos,
+                    pastagem e outros gastos.
+                </p>
+
+            </div>
+
+        </div>
+
+
+        <form id="formCusto">
+
+            <div class="form-grid">
+
+                <div class="campo">
+
+                    <label>Tipo de gasto</label>
+
+                    <select id="custoTipo">
+
+                        <option value="Alimentação">
+                            🌽 Alimentação
+                        </option>
+
+                        <option value="Medicamentos">
+                            💉 Medicamentos
+                        </option>
+
+                        <option value="Pasto">
+                            🌱 Pasto
+                        </option>
+
+                        <option value="Frete">
+                            🚚 Frete
+                        </option>
+
+                        <option value="Mão de obra">
+                            👨‍🌾 Mão de obra
+                        </option>
+
+                        <option value="Veterinário">
+                            🩺 Veterinário
+                        </option>
+
+                        <option value="Outros">
+                            📦 Outros
+                        </option>
+
+                    </select>
+
+                </div>
+
+
+                <div class="campo">
+
+                    <label>Descrição</label>
+
+                    <input
+                        type="text"
+                        id="custoDescricao"
+                        placeholder="Ex: Ração"
+                        required
+                    >
+
+                </div>
+
+
+                <div class="campo">
+
+                    <label>Valor</label>
+
+                    <input
+                        type="number"
+                        id="custoValor"
+                        min="0"
+                        step="0.01"
+                        placeholder="R$ 0,00"
+                        required
+                    >
+
+                </div>
+
+
+                <div class="campo">
+
+                    <label>Data</label>
+
+                    <input
+                        type="date"
+                        id="custoData"
+                        required
+                    >
+
+                </div>
+
+            </div>
+
+
+            <button class="botao-principal" type="submit">
+                💾 Registrar gasto
+            </button>
+
+        </form>
+
+    </section>
+
+
+
+    <!-- ========================= -->
+    <!-- VENDA -->
+    <!-- ========================= -->
+
+    <section class="financeiro-card venda-card">
+
+        <div class="titulo-secao">
+
+            <div class="titulo-icone">
+                📈
+            </div>
+
+            <div>
+
+                <h2>Venda de gado</h2>
+
+                <p>
+                    Informe o preço de venda e veja
+                    automaticamente se houve lucro ou prejuízo.
+                </p>
+
+            </div>
+
+        </div>
+
+
+        <form id="formVenda">
+
+            <div class="form-grid">
+
+                <div class="campo">
+
+                    <label>Quantidade vendida</label>
+
+                    <input
+                        type="number"
+                        id="vendaQuantidade"
+                        min="1"
+                        placeholder="Ex: 10"
+                        required
+                    >
+
+                </div>
+
+
+                <div class="campo">
+
+                    <label>Forma de venda</label>
+
+                    <select id="vendaTipo">
+
+                        <option value="cabeca">
+                            Por cabeça
+                        </option>
+
+                        <option value="kg">
+                            Por kg
+                        </option>
+
+                        <option value="arroba">
+                            Por arroba (@)
+                        </option>
+
+                    </select>
+
+                </div>
+
+
+                <div class="campo">
+
+                    <label>Peso médio (kg)</label>
+
+                    <input
+                        type="number"
+                        id="vendaPeso"
+                        min="0"
+                        step="0.01"
+                        placeholder="Ex: 500"
+                    >
+
+                </div>
+
+
+                <div class="campo">
+
+                    <label>Preço de venda</label>
+
+                    <input
+                        type="number"
+                        id="vendaPreco"
+                        min="0"
+                        step="0.01"
+                        placeholder="Ex: 4500"
+                        required
+                    >
+
+                </div>
+
+
+                <div class="campo">
+
+                    <label>Data da venda</label>
+
+                    <input
+                        type="date"
+                        id="vendaData"
+                        required
+                    >
+
+                </div>
+
+            </div>
+
+
+            <!-- SIMULAÇÃO -->
+
+            <div class="simulacao">
+
+                <h3>📊 Resultado da venda</h3>
+
+
+                <div class="resultado-grid">
+
+                    <div>
+                        <span>Receita</span>
+                        <strong id="vendaReceita">
+                            R$ 0,00
+                        </strong>
+                    </div>
+
+
+                    <div>
+                        <span>Custo estimado</span>
+                        <strong id="vendaCusto">
+                            R$ 0,00
+                        </strong>
+                    </div>
+
+
+                    <div>
+                        <span>Lucro / Prejuízo</span>
+                        <strong id="vendaLucro">
+                            R$ 0,00
+                        </strong>
+                    </div>
+
+
+                    <div>
+                        <span>Margem</span>
+                        <strong id="vendaMargem">
+                            0%
+                        </strong>
+                    </div>
+
+                </div>
+
+
+                <div
+                    id="mensagemResultado"
+                    class="mensagem-resultado"
+                >
+                    Informe os dados da venda.
+                </div>
+
+            </div>
+
+
+            <button class="botao-principal" type="submit">
+                💾 Registrar venda
+            </button>
+
+        </form>
+
+    </section>
+
+
+
+    <!-- ========================= -->
+    <!-- HISTÓRICO -->
+    <!-- ========================= -->
+
+    <section class="financeiro-card">
+
+        <div class="titulo-secao">
+
+            <div class="titulo-icone">
+                📋
+            </div>
+
+            <div>
+
+                <h2>Histórico financeiro</h2>
+
+                <p>
+                    Últimas movimentações da fazenda.
+                </p>
+
+            </div>
+
+        </div>
+
+
+        <div id="historicoFinanceiro">
+
+            <div class="historico-vazio">
+                Nenhuma movimentação registrada.
+            </div>
+
+        </div>
+
+    </section>
+
+
+</main>
+
+
+<script src="financeiro.js"></script>
+
+</body>
+
+</html>

@@ -1,0 +1,163 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta
+        name="viewport"
+        content="width=device-width, initial-scale=1.0"
+    >
+
+    <title>Animais cadastrados - AgroNexo</title>
+
+    <link rel="stylesheet" href="style.css">
+
+</head>
+
+<body>
+
+<header class="topo">
+
+    <div>
+
+        <h1>AgroNexo</h1>
+
+        <p>Animais cadastrados</p>
+
+    </div>
+
+    <button
+        class="botao-menu"
+        onclick="abrirMenu()"
+    >
+        ☰
+    </button>
+
+</header>
+
+
+<div
+    id="fundoMenu"
+    class="fundo-menu"
+    onclick="fecharMenu()"
+></div>
+
+
+<aside
+    id="menuLateral"
+    class="menu-lateral"
+>
+
+    <div class="menu-cabecalho">
+
+        <div>
+
+            <h2>AgroNexo</h2>
+
+            <p>Fazenda</p>
+
+        </div>
+
+        <button
+            class="fechar-menu"
+            onclick="fecharMenu()"
+        >
+            ×
+        </button>
+
+    </div>
+
+
+    <nav class="opcoes-menu">
+
+        <button onclick="irPara('index.html')">
+            🏠
+            <span>Início</span>
+        </button>
+
+        <button onclick="irPara('animais.html')">
+            🐂
+            <span>Animais cadastrados</span>
+        </button>
+
+        <button onclick="irPara('cadastro.html')">
+            📋
+            <span>Cadastrar animal</span>
+        </button>
+
+        <button onclick="irPara('pastos.html')">
+            🌱
+            <span>Pastos</span>
+        </button>
+
+        <button onclick="irPara('manejo.html')">
+            🚜
+            <span>Manejo</span>
+        </button>
+
+    </nav>
+
+
+    <div class="menu-rodape">
+
+        <button onclick="sair()">
+            🚪
+            <span>Sair</span>
+        </button>
+
+    </div>
+
+</aside>
+
+
+<main class="dashboard">
+
+    <section class="explicacao">
+
+        <h2>
+            🐂 Animais cadastrados
+        </h2>
+
+        <p>
+            Aqui aparecem os animais que já foram
+            cadastrados na fazenda.
+        </p>
+
+    </section>
+
+
+    <section id="listaAnimais">
+
+    </section>
+
+
+    <button
+        onclick="irPara('cadastro.html')"
+        class="botao-principal"
+    >
+        ➕ Cadastrar novo animal
+    </button>
+
+</main>
+
+
+<footer>
+
+    AgroNexo • Controle inteligente da propriedade
+
+</footer>
+
+
+<script src="script.js"></script>
+
+<script>
+
+    mostrarAnimaisCadastrados();
+
+</script>
+
+</body>
+
+</html>

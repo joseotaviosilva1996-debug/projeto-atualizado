@@ -1,0 +1,1056 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta
+        name="viewport"
+        content="width=device-width, initial-scale=1.0"
+    >
+
+    <title>AgroNexo - Rebanho</title>
+
+    <style>
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+
+            font-family:
+                Arial,
+                Helvetica,
+                sans-serif;
+
+            background: #f3f6f3;
+
+            color: #222;
+
+        }
+
+
+        /* TOPO */
+
+        .topo {
+
+            background:
+                linear-gradient(
+                    135deg,
+                    #176b35,
+                    #258247
+                );
+
+            color: white;
+
+            padding: 20px 35px;
+
+            display: flex;
+
+            align-items: center;
+
+            justify-content: space-between;
+
+            box-shadow:
+                0 3px 12px
+                rgba(0,0,0,0.15);
+
+        }
+
+        .titulo {
+
+            display: flex;
+
+            align-items: center;
+
+            gap: 12px;
+
+        }
+
+        .icone-topo {
+
+            font-size: 38px;
+
+        }
+
+        .titulo h1 {
+
+            font-size: 28px;
+
+        }
+
+        .titulo p {
+
+            margin-top: 4px;
+
+            opacity: .85;
+
+            font-size: 14px;
+
+        }
+
+
+        .botao-voltar {
+
+            background:
+                rgba(255,255,255,.15);
+
+            color: white;
+
+            border:
+                1px solid
+                rgba(255,255,255,.4);
+
+            border-radius: 10px;
+
+            padding: 11px 18px;
+
+            cursor: pointer;
+
+        }
+
+        .botao-voltar:hover {
+
+            background:
+                rgba(255,255,255,.25);
+
+        }
+
+
+        /* CONTEÚDO */
+
+        .conteudo {
+
+            max-width: 1100px;
+
+            margin: 35px auto;
+
+            padding: 0 20px;
+
+        }
+
+
+        .cabecalho {
+
+            display: flex;
+
+            justify-content: space-between;
+
+            align-items: center;
+
+            margin-bottom: 25px;
+
+        }
+
+
+        .cabecalho h2 {
+
+            color: #176b35;
+
+            font-size: 28px;
+
+        }
+
+
+        .cabecalho p {
+
+            color: #777;
+
+            margin-top: 6px;
+
+        }
+
+
+        .botao-cadastrar {
+
+            background: #258247;
+
+            color: white;
+
+            border: none;
+
+            border-radius: 10px;
+
+            padding: 13px 18px;
+
+            font-weight: bold;
+
+            cursor: pointer;
+
+        }
+
+
+        .botao-cadastrar:hover {
+
+            background: #1b6b38;
+
+        }
+
+
+        /* RESUMO */
+
+        .resumo {
+
+            display: grid;
+
+            grid-template-columns:
+                repeat(4, 1fr);
+
+            gap: 15px;
+
+            margin-bottom: 25px;
+
+        }
+
+
+        .card {
+
+            background: white;
+
+            border-radius: 15px;
+
+            padding: 20px;
+
+            box-shadow:
+                0 4px 15px
+                rgba(0,0,0,.07);
+
+        }
+
+
+        .card .numero {
+
+            font-size: 27px;
+
+            font-weight: bold;
+
+            color: #176b35;
+
+        }
+
+
+        .card p {
+
+            color: #777;
+
+            margin-top: 5px;
+
+        }
+
+
+        /* LISTA */
+
+        .lista {
+
+            background: white;
+
+            border-radius: 18px;
+
+            padding: 25px;
+
+            box-shadow:
+                0 5px 20px
+                rgba(0,0,0,.08);
+
+        }
+
+
+        .lista-topo {
+
+            display: flex;
+
+            justify-content: space-between;
+
+            align-items: center;
+
+            margin-bottom: 20px;
+
+        }
+
+
+        .lista-topo h3 {
+
+            color: #176b35;
+
+        }
+
+
+        .busca {
+
+            width: 260px;
+
+            padding: 11px 13px;
+
+            border:
+                1px solid #d5ddd7;
+
+            border-radius: 9px;
+
+            outline: none;
+
+        }
+
+
+        .busca:focus {
+
+            border-color: #258247;
+
+        }
+
+
+        /* ANIMAL */
+
+        .animal {
+
+            border:
+                1px solid #e3e8e3;
+
+            border-radius: 13px;
+
+            padding: 17px;
+
+            margin-bottom: 12px;
+
+            display: flex;
+
+            align-items: center;
+
+            justify-content: space-between;
+
+            gap: 15px;
+
+        }
+
+
+        .animal:hover {
+
+            background: #f8faf8;
+
+        }
+
+
+        .animal-info {
+
+            display: flex;
+
+            align-items: center;
+
+            gap: 15px;
+
+        }
+
+
+        .animal-icone {
+
+            width: 48px;
+
+            height: 48px;
+
+            border-radius: 12px;
+
+            background: #e7f3ea;
+
+            display: flex;
+
+            align-items: center;
+
+            justify-content: center;
+
+            font-size: 25px;
+
+        }
+
+
+        .animal h4 {
+
+            margin-bottom: 5px;
+
+            color: #222;
+
+        }
+
+
+        .animal p {
+
+            font-size: 13px;
+
+            color: #777;
+
+        }
+
+
+        .dados {
+
+            display: flex;
+
+            gap: 20px;
+
+            color: #555;
+
+            font-size: 14px;
+
+        }
+
+
+        .acoes {
+
+            display: flex;
+
+            gap: 7px;
+
+        }
+
+
+        .botao-editar,
+        .botao-excluir {
+
+            border: none;
+
+            border-radius: 8px;
+
+            padding: 9px 12px;
+
+            cursor: pointer;
+
+        }
+
+
+        .botao-editar {
+
+            background: #e8f0ff;
+
+        }
+
+
+        .botao-excluir {
+
+            background: #ffe7e7;
+
+        }
+
+
+        /* VAZIO */
+
+        .vazio {
+
+            text-align: center;
+
+            padding: 50px 20px;
+
+            color: #777;
+
+        }
+
+
+        .vazio .icone {
+
+            font-size: 50px;
+
+            margin-bottom: 10px;
+
+        }
+
+
+        .vazio h3 {
+
+            color: #444;
+
+            margin-bottom: 8px;
+
+        }
+
+
+        /* RESPONSIVO */
+
+        @media (max-width: 800px) {
+
+            .resumo {
+
+                grid-template-columns:
+                    repeat(2, 1fr);
+
+            }
+
+            .cabecalho {
+
+                flex-direction: column;
+
+                align-items: flex-start;
+
+                gap: 15px;
+
+            }
+
+            .lista-topo {
+
+                flex-direction: column;
+
+                align-items: stretch;
+
+                gap: 15px;
+
+            }
+
+            .busca {
+
+                width: 100%;
+
+            }
+
+            .animal {
+
+                flex-direction: column;
+
+                align-items: stretch;
+
+            }
+
+            .dados {
+
+                flex-wrap: wrap;
+
+            }
+
+        }
+
+
+        @media (max-width: 500px) {
+
+            .topo {
+
+                padding: 15px 20px;
+
+            }
+
+            .titulo h1 {
+
+                font-size: 22px;
+
+            }
+
+            .resumo {
+
+                grid-template-columns: 1fr 1fr;
+
+            }
+
+            .lista {
+
+                padding: 18px;
+
+            }
+
+        }
+
+    </style>
+
+</head>
+
+
+<body>
+
+
+<header class="topo">
+
+    <div class="titulo">
+
+        <div class="icone-topo">
+            🐂
+        </div>
+
+        <div>
+
+            <h1>
+                AgroNexo
+            </h1>
+
+            <p>
+                Rebanho
+            </p>
+
+        </div>
+
+    </div>
+
+
+    <button
+        class="botao-voltar"
+        onclick="window.location.href='index.html'"
+    >
+        ← Início
+    </button>
+
+</header>
+
+
+
+<main class="conteudo">
+
+
+    <div class="cabecalho">
+
+        <div>
+
+            <h2>
+                🐂 Animais cadastrados
+            </h2>
+
+            <p>
+                Consulte e gerencie os animais da sua fazenda.
+            </p>
+
+        </div>
+
+
+        <button
+            class="botao-cadastrar"
+            onclick="window.location.href='cadastro.html'"
+        >
+            ➕ Cadastrar animal
+        </button>
+
+    </div>
+
+
+
+    <!-- RESUMO -->
+
+    <section class="resumo">
+
+        <div class="card">
+
+            <div
+                class="numero"
+                id="totalAnimais"
+            >
+                0
+            </div>
+
+            <p>
+                Total de animais
+            </p>
+
+        </div>
+
+
+        <div class="card">
+
+            <div
+                class="numero"
+                id="totalMachos"
+            >
+                0
+            </div>
+
+            <p>
+                Machos
+            </p>
+
+        </div>
+
+
+        <div class="card">
+
+            <div
+                class="numero"
+                id="totalFemeas"
+            >
+                0
+            </div>
+
+            <p>
+                Fêmeas
+            </p>
+
+        </div>
+
+
+        <div class="card">
+
+            <div
+                class="numero"
+                id="totalVacas"
+            >
+                0
+            </div>
+
+            <p>
+                Vacas
+            </p>
+
+        </div>
+
+    </section>
+
+
+
+    <!-- LISTA -->
+
+    <section class="lista">
+
+
+        <div class="lista-topo">
+
+            <h3>
+                Lista do rebanho
+            </h3>
+
+            <input
+                type="text"
+                class="busca"
+                id="busca"
+                placeholder="🔎 Buscar por brinco ou nome..."
+                oninput="mostrarAnimais()"
+            >
+
+        </div>
+
+
+        <div id="listaAnimais"></div>
+
+
+    </section>
+
+
+</main>
+
+
+
+<script>
+
+
+// =====================================================
+// RECUPERAR ANIMAIS
+// =====================================================
+
+function pegarAnimais() {
+
+    return JSON.parse(
+        localStorage.getItem(
+            "animaisAgroNexo"
+        )
+    ) || [];
+
+}
+
+
+
+// =====================================================
+// MOSTRAR ANIMAIS
+// =====================================================
+
+function mostrarAnimais() {
+
+
+    const animais =
+        pegarAnimais();
+
+
+    const busca =
+        document
+            .getElementById("busca")
+            .value
+            .toLowerCase()
+            .trim();
+
+
+    const lista =
+        document
+            .getElementById("listaAnimais");
+
+
+    const filtrados =
+        animais.filter(
+            function(animal) {
+
+                return (
+
+                    String(
+                        animal.brinco || ""
+                    )
+                    .toLowerCase()
+                    .includes(busca)
+
+                    ||
+
+                    String(
+                        animal.nome || ""
+                    )
+                    .toLowerCase()
+                    .includes(busca)
+
+                );
+
+            }
+        );
+
+
+    // ---------------------------------------------
+    // CONTADORES
+    // ---------------------------------------------
+
+    document
+        .getElementById("totalAnimais")
+        .textContent =
+            animais.length;
+
+
+    document
+        .getElementById("totalMachos")
+        .textContent =
+            animais.filter(
+                animal =>
+                    animal.sexo === "Macho"
+            ).length;
+
+
+    document
+        .getElementById("totalFemeas")
+        .textContent =
+            animais.filter(
+                animal =>
+                    animal.sexo === "Fêmea"
+            ).length;
+
+
+    document
+        .getElementById("totalVacas")
+        .textContent =
+            animais.filter(
+                animal =>
+                    animal.categoria === "Vaca"
+            ).length;
+
+
+    // ---------------------------------------------
+    // NENHUM ANIMAL
+    // ---------------------------------------------
+
+    if (filtrados.length === 0) {
+
+        lista.innerHTML = `
+
+            <div class="vazio">
+
+                <div class="icone">
+                    🐄
+                </div>
+
+                <h3>
+                    Nenhum animal encontrado
+                </h3>
+
+                <p>
+                    ${
+                        animais.length === 0
+                        ? "Você ainda não cadastrou nenhum animal."
+                        : "Nenhum animal corresponde à sua busca."
+                    }
+                </p>
+
+            </div>
+
+        `;
+
+        return;
+
+    }
+
+
+    // ---------------------------------------------
+    // LISTA
+    // ---------------------------------------------
+
+    lista.innerHTML = "";
+
+
+    filtrados.forEach(
+        function(animal) {
+
+
+            const div =
+                document.createElement("div");
+
+
+            div.className =
+                "animal";
+
+
+            div.innerHTML = `
+
+                <div class="animal-info">
+
+                    <div class="animal-icone">
+                        🐂
+                    </div>
+
+                    <div>
+
+                        <h4>
+                            ${
+                                animal.nome
+                                || "Animal sem nome"
+                            }
+                        </h4>
+
+                        <p>
+                            Brinco:
+                            <strong>
+                                ${
+                                    animal.brinco
+                                    || "-"
+                                }
+                            </strong>
+
+                            •
+                            ${
+                                animal.raca
+                                || "Raça não informada"
+                            }
+
+                        </p>
+
+                    </div>
+
+                </div>
+
+
+                <div class="dados">
+
+                    <span>
+                        📋
+                        ${
+                            animal.categoria
+                            || "-"
+                        }
+                    </span>
+
+                    <span>
+                        ⚖️
+                        ${
+                            animal.peso
+                            ? animal.peso + " kg"
+                            : "-"
+                        }
+                    </span>
+
+                    <span>
+                        🌱
+                        ${
+                            animal.pasto
+                            || "-"
+                        }
+                    </span>
+
+                </div>
+
+
+                <div class="acoes">
+
+                    <button
+                        class="botao-editar"
+                        onclick="editarAnimal('${animal.id}')"
+                    >
+                        ✏️
+                    </button>
+
+                    <button
+                        class="botao-excluir"
+                        onclick="excluirAnimal('${animal.id}')"
+                    >
+                        🗑️
+                    </button>
+
+                </div>
+
+            `;
+
+
+            lista.appendChild(div);
+
+        }
+    );
+
+}
+
+
+
+// =====================================================
+// EXCLUIR
+// =====================================================
+
+function excluirAnimal(id) {
+
+
+    const confirmar =
+        confirm(
+            "Tem certeza que deseja excluir este animal?"
+        );
+
+
+    if (!confirmar) {
+
+        return;
+
+    }
+
+
+    let animais =
+        pegarAnimais();
+
+
+    animais =
+        animais.filter(
+            animal =>
+                animal.id !== id
+        );
+
+
+    localStorage.setItem(
+        "animaisAgroNexo",
+        JSON.stringify(animais)
+    );
+
+
+    mostrarAnimais();
+
+}
+
+
+
+// =====================================================
+// EDITAR
+// =====================================================
+
+function editarAnimal(id) {
+
+    localStorage.setItem(
+        "animalEditando",
+        id
+    );
+
+
+    window.location.href =
+        "cadastro.html";
+
+}
+
+
+
+// =====================================================
+// INICIAR
+// =====================================================
+
+mostrarAnimais();
+
+
+</script>
+
+
+</body>
+
+</html>

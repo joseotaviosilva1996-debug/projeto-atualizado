@@ -1,0 +1,466 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+<head>
+    <meta charset="UTF-8">
+
+    <meta
+        name="viewport"
+        content="width=device-width, initial-scale=1.0"
+    >
+
+    <title>Compra de Gado - AgroNexo</title>
+
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+
+<header class="topo">
+
+    <div>
+        <h1>AgroNexo</h1>
+        <p>Compra de Gado</p>
+    </div>
+
+    <button
+        class="botao-menu"
+        onclick="abrirMenu()"
+    >
+        ☰
+    </button>
+
+</header>
+
+
+<!-- FUNDO DO MENU -->
+
+<div
+    id="fundoMenu"
+    class="fundo-menu"
+    onclick="fecharMenu()"
+></div>
+
+
+<!-- MENU -->
+
+<aside
+    id="menuLateral"
+    class="menu-lateral"
+>
+
+    <div class="menu-cabecalho">
+
+        <div>
+            <h2>AgroNexo</h2>
+            <p>Fazenda</p>
+        </div>
+
+        <button
+            class="fechar-menu"
+            onclick="fecharMenu()"
+        >
+            ×
+        </button>
+
+    </div>
+
+
+    <nav class="opcoes-menu">
+
+        <button onclick="irPara('index.html')">
+            🏠
+            <span>Início</span>
+        </button>
+
+        <button onclick="irPara('gado.html')">
+            🐂
+            <span>Rebanho</span>
+        </button>
+
+        <button onclick="irPara('pastos.html')">
+            🌱
+            <span>Pastos</span>
+        </button>
+
+        <button onclick="irPara('manejo.html')">
+            🚜
+            <span>Manejo</span>
+        </button>
+
+        <button onclick="irPara('cadastro.html')">
+            📋
+            <span>Cadastrar animal</span>
+        </button>
+
+        <button onclick="irPara('compra.html')">
+            🐄
+            <span>Compra de gado</span>
+        </button>
+
+        <button onclick="irPara('financeiro.html')">
+            💰
+            <span>Financeiro</span>
+        </button>
+
+        <button onclick="irPara('relatorios.html')">
+            📊
+            <span>Relatórios</span>
+        </button>
+
+        <button onclick="irPara('configuracoes.html')">
+            ⚙️
+            <span>Configurações</span>
+        </button>
+
+    </nav>
+
+
+    <div class="menu-rodape">
+
+        <button onclick="sair()">
+            🚪
+            <span>Sair</span>
+        </button>
+
+    </div>
+
+</aside>
+
+
+<main class="dashboard">
+
+
+    <!-- TÍTULO -->
+
+    <section class="explicacao">
+
+        <h2>🐂 Compra de Gado</h2>
+
+        <p>
+            Cadastre uma compra e veja automaticamente
+            os custos estimados, consumo de ração,
+            valor de venda e possível lucro ou prejuízo.
+        </p>
+
+    </section>
+
+
+    <!-- FORMULÁRIO -->
+
+    <form id="formCompraGado">
+
+        <h2>📋 Dados da compra</h2>
+
+        <br>
+
+
+        <div class="campo">
+
+            <label for="tipoGado">
+                Tipo de animal
+            </label>
+
+            <select id="tipoGado" required>
+
+                <option value="">
+                    Selecione
+                </option>
+
+                <option value="Bezerro">
+                    Bezerro
+                </option>
+
+                <option value="Vaca">
+                    Vaca
+                </option>
+
+                <option value="Boi">
+                    Boi
+                </option>
+
+            </select>
+
+        </div>
+
+
+        <div class="campo">
+
+            <label for="quantidadeGado">
+                Quantidade de animais
+            </label>
+
+            <input
+                type="number"
+                id="quantidadeGado"
+                min="1"
+                step="1"
+                placeholder="Ex: 5"
+                required
+            >
+
+        </div>
+
+
+        <div class="campo">
+
+            <label for="pesoGado">
+                Peso médio por animal (kg)
+            </label>
+
+            <input
+                type="number"
+                id="pesoGado"
+                min="1"
+                step="0.1"
+                placeholder="Ex: 350"
+                required
+            >
+
+        </div>
+
+
+        <div class="campo">
+
+            <label for="valorCompraKg">
+                Valor da compra por kg (R$)
+            </label>
+
+            <input
+                type="number"
+                id="valorCompraKg"
+                min="0"
+                step="0.01"
+                placeholder="Ex: 12,50"
+                required
+            >
+
+        </div>
+
+
+        <div class="campo">
+
+            <label for="diasEngorda">
+                Dias estimados de engorda
+            </label>
+
+            <input
+                type="number"
+                id="diasEngorda"
+                min="1"
+                step="1"
+                value="120"
+                required
+            >
+
+        </div>
+
+
+        <div class="campo">
+
+            <label for="ganhoDiario">
+                Ganho de peso estimado por dia (kg)
+            </label>
+
+            <input
+                type="number"
+                id="ganhoDiario"
+                min="0"
+                step="0.01"
+                value="0.8"
+                required
+            >
+
+        </div>
+
+
+        <div class="campo">
+
+            <label for="valorVendaKg">
+                Valor estimado de venda por kg (R$)
+            </label>
+
+            <input
+                type="number"
+                id="valorVendaKg"
+                min="0"
+                step="0.01"
+                placeholder="Ex: 14,00"
+                required
+            >
+
+        </div>
+
+
+        <div class="campo">
+
+            <label for="precoRacao">
+                Preço da ração por kg (R$)
+            </label>
+
+            <input
+                type="number"
+                id="precoRacao"
+                min="0"
+                step="0.01"
+                placeholder="Ex: 2,50"
+                required
+            >
+
+        </div>
+
+
+        <div class="campo">
+
+            <label for="outrosGastos">
+                Outros gastos por animal (R$)
+            </label>
+
+            <input
+                type="number"
+                id="outrosGastos"
+                min="0"
+                step="0.01"
+                value="0"
+                placeholder="Ex: 300"
+            >
+
+        </div>
+
+
+        <div class="campo">
+
+            <label for="observacaoCompra">
+                Observações
+            </label>
+
+            <textarea
+                id="observacaoCompra"
+                placeholder="Ex: Compra de 10 bois para engorda..."
+            ></textarea>
+
+        </div>
+
+
+        <!-- SIMULAÇÃO -->
+
+        <div
+            id="resultadoCompra"
+            class="resultado-compra"
+        >
+
+            <h2>📊 Simulação</h2>
+
+            <p>
+                Preencha os dados acima para calcular.
+            </p>
+
+        </div>
+
+
+        <button
+            type="submit"
+            class="botao-principal"
+        >
+            💾 Registrar compra
+        </button>
+
+    </form>
+
+
+    <br>
+
+
+    <!-- RESUMO -->
+
+    <section class="resumo-financeiro">
+
+        <div class="finance-card">
+
+            <div>🐂</div>
+
+            <strong id="totalComprasGado">
+                0
+            </strong>
+
+            <p>
+                Compras registradas
+            </p>
+
+        </div>
+
+
+        <div class="finance-card entrada">
+
+            <div>💰</div>
+
+            <strong id="totalInvestidoGado">
+                R$ 0,00
+            </strong>
+
+            <p>
+                Total investido
+            </p>
+
+        </div>
+
+
+        <div class="finance-card saldo">
+
+            <div>📈</div>
+
+            <strong id="resultadoGeralGado">
+                R$ 0,00
+            </strong>
+
+            <p>
+                Lucro / prejuízo estimado
+            </p>
+
+        </div>
+
+    </section>
+
+
+    <!-- RELATÓRIO -->
+
+    <section class="proximos">
+
+        <h2>
+            🧾 Relatório das compras
+        </h2>
+
+        <br>
+
+        <div id="listaComprasGado">
+
+            <div class="card">
+
+                <h2>
+                    🐂 Nenhuma compra registrada
+                </h2>
+
+                <p>
+                    Registre uma compra para gerar
+                    o relatório.
+                </p>
+
+            </div>
+
+        </div>
+
+    </section>
+
+</main>
+
+
+<footer>
+    AgroNexo • Controle inteligente da propriedade
+</footer>
+
+
+<script src="script.js"></script>
+
+</body>
+
+</html>
